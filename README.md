@@ -1,6 +1,5 @@
 # JavaProject
-Git Repo for Java final project 
-# One Of A Kind Jewllery 
+Concert Tracker 
 
 
 
@@ -32,7 +31,7 @@ Packages should be named as such:
 Should use our common camel casing as used in class for the last 2 years.
 
 # COMMENT COMMENT COMMENT COMMENT 
-## Comment everything well and completely so anyone can use and manipulate your code if needed in case of emegrgencey or mixture of tasks.
+## Comment everything well and completely so anyone can use and manipulate your code if needed in case of emeregencey or mixture of tasks.
 
 # ALWAYS USE YOUR OWN BRANCH ONLY PUSH YOUR BRANCH ASK SOMEONE TO TEST YOUR BRANCH WITH STAGING (WHICH SHOULD BE STABLE) THEN CREATE A MERGE REQUEST AFTER ITS BEEN APPROVED BY ATLEAST ONE OTHER PERSON TO GO TO SATGING ONLY
 # WE WILL MAKE MERGES IN TO MASTER AS A GROUP INCASE ERRORS ARISE EVERYONE WILL BE THERE TO EXPLAIN OR FIX THEIR CODE!!!!!!
