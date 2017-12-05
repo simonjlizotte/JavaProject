@@ -27,6 +27,9 @@ public class ConcertTrackerMain extends Application{
 		
 		// Build file Menu Items
 		MenuItem quit = new MenuItem("Quit");
+		quit.setOnAction((event) -> {
+			System.exit(0);
+		});
 		
 		// Build help Menu Items 
 		MenuItem helpFile = new MenuItem ("Help");
