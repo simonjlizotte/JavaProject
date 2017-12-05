@@ -1,3 +1,5 @@
+
+import credits.CreditsScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -37,6 +39,12 @@ public class ConcertTrackerMain extends Application{
 		// Build credits Menu Items 
 		MenuItem creditSources = new MenuItem("Sources");
 		MenuItem creditNames = new MenuItem("Credits");
+		creditNames.setOnAction((event) -> {
+			Stage stage = new Stage();
+			stage.setTitle("CREDITS");
+			stage.setScene(new CreditsScene());
+			stage.show();
+		});
 		
 		// Add File Menu Items to menu 
 		file.getItems().addAll(quit);
