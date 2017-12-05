@@ -1,5 +1,6 @@
 package credits;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 /** 
  * 
@@ -12,6 +13,13 @@ import javafx.scene.layout.BorderPane;
 public class SourcesPane extends BorderPane {
 
 	public SourcesPane() {
+		// Create Label 
+		Label title = new Label("Sources");
+		
+		// Set label to top of pane 
+		
+		this.setTop(title);
+		
 		
 	}
 }
