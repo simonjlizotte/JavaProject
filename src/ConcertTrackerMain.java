@@ -1,3 +1,5 @@
+
+import credits.CreditsScene;
 import Tabs.AddConcertTab;
 import Tabs.ChartTab;
 import Tabs.ViewConcertTab;
@@ -42,6 +44,12 @@ public class ConcertTrackerMain extends Application{
 		// Build credits Menu Items 
 		MenuItem creditSources = new MenuItem("Sources");
 		MenuItem creditNames = new MenuItem("Credits");
+		creditNames.setOnAction((event) -> {
+			Stage stage = new Stage();
+			stage.setTitle("CREDITS");
+			stage.setScene(new CreditsScene());
+			stage.show();
+		});
 		
 		// Add File Menu Items to menu 
 		file.getItems().addAll(quit);
