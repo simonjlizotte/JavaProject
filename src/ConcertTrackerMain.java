@@ -1,6 +1,7 @@
 
 import credits.CreditsScene;
 import credits.SourcesScene;
+import help.HelpScene;
 import Tabs.AddConcertTab;
 import Tabs.ChartTab;
 import Tabs.ViewConcertTab;
@@ -42,6 +43,12 @@ public class ConcertTrackerMain extends Application{
 		
 		// Build help Menu Items 
 		MenuItem helpFile = new MenuItem ("Help");
+		helpFile.setOnAction((event) -> {
+			Stage helpStage = new Stage();
+			helpStage.setTitle("HELP");
+			helpStage.setScene(new HelpScene());
+			helpStage.show();
+		});
 		
 		// Build credits Menu Items 
 		MenuItem creditSources = new MenuItem("Sources");
