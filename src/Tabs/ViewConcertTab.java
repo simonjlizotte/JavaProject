@@ -1,6 +1,11 @@
 package Tabs;
 
+import java.util.ArrayList;
+
 import javafx.scene.control.Tab;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import objects.Concert;
 
 /**
  * 
@@ -11,6 +16,8 @@ import javafx.scene.control.Tab;
  */
 public class ViewConcertTab extends Tab{
 
+	Concert conertNames = new Concert();
+	
 	//constants needed
 	public static final String TAB_TITLE = "View Concerts"; //title for the tab
 	
@@ -20,6 +27,10 @@ public class ViewConcertTab extends Tab{
 	//constructor
 	private ViewConcertTab() {
 		this.setText(TAB_TITLE);
+		
+		VBox vbox = new VBox();
+		
+		
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
