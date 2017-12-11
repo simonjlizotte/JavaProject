@@ -1,13 +1,18 @@
 package Tabs;
 
+import java.io.File;
+
 import org.controlsfx.control.Rating;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 
 /**
  * 
@@ -25,7 +30,8 @@ public class AddConcertTab extends Tab{
 	private static AddConcertTab tab;
 	
 	//Create a Raiting variable
-	Rating rating = new Rating();
+	private Rating rating = new Rating();	
+	
 	
 	//constructor
 	private AddConcertTab() {
@@ -82,8 +88,32 @@ public class AddConcertTab extends Tab{
 		
 		
 		//Eighth Row - Rating
-		pane.add(rating, 0, 7);
+		Text ratingText = new Text("Rating: ");
+		rating.setMax(5);
+		rating.setUpdateOnHover(true);
+		pane.add(ratingText, 0, 7);
+		pane.add(rating, 1, 7);
 		
+//		//Final Row - Upload File
+//		FileChooser fc = new FileChooser();
+//		fc.setTitle("Upload Picture");
+//		
+//		
+//		Button test = new Button("Test");
+//		Button fileTest = new Button("FileTest");
+//		test.setOnAction(e-> 
+//		{
+//		System.out.print(rating.getRating());}
+//		);
+//		pane.add(test, 0, 8);
+//		pane.add(fileTest, 0, 9);
+//		
+//		fileTest.setOnAction(e->{
+//			File file = fc.showOpenDialog(null);
+//            if (file != null) {
+//                openFile(file);
+//            }
+//		});
 		
 		pane.setPadding(insets);
 		pane.setVgap(10);
@@ -91,6 +121,20 @@ public class AddConcertTab extends Tab{
 		this.setContent(pane);
 	}
 	
+	
+	
+	public Rating getRating() {
+		return rating;
+	}
+	
+	
+	
+	public void setRating(Rating rating) {
+		this.rating = rating;
+	}
+
+
+
 	//this method will be call when needing the instance of the tab or when first creating it
 	public static AddConcertTab getInstance() {
 		if(tab == null) {
@@ -98,5 +142,6 @@ public class AddConcertTab extends Tab{
 		}
 		return tab;
 	}
+	
 	
 }
