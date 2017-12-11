@@ -34,6 +34,9 @@ public class ViewConcertTab extends Tab{
 	private ViewConcertTab() {
 		this.setText(TAB_TITLE);
 		
+		//Calling my arraylist that is populated by fictious band name objects
+		bandNameArrayList();
+		
 		//VBox to host the listView
 		VBox vbox = new VBox();
 		
