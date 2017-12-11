@@ -1,5 +1,14 @@
 package credits;
+/**
+ * Created scene to go along with the credits pane
+ */
 
-public class CreditsScene {
+import javafx.scene.Scene;
+
+public class CreditsScene extends Scene {
+
+	public CreditsScene() {
+			super (new CreditsPane(), 600, 600);
+	}
 
 }

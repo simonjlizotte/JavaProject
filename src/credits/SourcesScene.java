@@ -1,5 +1,16 @@
 package credits;
 
-public class SourcesScene {
+import javafx.scene.Scene;
+/**
+ * 
+ * @author simonlizotte
+ *Externalized scene for sources pane 
+ */
+
+public class SourcesScene extends Scene {
+
+	public SourcesScene() {
+		super(new SourcesPane(), 600,600);
+	}
 
 }
