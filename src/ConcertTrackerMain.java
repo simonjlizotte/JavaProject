@@ -2,7 +2,6 @@
 import credits.CreditsScene;
 import credits.SourcesScene;
 import help.HelpScene;
-import SingleConcertView.singleConcertViewPane;
 import SingleConcertView.singleConcertViewScene;
 import Tabs.AddConcertTab;
 import Tabs.ChartTab;
