@@ -6,6 +6,7 @@
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Users/simonlizotte/Desktop/java/JavaProject/mysql-connector-java-5.1.39/mysql-connector-java-5.1.43-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/adambazzi/Downloads/mysql-connector-java-5.1.39/mysql-connector-java-5.1.43-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/adambazzi/Downloads/controlsfx-8.40.14/controlsfx-8.40.14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
