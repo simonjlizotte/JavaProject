@@ -2,6 +2,9 @@ package Tabs;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -15,7 +18,9 @@ import objects.Concert;
  * to one instance of this tab.
  */
 public class ViewConcertTab extends Tab{
-
+	private ListView concertList;
+	private ArrayList<Concert> bandNames;
+	
 	//Instance of the Concert object
 	Concert conertNames = new Concert();
 	
@@ -29,9 +34,14 @@ public class ViewConcertTab extends Tab{
 	private ViewConcertTab() {
 		this.setText(TAB_TITLE);
 		
-		//VBox to host the listview
+		//VBox to host the listView
 		VBox vbox = new VBox();
 		
+		concertList = new ListView();
+					
+	}
+	
+	public void bandNameArrayList() {
 		
 	}
 	
