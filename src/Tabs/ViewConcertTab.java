@@ -42,7 +42,12 @@ public class ViewConcertTab extends Tab{
 	}
 	
 	public void bandNameArrayList() {
-		
+		bandNames = new ArrayList<Concert>();
+		bandNames.add(new Concert("Torture Kosher"));
+		bandNames.add(new Concert("Torture Kosher"));
+		bandNames.add(new Concert("Torture Kosher"));
+		bandNames.add(new Concert("Torture Kosher"));
+		bandNames.add(new Concert("Torture Kosher"));
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
