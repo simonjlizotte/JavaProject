@@ -98,14 +98,14 @@ public class AddConcertTab extends Tab{
 //		FileChooser fc = new FileChooser();
 //		fc.setTitle("Upload Picture");
 //		
-//		
-//		Button test = new Button("Test");
-//		Button fileTest = new Button("FileTest");
-//		test.setOnAction(e-> 
-//		{
-//		System.out.print(rating.getRating());}
-//		);
-//		pane.add(test, 0, 8);
+		
+		Button test = new Button("Test");
+		Button fileTest = new Button("FileTest");
+		test.setOnAction(e-> 
+		{
+		System.out.print(rating.getRating());}
+		);
+		pane.add(test, 0, 8);
 //		pane.add(fileTest, 0, 9);
 //		
 //		fileTest.setOnAction(e->{
@@ -114,7 +114,7 @@ public class AddConcertTab extends Tab{
 //                openFile(file);
 //            }
 //		});
-		
+//		
 		pane.setPadding(insets);
 		pane.setVgap(10);
 		pane.setHgap(10);
