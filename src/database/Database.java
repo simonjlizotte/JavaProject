@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import database.Database;
 
@@ -35,4 +36,29 @@ public class Database {
 		}
 		return instance;
 	}
+	
+	/**
+	 * This method will simply be use to close the connection
+	 * 
+	 * it is logging when the database closes for debugging purposes.
+	 */
+	public void close() {
+		System.out.println("Closing connection");
+		try {
+			connection.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * simply a getter for the connection object
+	 * @return connection
+	 */
+	public Connection getConnection() {
+		return connection;
+	}
+	
+	
+	
 }
