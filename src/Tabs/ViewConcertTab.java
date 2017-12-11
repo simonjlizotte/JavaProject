@@ -16,6 +16,7 @@ import objects.Concert;
  */
 public class ViewConcertTab extends Tab{
 
+	//Instance of the Concert object
 	Concert conertNames = new Concert();
 	
 	//constants needed
@@ -28,6 +29,7 @@ public class ViewConcertTab extends Tab{
 	private ViewConcertTab() {
 		this.setText(TAB_TITLE);
 		
+		//VBox to host the listview
 		VBox vbox = new VBox();
 		
 		
