@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.sound.sampled.LineUnavailableException;
 
+import org.controlsfx.control.Rating;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,6 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class singleConcertViewPane extends BorderPane {
 	
@@ -30,7 +33,8 @@ public class singleConcertViewPane extends BorderPane {
 		HBox buttonBox = new HBox();
 		GridPane inputs = new GridPane();
 		
-		// Create text items 
+		//Create a Raiting variable
+		Rating rating = new Rating();
 		
 		// Title
 		Label title = new Label("Concert View");
@@ -101,10 +105,10 @@ public class singleConcertViewPane extends BorderPane {
 		inputs.add(seatsInput, 1, 6);
 		DatePicker dateAttendedInput = new DatePicker();
 		inputs.add(dateAttendedInput, 1, 7);
-		TextField overallRatingInput = new TextField();
-		overallRatingInput.setEditable(false);
-		overallRatingInput.setPromptText("Rating");
-		inputs.add(overallRatingInput, 1, 8);
+		//Eighth Row - Rating
+		rating.setMax(5);
+		rating.setUpdateOnHover(true);
+		inputs.add(rating, 1, 8);
 		
 		
 		edit.setOnAction((event)->{
@@ -114,7 +118,6 @@ public class singleConcertViewPane extends BorderPane {
 			whatCityInput.setEditable(true);
 			openingActInput.setEditable(true);
 			seatsInput.setEditable(true);
-			overallRatingInput.setEditable(true);
 			
 			edit.setVisible(false);
 			saveEdits.setVisible(true);
@@ -129,7 +132,6 @@ public class singleConcertViewPane extends BorderPane {
 					whatCityInput.setEditable(false);
 					openingActInput.setEditable(false);
 					seatsInput.setEditable(false);
-					overallRatingInput.setEditable(false);
 					
 					edit.setVisible(true);
 					saveEdits.setVisible(false);
