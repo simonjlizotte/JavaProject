@@ -1,5 +1,7 @@
 
 import credits.CreditsScene;
+import credits.SourcesScene;
+import help.HelpScene;
 import Tabs.AddConcertTab;
 import Tabs.ChartTab;
 import Tabs.ViewConcertTab;
@@ -34,21 +36,36 @@ public class ConcertTrackerMain extends Application{
 		
 		// Build file Menu Items
 		MenuItem quit = new MenuItem("Quit");
+		// Set Lambda
 		quit.setOnAction((event) -> {
 			System.exit(0);
 		});
 		
 		// Build help Menu Items 
 		MenuItem helpFile = new MenuItem ("Help");
+		helpFile.setOnAction((event) -> {
+			Stage helpStage = new Stage();
+			helpStage.setTitle("HELP");
+			helpStage.setScene(new HelpScene());
+			helpStage.show();
+		});
 		
 		// Build credits Menu Items 
 		MenuItem creditSources = new MenuItem("Sources");
+		// Set Lambda
+		creditSources.setOnAction((event) -> {
+			Stage creditStage = new Stage();
+			creditStage.setTitle("SOURCES");
+			creditStage.setScene(new SourcesScene());
+			creditStage.show();
+		});
 		MenuItem creditNames = new MenuItem("Credits");
+		// Set lambda
 		creditNames.setOnAction((event) -> {
-			Stage stage = new Stage();
-			stage.setTitle("CREDITS");
-			stage.setScene(new CreditsScene());
-			stage.show();
+			Stage nameStage = new Stage();
+			nameStage.setTitle("CREDITS");
+			nameStage.setScene(new CreditsScene());
+			nameStage.show();
 		});
 		
 		// Add File Menu Items to menu 
