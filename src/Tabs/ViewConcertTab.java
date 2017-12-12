@@ -1,9 +1,11 @@
 package Tabs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
@@ -18,8 +20,7 @@ import objects.Concert;
  * to one instance of this tab.
  */
 public class ViewConcertTab extends Tab{
-	private ListView concertList;
-	private ArrayList<Concert> bandNames;
+	private List<Concert> bandNames;
 	
 	//Instance of the Concert object
 	Concert conertNames = new Concert();
@@ -34,14 +35,19 @@ public class ViewConcertTab extends Tab{
 	private ViewConcertTab() {
 		this.setText(TAB_TITLE);
 		
-		//Calling my arraylist that is populated by fictious band name objects
-		bandNameArrayList();
-		
 		//VBox to host the listView
 		VBox vbox = new VBox();
 		
-		concertList = new ListView();
-					
+		ListView<String> bandList = new ListView<String>();
+		
+		ObservableList<String> bands =FXCollections.observableArrayList (
+		    "Band1", "Band2", "Band3", "Band4");
+		bandList.setItems(bands);
+		
+		vbox.getChildren().add(bandList);
+		vbox.setMinHeight(768);
+		this.setContent(vbox);
+
 	}
 	
 	public void bandNameArrayList() {
