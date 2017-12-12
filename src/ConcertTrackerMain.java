@@ -72,10 +72,10 @@ public class ConcertTrackerMain extends Application{
 			nameStage.show();
 		});
 		
-		MenuItem selected = new MenuItem("Select");
+		MenuItem selected = new MenuItem("ConcertTest");
 		selected.setOnAction((event) -> {
 			Stage selectedStage = new Stage();
-			selectedStage.setTitle("SELECTED");
+			selectedStage.setTitle("ConcertTesting");
 			selectedStage.setScene(new singleConcertViewScene());
 			selectedStage.show();
 		});
