@@ -5,10 +5,13 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import objects.Concert;
 
@@ -41,13 +44,13 @@ public class ViewConcertTab extends Tab{
 		ListView<String> bandList = new ListView<String>();
 		
 		ObservableList<String> bands =FXCollections.observableArrayList (
-		    "Band1", "Band2", "Band3", "Band4");
+		    "Band1", "Band2", "Band3", "Band4", "Band1", "Band2", "Band3", "Band4", "Band1", "Band2", "Band3", "Band4");
 		bandList.setItems(bands);
 		
 		vbox.getChildren().add(bandList);
-		vbox.setMinHeight(768);
+		vbox.setPadding(new Insets(10,10,10,10));
+		vbox.setAlignment(Pos.TOP_CENTER);
 		this.setContent(vbox);
-
 	}
 	
 	public void bandNameArrayList() {
