@@ -41,8 +41,10 @@ public class ViewConcertTab extends Tab{
 		//VBox to host the listView
 		VBox vbox = new VBox();
 		
+		//Listview of band names
 		ListView<String> bandList = new ListView<String>();
 		
+		//ObservableList to populate the listview
 		ObservableList<String> bands =FXCollections.observableArrayList (
 		    "Band1", "Band2", "Band3", "Band4", "Band1", "Band2", "Band3", "Band4", "Band1", "Band2", "Band3", "Band4");
 		bandList.setItems(bands);
@@ -53,6 +55,7 @@ public class ViewConcertTab extends Tab{
 		this.setContent(vbox);
 	}
 	
+	//ArrayList of band names TODO: Need to use this method eventually*
 	public void bandNameArrayList() {
 		bandNames = new ArrayList<Concert>();
 		bandNames.add(new Concert("Torture Kosher"));
