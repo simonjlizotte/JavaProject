@@ -1,7 +1,8 @@
 # JavaProject
 Concert Tracker 
 
-
+**DUE DATE: January 15th 
+PRESENTATION DUE DATE: January 16th**
 
 ## Git Branches
 Branches should be names in this conventions:
@@ -35,3 +36,10 @@ Should use our common camel casing as used in class for the last 2 years.
 
 # ALWAYS USE YOUR OWN BRANCH ONLY PUSH YOUR BRANCH ASK SOMEONE TO TEST YOUR BRANCH WITH STAGING (WHICH SHOULD BE STABLE) THEN CREATE A MERGE REQUEST AFTER ITS BEEN APPROVED BY ATLEAST ONE OTHER PERSON TO GO TO STAGING ONLY STAGING IS OUR "WORKING" MODEL WHERE OUR TESTED INDIVIDUAL BRANCHES WILL MEET. MASTER WILL ONLY BE STABLE VERSIONS AFTER STAGING IS DEEMED STABLE.
 # WE WILL MAKE MERGES IN TO MASTER AS A GROUP INCASE ERRORS ARISE EVERYONE WILL BE THERE TO EXPLAIN OR FIX THEIR CODE!!!!!!
+
+### **Designed GUI (Subject to change)**
+![alt text](Concert_UI.png "Designed GUI")
+
+### **Database Structure**
+![alt text](DataBase_Structure.png "Designed Database Structure")
+
