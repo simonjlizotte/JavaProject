@@ -51,6 +51,7 @@ public class ViewConcertTab extends Tab{
 		
 		vbox.getChildren().add(bandList);
 		vbox.setPadding(new Insets(10,10,10,10));
+		vbox.setMinHeight(768);
 		vbox.setAlignment(Pos.TOP_CENTER);
 		this.setContent(vbox);
 	}
