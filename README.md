@@ -1,7 +1,8 @@
 # JavaProject
 Concert Tracker 
 
-
+**DUE DATE: January 15th 
+PRESENTATION DUE DATE: January 16th**
 
 ## Git Branches
 Branches should be names in this conventions:
