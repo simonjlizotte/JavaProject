@@ -18,7 +18,76 @@ import database.Database;
  */
 public class Database {
 
-	//TODO CREATE a method to create tables needed.
+	//Statements to query 
+	/*
+	 * CREATE TABLE genreTable(
+    			id int NOT NULL AUTO_INCREMENT,
+    			genre_name VARCHAR(50),
+    			PRIMARY KEY(id)
+    );
+	 */
+	public static final String CREATE_TABLE_GENRE = "CREATE TABLE " + Const.TABLE_GENRE 
+			+ " (" + Const.GENRE_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " 
+			+ Const.GENRE_COLUMN_NAME + " VARCHAR(50), "
+			+ "PRIMARY KEY(" + Const.GENRE_COLUMN_ID + "));";
+	
+	
+	/*
+	 CREATE TABLE bandTable(
+		id int NOT NULL AUTO_INCREMENT,
+    		band_name VARCHAR(50),
+    		genre_id int,
+    		PRIMARY KEY(id),
+    		FOREIGN KEY (genre_id) REFERENCES genreTable(id)
+    	);
+	 */
+	public static final String CREATE_TABLE_BAND = "CREATE TABLE " + Const.TABLE_BANDS 
+			+ " (" + Const.BANDS_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " 
+			+ Const.BANDS_COLUMN_NAME + " VARCHAR(50), "
+			+ Const.BANDS_COLUMN_GENRE_ID + " int, "
+			+ "PRIMARY KEY(" + Const.BANDS_COLUMN_ID + "),"
+			+ "FOREIGN KEY(" + Const.GENRE_COLUMN_ID + ") REFERENCES " + Const.TABLE_GENRE + "(" + Const.GENRE_COLUMN_ID + "));";
+		
+	/*
+	 * CREATE TABLE venueTable(
+    		id int NOT NULL AUTO_INCREMENT,
+    		venue VARCHAR(50),
+    		city VARCHAR(50),
+    		PRIMARY KEY(id)
+    );
+	 */
+	public static final String CREATE_TABLE_VENUE = "CREATE TABLE " + Const.TABLE_VENUE
+			+ " (" + Const.VENUE_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, "
+			+ Const.VENUE_COLUMN_NAME + " VARCHAR(50), " 
+			+ Const.VENUE_COLUMN_CITY + " VARCHAR(50), "
+			+ "PRIMARY KEY(" + Const.VENUE_COLUMN_ID + "));";
+	
+	/*CREATE TABLE concertTable(
+		    id int NOT NULL AUTO_INCREMENT,
+		    band_id int,
+		    venue_id int,
+		    concert_date DATE,
+		    rating TINYINT,
+		    picture BLOB,
+		    PRIMARY KEY(id),
+		    FOREIGN KEY (band_id) REFERENCES bandTable(id),
+		    FOREIGN KEY (venue_id) REFERENCES venueTable(id)
+		    );
+	 */
+	public static final String CREATE_TABLE_CONCERT = "CREATE TABLE" + Const.TABLE_CONCERTS
+			+ " (" + Const.CONCERTS_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, "
+			+ Const.CONCERTS_COLUMN_BAND_ID + " int, "
+			+ Const.CONCERTS_COLUMN_VENUE_ID + " int, "
+			+ Const.CONCERTS_COLUMN_DATE + " DATE, "
+			+ Const.CONCERTS_COLUMN_RATING + " TINYINT, " 
+			+ Const.CONCERTS_COLUMN_PIC + " BLOB, "
+			+ "PRIMARY KEY(" + Const.CONCERTS_COLUMN_ID + "),"
+			+ "FOREIGN KEY(" + Const.CONCERTS_COLUMN_BAND_ID + ") REFERENCES " + Const.TABLE_BANDS + "(" + Const.BANDS_COLUMN_ID + "),"
+			+ "FOREIGN KEY(" + Const.CONCERTS_COLUMN_VENUE_ID + ") REFERENCES " + Const.TABLE_VENUE + "(" + Const.VENUE_COLUMN_ID + "));";
+
+		
+	
+	
 	
 	//properties
 	private static Database instance = null;

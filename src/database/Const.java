@@ -8,9 +8,33 @@ package database;
 public class Const {
 	
 	//credentials (could be placed in a different class that will be ignored by git)
-		public static final String DB_NAME = "database";
-		public static final String DB_USERNAME = "username";
-		public static final String DB_PASSWORD = "password";
+	public static final String DB_NAME = "database";
+	public static final String DB_USERNAME = "username";
+	public static final String DB_PASSWORD = "password";
 		
-	//TABLES CONSTANTS SHOULD BE PLACED HERE 
-}
+	//GENRE TABLE
+	public static final String TABLE_GENRE = "genreTable";
+	public static final String GENRE_COLUMN_ID = "id";
+	public static final String GENRE_COLUMN_NAME = "genre_name";
+	
+	//BAND TABLE
+	public static final String TABLE_BANDS = "bandTable";
+	public static final String BANDS_COLUMN_ID = "id";
+	public static final String BANDS_COLUMN_NAME = "band_name";
+	public static final String BANDS_COLUMN_GENRE_ID = "genre_id";
+	
+	//VENUE TABLE
+	public static final String TABLE_VENUE = "venueTable";
+	public static final String VENUE_COLUMN_ID = "id";
+	public static final String VENUE_COLUMN_NAME = "venue";
+	public static final String VENUE_COLUMN_CITY = "city";
+	
+	//CONCERT TABLE
+	public static final String TABLE_CONCERTS = "concertTable";
+	public static final String CONCERTS_COLUMN_ID = "id";
+	public static final String CONCERTS_COLUMN_VENUE_ID = "venue_id";
+	public static final String CONCERTS_COLUMN_BAND_ID = "band_id";
+	public static final String CONCERTS_COLUMN_RATING = "rating";
+	public static final String CONCERTS_COLUMN_DATE = "concert_date";
+	public static final String CONCERTS_COLUMN_PIC = "picture";
+ }
