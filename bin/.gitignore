@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-/Tabs/
-/credits/
-/help/
-/objects/
-/fonts/
-=======
-/objects/
-/Tabs/
-/credits/
-/help/
->>>>>>> master
+/database/
+/Tables/
+/DAOS/
