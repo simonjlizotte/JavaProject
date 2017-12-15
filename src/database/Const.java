@@ -18,7 +18,7 @@ public class Const {
 	public static final String GENRE_COLUMN_NAME = "genre_name";
 	
 	//BAND TABLE
-	public static final String TABLE_BANDS = "bandTable";
+	public static final String TABLE_BAND = "bandTable";
 	public static final String BANDS_COLUMN_ID = "id";
 	public static final String BANDS_COLUMN_NAME = "band_name";
 	public static final String BANDS_COLUMN_GENRE_ID = "genre_id";
@@ -30,7 +30,7 @@ public class Const {
 	public static final String VENUE_COLUMN_CITY = "city";
 	
 	//CONCERT TABLE
-	public static final String TABLE_CONCERTS = "concertTable";
+	public static final String TABLE_CONCERT = "concertTable";
 	public static final String CONCERTS_COLUMN_ID = "id";
 	public static final String CONCERTS_COLUMN_VENUE_ID = "venue_id";
 	public static final String CONCERTS_COLUMN_BAND_ID = "band_id";

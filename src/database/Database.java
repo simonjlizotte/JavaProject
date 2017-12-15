@@ -1,8 +1,11 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import database.Const;
 import database.Database;
@@ -41,7 +44,7 @@ public class Database {
     		FOREIGN KEY (genre_id) REFERENCES genreTable(id)
     	);
 	 */
-	public static final String CREATE_TABLE_BAND = "CREATE TABLE " + Const.TABLE_BANDS 
+	public static final String CREATE_TABLE_BAND = "CREATE TABLE " + Const.TABLE_BAND 
 			+ " (" + Const.BANDS_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " 
 			+ Const.BANDS_COLUMN_NAME + " VARCHAR(50), "
 			+ Const.BANDS_COLUMN_GENRE_ID + " int, "
@@ -74,7 +77,7 @@ public class Database {
 		    FOREIGN KEY (venue_id) REFERENCES venueTable(id)
 		    );
 	 */
-	public static final String CREATE_TABLE_CONCERT = "CREATE TABLE" + Const.TABLE_CONCERTS
+	public static final String CREATE_TABLE_CONCERT = "CREATE TABLE" + Const.TABLE_CONCERT
 			+ " (" + Const.CONCERTS_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, "
 			+ Const.CONCERTS_COLUMN_BAND_ID + " int, "
 			+ Const.CONCERTS_COLUMN_VENUE_ID + " int, "
@@ -82,7 +85,7 @@ public class Database {
 			+ Const.CONCERTS_COLUMN_RATING + " TINYINT, " 
 			+ Const.CONCERTS_COLUMN_PIC + " BLOB, "
 			+ "PRIMARY KEY(" + Const.CONCERTS_COLUMN_ID + "),"
-			+ "FOREIGN KEY(" + Const.CONCERTS_COLUMN_BAND_ID + ") REFERENCES " + Const.TABLE_BANDS + "(" + Const.BANDS_COLUMN_ID + "),"
+			+ "FOREIGN KEY(" + Const.CONCERTS_COLUMN_BAND_ID + ") REFERENCES " + Const.TABLE_BAND + "(" + Const.BANDS_COLUMN_ID + "),"
 			+ "FOREIGN KEY(" + Const.CONCERTS_COLUMN_VENUE_ID + ") REFERENCES " + Const.TABLE_VENUE + "(" + Const.VENUE_COLUMN_ID + "));";
 
 		
@@ -106,7 +109,11 @@ public class Database {
 				e.printStackTrace();
 			}
 			
-			//CREATE QUERIES FOR TABLES SHOULD BE PLACE HERE.
+			createTable(Const.TABLE_GENRE, CREATE_TABLE_GENRE, connection);
+			createTable(Const.TABLE_BAND, CREATE_TABLE_BAND, connection);
+			createTable(Const.TABLE_VENUE, CREATE_TABLE_VENUE, connection);
+			createTable(Const.TABLE_CONCERT, CREATE_TABLE_CONCERT, connection);
+
 			
 		}else {
 			System.out.println("Connection already created");
@@ -126,6 +133,38 @@ public class Database {
 			instance = new Database();
 		}
 		return instance;
+	}
+	
+	/**
+	 * We create the tables using this method. it'll be call when connecting to the database
+	 * 
+	 * @param tableName name of the table we want to create
+	 * @param tableQuery statement to create the table
+	 * @param connection connection to the database
+	 */
+	public void createTable(String tableName, String tableQuery, Connection connection) {
+		/**
+		 * Create a statement
+		 * statements are used to execute queries on the database
+		 */
+		Statement createTables;
+		try {
+			//Grab metaData from the database
+			DatabaseMetaData md = connection.getMetaData();
+			//filter the metaData to filter if the table in question exists
+			ResultSet result = md.getTables(null, null, tableName, null);
+			//we check if exists by checking if there is any results
+			if(result.next()) {
+				System.out.println(tableName + " table already exists");
+			}else {
+				//if not, we create a statements and executed 
+				createTables = connection.createStatement();
+				createTables.execute(tableQuery);
+				System.out.println("The " + tableName + " table has been created");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
