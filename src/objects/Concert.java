@@ -19,7 +19,10 @@ public class Concert {
 	
 	//default constructor
 	public Concert() {
-		
+	}
+	
+	public Concert(String bandName) {
+		this.bandName = bandName;
 	}
 	
 	//constructor taking all properties as parameters
