@@ -1,7 +1,8 @@
 # JavaProject
 Concert Tracker 
 
-
+**DUE DATE: January 15th 
+PRESENTATION DUE DATE: January 16th**
 
 ## Git Branches
 Branches should be names in this conventions:
@@ -38,3 +39,7 @@ Should use our common camel casing as used in class for the last 2 years.
 
 ### **Designed GUI (Subject to change)**
 ![alt text](Concert_UI.png "Designed GUI")
+
+### **Database Structure**
+![alt text](DataBase_Structure.png "Designed Database Structure")
+
