@@ -90,7 +90,8 @@ public class AddConcertTab extends Tab{
 		//Eighth Row - Rating
 		Text ratingText = new Text("Rating: ");
 		rating.setMax(5);
-		rating.setUpdateOnHover(true);
+		rating.setUpdateOnHover(false);
+		rating.setPartialRating(true);
 		pane.add(ratingText, 0, 7);
 		pane.add(rating, 1, 7);
 		
@@ -103,7 +104,7 @@ public class AddConcertTab extends Tab{
 		Button fileTest = new Button("FileTest");
 		test.setOnAction(e-> 
 		{
-		System.out.print(rating.getRating());}
+		System.out.println(rating.getRating());}
 		);
 		pane.add(test, 0, 8);
 //		pane.add(fileTest, 0, 9);
