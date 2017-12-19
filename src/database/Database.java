@@ -77,7 +77,7 @@ public class Database {
 		    FOREIGN KEY (venue_id) REFERENCES venueTable(id)
 		    );
 	 */
-	public static final String CREATE_TABLE_CONCERT = "CREATE TABLE" + Const.TABLE_CONCERT
+	public static final String CREATE_TABLE_CONCERT = "CREATE TABLE " + Const.TABLE_CONCERT
 			+ " (" + Const.CONCERTS_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, "
 			+ Const.CONCERTS_COLUMN_BAND_ID + " int, "
 			+ Const.CONCERTS_COLUMN_VENUE_ID + " int, "
