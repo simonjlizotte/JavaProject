@@ -1,6 +1,8 @@
 package Tables;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import DAOS.GenreDAO;
@@ -35,17 +37,51 @@ public class GenreTable implements GenreDAO{
 		}
 	}
 
-	
+	/**
+	 * This method will SELECT ALL genres from the table
+	 * 
+	 * Query: SELECT * FROM genreTable;
+	 */
 	@Override
 	public ArrayList<Genre> getAllGenres() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM " + Const.TABLE_GENRE;
+		ArrayList<Genre> genres = new ArrayList<Genre>();
+		
+		try {
+			Statement getGenres = db.getConnection().createStatement();
+			ResultSet result = getGenres.executeQuery(query);
+			//this loop will iterate through each item in the result set and 
+				//when it gets to the last item will return false
+			while(result.next()) {
+				genres.add(new Genre(result.getInt(Const.GENRE_COLUMN_ID),
+									result.getString(Const.GENRE_COLUMN_NAME)));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return genres;
 	}
 
+	/**
+	 * This method will SELECT a genre FROM the table WHERE id matches
+	 * 
+	 * Query: SELECT * FROM genreTable WHERE id = 'id';
+	 */
 	@Override
 	public Genre getGenre(int genreID) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM " + Const.TABLE_GENRE + " WHERE " +
+					Const.GENRE_COLUMN_ID + " = " + genreID;
+		Genre genre = new Genre();
+		try {
+			Statement getGenre = db.getConnection().createStatement();
+			ResultSet result = getGenre.executeQuery(query);
+			result.next();
+			genre = new Genre(result.getInt(Const.GENRE_COLUMN_ID),
+					result.getString(Const.GENRE_COLUMN_NAME)); 
+		}catch(SQLException e) {
+			
+		}
+		return genre;
 	}
 
 	@Override
