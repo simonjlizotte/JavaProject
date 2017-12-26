@@ -90,9 +90,22 @@ public class GenreTable implements GenreDAO{
 		
 	}
 
+	/**
+	 * This method will DELETE a genre FROM the table WHERE id matches
+	 * 
+	 * Query: DELETE FROM genreTable WHERE id = 'id';
+	 */
 	@Override
 	public void deleteGenre(Genre genre) {
-		// TODO Auto-generated method stub
+		String query = "DELETE FROM " + Const.TABLE_GENRE + " WHERE " +
+				Const.GENRE_COLUMN_ID + " = " + genre.getId();
+	try {
+		db.getConnection().createStatement().execute(query);
+		System.out.println(genre.getGenre() + " deleted from the table");
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+}
 		
 	}
 
