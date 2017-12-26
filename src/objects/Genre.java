@@ -2,15 +2,15 @@ package objects;
 
 public class Genre {
 	private int id;
-	
-	//MISSING GENRE PROPERTY, WAITING FOR ENUM
-	
+	private String genre;
+		
 	public Genre() {
 		
 	}
 	
-	public Genre(int id) {
+	public Genre(int id, String genre) {
 		this.id = id;
+		this.genre = genre;
 	}
 
 	public int getId() {
@@ -20,5 +20,15 @@ public class Genre {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	
+	
 	
 }
