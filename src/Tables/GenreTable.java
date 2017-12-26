@@ -84,10 +84,17 @@ public class GenreTable implements GenreDAO{
 		return genre;
 	}
 
+	/**
+	 * This method will UPDATE a genre FROM the table WHERE id matches
+	 * 
+	 * UPDATE genreTable 
+		SET genre_name = 'genre' 
+		WHERE id = 'id'
+	 */
 	@Override
 	public void updateGenre(Genre genre) {
-		// TODO Auto-generated method stub
-		
+		String query = "UPDATE * FROM " + Const.TABLE_GENRE + " WHERE " +
+				Const.GENRE_COLUMN_ID + " = " + genre.getId();
 	}
 
 	/**
@@ -99,14 +106,11 @@ public class GenreTable implements GenreDAO{
 	public void deleteGenre(Genre genre) {
 		String query = "DELETE FROM " + Const.TABLE_GENRE + " WHERE " +
 				Const.GENRE_COLUMN_ID + " = " + genre.getId();
-	try {
-		db.getConnection().createStatement().execute(query);
-		System.out.println(genre.getGenre() + " deleted from the table");
-	}catch(SQLException e) {
-		e.printStackTrace();
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println(genre.getGenre() + " deleted from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
-}
-		
-	}
-
 }
