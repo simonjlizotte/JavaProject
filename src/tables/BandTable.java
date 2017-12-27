@@ -1,12 +1,15 @@
 package tables;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import DAOS.BandDAO;
 import database.Const;
 import database.Database;
 import objects.Band;
+import objects.Genre;
 
 
 /**
@@ -22,13 +25,18 @@ public class BandTable implements BandDAO{
 	/**
 	 * This method will INSERT a new band INTO the table
 	 * 
-	 * Query: INSERT INTO bandTable (band_name, genre_id) values ('band', 'genreid');
+	 * Query:INSERT INTO bandTable(band_name, genre_id)
+			SELECT 'Joe The Gays', id
+  			FROM genreTable
+ 			WHERE genre_name = 'this'
+ 			LIMIT 1
 	 */
 	@Override
-	public void createBand(Band band) {
+	public void createBand(Band band, Genre genre) {
 		String query = "INSERT INTO " + Const.TABLE_BAND + 
 				"(" + Const.BANDS_COLUMN_NAME + ", "+ Const.BANDS_COLUMN_GENRE_ID +") "
-						+ "values ('" +	band.getName() + "', '" + band.getGenreId() + "')";
+				+ "FROM " + Const.TABLE_GENRE 
+				+ "WHERE " + Const.GENRE_COLUMN_NAME + " = '" + genre.getGenre() + "' LIMIT 1;";
 		try {
 			db.getConnection().createStatement().execute(query);
 			System.out.println(band.getName() + " successfully added to the table");
@@ -37,16 +45,47 @@ public class BandTable implements BandDAO{
 		}
 	}
 
+	/**
+	 * This method will SELECT ALL genres from the table
+	 * 
+	 * Query: SELECT * FROM bandTable;
+	 */
 	@Override
 	public ArrayList<Band> getAllBands() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM " + Const.TABLE_BAND;
+		ArrayList<Band> bands = new ArrayList<Band>();
+		
+		try {
+			Statement getGenres = db.getConnection().createStatement();
+			ResultSet result = getGenres.executeQuery(query);
+			//this loop will iterate through each item in the result set and 
+				//when it gets to the last item will return false
+			while(result.next()) {
+				bands.add(new Band(result.getInt(Const.BANDS_COLUMN_ID),
+									result.getString(Const.BANDS_COLUMN_NAME)
+									, result.getInt(Const.BANDS_COLUMN_GENRE_ID)));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return bands;
 	}
 
 	@Override
 	public Band getBand(int bandID) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM " + Const.TABLE_BAND + " WHERE " +
+				Const.BANDS_COLUMN_ID + " = " + bandID;
+	Band band = new Band();
+	try {
+		Statement getBand = db.getConnection().createStatement();
+		ResultSet result = getBand.executeQuery(query);
+		result.next();
+		band = new Band(result.getInt(Const.BANDS_COLUMN_ID),
+				result.getString(Const.BANDS_COLUMN_NAME), result.getInt(Const.BANDS_COLUMN_GENRE_ID)); 
+	}catch(SQLException e) {
+		
+	}
+	return band;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package DAOS;
 import java.util.ArrayList;
 
 import objects.Band;
+import objects.Genre;
 
 /**
  * Interface to implement inside bandTable class. contains all the crud methods
@@ -11,7 +12,7 @@ import objects.Band;
  */
 public interface BandDAO {
 	//Create
-	public void createBand(Band band);
+	public void createBand(Band band, Genre genre);
 	//Read
 	public ArrayList<Band> getAllBands();
 	public Band getBand(int bandID);
