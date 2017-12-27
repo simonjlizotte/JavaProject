@@ -1,11 +1,14 @@
 package tables;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import DAOS.VenueDAO;
 import database.Const;
 import database.Database;
+import objects.Genre;
 import objects.Venue;
 
 /**
@@ -36,10 +39,30 @@ public class VenueTable implements VenueDAO{
 		}
 	}
 
+	/**
+	 * This method will SELECT ALL venues from the table
+	 * 
+	 * Query: SELECT * FROM venueTable;
+	 */
 	@Override
 	public ArrayList<Venue> getAllVenues() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM " + Const.TABLE_VENUE;
+		ArrayList<Venue> venues = new ArrayList<Venue>();
+		
+		try {
+			Statement getGenres = db.getConnection().createStatement();
+			ResultSet result = getGenres.executeQuery(query);
+			//this loop will iterate through each item in the result set and 
+				//when it gets to the last item will return false
+			while(result.next()) {
+				venues.add(new Venue(result.getInt(Const.VENUE_COLUMN_ID),
+									result.getString(Const.VENUE_COLUMN_NAME),
+									result.getString(Const.VENUE_COLUMN_CITY)));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return venues;
 	}
 
 	@Override
