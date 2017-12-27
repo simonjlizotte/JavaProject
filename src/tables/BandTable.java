@@ -1,8 +1,10 @@
 package tables;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DAOS.BandDAO;
+import database.Const;
 import database.Database;
 import objects.Band;
 
@@ -20,11 +22,19 @@ public class BandTable implements BandDAO{
 	/**
 	 * This method will INSERT a new band INTO the table
 	 * 
-	 * Query: INSERT INTO bandTable (genre_name) values ('genre');
+	 * Query: INSERT INTO bandTable (band_name, genre_id) values ('band', 'genreid');
 	 */
 	@Override
 	public void createBand(Band band) {
-		
+		String query = "INSERT INTO " + Const.TABLE_BAND + 
+				"(" + Const.BANDS_COLUMN_NAME + ", "+ Const.BANDS_COLUMN_GENRE_ID +") "
+						+ "values ('" +	band.getName() + "', '" + band.getGenreId() + "')";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println(band.getName() + " successfully added to the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
