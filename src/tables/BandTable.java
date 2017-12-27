@@ -71,6 +71,11 @@ public class BandTable implements BandDAO{
 		return bands;
 	}
 
+	/**
+	 * This method will SELECT a genre FROM the table WHERE id matches
+	 * 
+	 * Query: SELECT * FROM genreTable WHERE id = 'id';
+	 */
 	@Override
 	public Band getBand(int bandID) {
 		String query = "SELECT * FROM " + Const.TABLE_BAND + " WHERE " +
@@ -88,16 +93,42 @@ public class BandTable implements BandDAO{
 	return band;
 	}
 
+	/**
+	 * This method will UPDATE a genre FROM the table WHERE id matches
+	 * 
+	 * UPDATE bandTable 
+		SET band_name = 'band' 
+		WHERE id = 'id';
+	 */
 	@Override
 	public void updateBand(Band band) {
-		// TODO Auto-generated method stub
-		
+		String query = "UPDATE " + Const.TABLE_BAND +
+				"SET " + Const.BANDS_COLUMN_NAME + " = '" + band.getName() + "' WHERE "
+				+ Const.BANDS_COLUMN_ID + " = '" + band.getId() + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println(band.getName() + " updated from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
+	
 
+	/**
+	 * This method will DELETE a band FROM the table WHERE id matches
+	 * 
+	 * Query: DELETE FROM bandTable WHERE id = 'id';
+	 */
 	@Override
 	public void deleteBand(Band band) {
-		// TODO Auto-generated method stub
-		
+		String query = "DELETE FROM " + Const.TABLE_BAND + " WHERE " +
+				Const.BANDS_COLUMN_ID + " = " + band.getId();
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println(band.getName() + " deleted from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
