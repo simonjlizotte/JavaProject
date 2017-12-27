@@ -49,7 +49,7 @@ public class Database {
 			+ Const.BANDS_COLUMN_NAME + " VARCHAR(50), "
 			+ Const.BANDS_COLUMN_GENRE_ID + " int, "
 			+ "PRIMARY KEY(" + Const.BANDS_COLUMN_ID + "),"
-			+ "FOREIGN KEY(" + Const.GENRE_COLUMN_ID + ") REFERENCES " + Const.TABLE_GENRE + "(" + Const.GENRE_COLUMN_ID + "));";
+			+ "FOREIGN KEY(" + Const.BANDS_COLUMN_GENRE_ID + ") REFERENCES " + Const.TABLE_GENRE + "(" + Const.GENRE_COLUMN_ID + "));";
 		
 	/*
 	 * CREATE TABLE venueTable(
