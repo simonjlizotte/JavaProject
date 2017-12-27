@@ -65,6 +65,11 @@ public class VenueTable implements VenueDAO{
 		return venues;
 	}
 
+	/**
+	 * This method will SELECT a venue FROM the table WHERE id matches
+	 * 
+	 * Query: SELECT * FROM venueTable WHERE id = 'id';
+	 */
 	@Override
 	public Venue getVenue(int venueID) {
 		String query = "SELECT * FROM " + Const.TABLE_VENUE + " WHERE " +
@@ -83,16 +88,61 @@ public class VenueTable implements VenueDAO{
 	return venue;
 	}
 
+	/**
+	 * This method will UPDATE a venue FROM the table WHERE id matches
+	 * 
+	 * UPDATE genreTable 
+		SET venue = 'venue' 
+		WHERE id = 'id';
+	 */
 	@Override
 	public void updateVenue(Venue venue) {
-		// TODO Auto-generated method stub
-		
+		String query = "UPDATE " + Const.TABLE_VENUE +
+				"SET " + Const.VENUE_COLUMN_NAME + " = '" + venue.getVenue() + "' WHERE "
+				+ Const.VENUE_COLUMN_ID + " = '" + venue.getId() + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println(venue.getVenue() + " updated from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * This method will UPDATE a venue FROM the table WHERE id matches
+	 * 
+	 * UPDATE genreTable 
+		SET city = 'city' 
+		WHERE id = 'id';
+	 */
+	@Override
+	public void updateCity(Venue venue) {
+		String query = "UPDATE " + Const.TABLE_VENUE +
+				"SET " + Const.VENUE_COLUMN_CITY + " = '" + venue.getCity() + "' WHERE "
+				+ Const.VENUE_COLUMN_ID + " = '" + venue.getId() + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println(venue.getCity() + " updated from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * This method will DELETE a genre FROM the table WHERE id matches
+	 * 
+	 * Query: DELETE FROM venueTable WHERE id = 'id';
+	 */
 	@Override
 	public void deleteVenue(Venue venue) {
-		// TODO Auto-generated method stub
-		
+		String query = "DELETE FROM " + Const.TABLE_VENUE + " WHERE " +
+				Const.VENUE_COLUMN_ID + " = " + venue.getId();
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println(venue.getVenue() + " deleted from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

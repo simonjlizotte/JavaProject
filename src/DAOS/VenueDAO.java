@@ -12,6 +12,7 @@ public interface VenueDAO {
 		public Venue getVenue(int venueID);
 		//Update
 		public void updateVenue(Venue venue);
+		public void updateCity(Venue venue);
 		//Delete
 		public void deleteVenue(Venue venue);
 }
