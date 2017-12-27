@@ -79,7 +79,7 @@ public class GenreTable implements GenreDAO{
 			genre = new Genre(result.getInt(Const.GENRE_COLUMN_ID),
 					result.getString(Const.GENRE_COLUMN_NAME)); 
 		}catch(SQLException e) {
-			
+			e.printStackTrace();
 		}
 		return genre;
 	}

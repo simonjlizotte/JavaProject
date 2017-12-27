@@ -67,8 +67,20 @@ public class VenueTable implements VenueDAO{
 
 	@Override
 	public Venue getVenue(int venueID) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM " + Const.TABLE_VENUE + " WHERE " +
+				Const.TABLE_VENUE + " = " + venueID;
+	Venue venue = new Venue();
+	try {
+		Statement getVenue = db.getConnection().createStatement();
+		ResultSet result = getVenue.executeQuery(query);
+		result.next();
+		venue = new Venue(result.getInt(Const.VENUE_COLUMN_ID),
+				result.getString(Const.VENUE_COLUMN_NAME),
+				result.getString(Const.VENUE_COLUMN_CITY));
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return venue;
 	}
 
 	@Override
