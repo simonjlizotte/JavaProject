@@ -1,4 +1,4 @@
-package Tables;
+package tables;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -89,12 +89,19 @@ public class GenreTable implements GenreDAO{
 	 * 
 	 * UPDATE genreTable 
 		SET genre_name = 'genre' 
-		WHERE id = 'id'
+		WHERE id = 'id';
 	 */
 	@Override
 	public void updateGenre(Genre genre) {
-		String query = "UPDATE * FROM " + Const.TABLE_GENRE + " WHERE " +
-				Const.GENRE_COLUMN_ID + " = " + genre.getId();
+		String query = "UPDATE " + Const.TABLE_GENRE +
+				"SET " + Const.GENRE_COLUMN_NAME + " = '" + genre.getGenre() + "' WHERE "
+				+ Const.GENRE_COLUMN_ID + " = '" + genre.getId() + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println(genre.getGenre() + " updated from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
