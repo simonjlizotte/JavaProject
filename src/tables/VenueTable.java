@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import DAOS.VenueDAO;
 import database.Const;
 import database.Database;
-import objects.Genre;
 import objects.Venue;
 
 /**

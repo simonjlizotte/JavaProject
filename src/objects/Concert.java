@@ -9,10 +9,8 @@ public class Concert {
 
 	//properties
 	private int id;
-	private String bandName;
-	private String genre;
-	private String venue;
-	private String city;
+	private int bandID;
+	private int venueID;
 	private String date;
 	private int rating;
 	private String pic;
@@ -21,24 +19,17 @@ public class Concert {
 	public Concert() {
 	}
 	
-	public Concert(String bandName) {
-		this.bandName = bandName;
-	}
-	
-	//constructor taking all properties as parameters
-	public Concert(int id, String bandName, String genre, String venue, String city, String date, int rating, String pic) {
+
+	public Concert(int id, int bandID, int venueID, String date, int rating, String pic) {
 		this.id = id;
-		this.bandName = bandName;
-		this.genre = genre;
-		this.venue = venue;
-		this.city = city;
+		this.bandID = bandID;
+		this.venueID = venueID;
 		this.date = date;
 		this.rating = rating;
 		this.pic = pic;
 	}
 
 	//getters and setters
-	
 	public int getId() {
 		return id;
 	}
@@ -47,36 +38,20 @@ public class Concert {
 		this.id = id;
 	}
 
-	public String getBandName() {
-		return bandName;
+	public int getBandID() {
+		return bandID;
 	}
 
-	public void setBandName(String bandName) {
-		this.bandName = bandName;
+	public void setBandID(int bandID) {
+		this.bandID = bandID;
 	}
 
-	public String getGenre() {
-		return genre;
+	public int getVenueID() {
+		return venueID;
 	}
 
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-
-	public String getVenue() {
-		return venue;
-	}
-
-	public void setVenue(String venue) {
-		this.venue = venue;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
+	public void setVenueID(int venueID) {
+		this.venueID = venueID;
 	}
 
 	public String getDate() {
@@ -102,7 +77,4 @@ public class Concert {
 	public void setPic(String pic) {
 		this.pic = pic;
 	}
-	
-	
-	
 }
