@@ -1,5 +1,6 @@
 package Tabs;
 
+import database.Database;
 import javafx.scene.control.Tab;
 
 /**
@@ -11,6 +12,9 @@ import javafx.scene.control.Tab;
  */
 public class AddConcertTab extends Tab{
 
+	//Database
+	Database db;
+	
 	//constants needed
 	public static final String TAB_TITLE = "Add Concert"; //title for the tab
 	
@@ -20,6 +24,7 @@ public class AddConcertTab extends Tab{
 	//constructor
 	private AddConcertTab() {
 		this.setText(TAB_TITLE);
+		db = Database.getInstance();
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
