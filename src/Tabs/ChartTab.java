@@ -76,10 +76,6 @@ public class ChartTab extends Tab{
 		pane.add(genresChart, 0, 1);
 		pane.add(citiesChart, 1, 0);
 		
-		
-		
-		
-		
 		this.setContent(pane);
 		
 	}
