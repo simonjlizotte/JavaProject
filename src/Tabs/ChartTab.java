@@ -8,6 +8,13 @@ import javafx.scene.control.Tab;
  *
  * This tab is designed to follow a singleton pattern, meaning that there will only be access
  * to one instance of this tab.
+ * 
+ *@author carmenkerim
+ *
+ *This tab is used to display 3 main charts. 
+ * 1.cities chart
+ * 2.genre chart
+ * 3.year chart
  */
 public class ChartTab extends Tab{
 
