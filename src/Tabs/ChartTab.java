@@ -31,6 +31,8 @@ public class ChartTab extends Tab{
 		
 		// pieChart for cities
         PieChart citiesChart = new PieChart();
+        // setting the title and labels
+        
         
         // pieChart for genre
         PieChart genresChart = new PieChart();
