@@ -2,8 +2,10 @@ package Tabs;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.GridPane;
 
 /**
  * 
@@ -26,6 +28,9 @@ public class ChartTab extends Tab{
 	
 	//AddConcertTab created
 	private static ChartTab tab;
+	
+	//Gridpane used to display the charts
+	public static GridPane pane;
 	
 	//constructor
 	private ChartTab() {
@@ -61,7 +66,7 @@ public class ChartTab extends Tab{
         //Set the data to the genresChart
         genresChart.setData(genresData);
         
-      //------- year chart -------//
+        //------- year chart -------//
         PieChart yearChart = new PieChart();
         
         // title to the yearChart
@@ -75,6 +80,20 @@ public class ChartTab extends Tab{
       
         // set the data to the yearChart
         yearChart.setData(yearData);
+        
+        //Setting the spacing of the charts
+        pane.setHgap(10);
+        
+        // padding around the charts
+        pane.setPadding(new Insets(10,10,10,10));
+        
+        // added yearChart,genres, and titles chart to pane
+        pane.add(yearChart, 0, 0);
+        pane.add(genresChart, 0, 1);
+        pane.add(citiesChart, 1, 0);
+        
+        //setting the pane to the tab view
+        this.setContent(pane);
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
