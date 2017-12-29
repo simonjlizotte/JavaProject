@@ -1,5 +1,7 @@
 package Tabs;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tab;
 
@@ -32,7 +34,16 @@ public class ChartTab extends Tab{
 		// pieChart for cities
         PieChart citiesChart = new PieChart();
         // setting the title and labels
+        citiesChart.setTitle("Cities");
+        citiesChart.setLabelsVisible(true);
         
+        //Sample obserableList for the cities
+        ObservableList<PieChart.Data> citiesData =
+            FXCollections.observableArrayList(
+                new PieChart.Data("Windsor", 2));
+        
+        //Set the data to the citiesChart
+        citiesChart.setData(citiesData);
         
         // pieChart for genre
         PieChart genresChart = new PieChart();
