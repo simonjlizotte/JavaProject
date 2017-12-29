@@ -53,16 +53,28 @@ public class ChartTab extends Tab{
         genresChart.setTitle("Genres");
         genresChart.setLabelsVisible(true);
         
-        //Sample obserableList for the cities
+        //Sample obserableList for the genres
         ObservableList<PieChart.Data> genresData =
             FXCollections.observableArrayList(
                 new PieChart.Data("Hard", 2));
-        //Set the data to the citiesChart
+        
+        //Set the data to the genresChart
         genresChart.setData(genresData);
         
-        // pieChart for year
+      //------- year chart -------//
         PieChart yearChart = new PieChart();
-     
+        
+        // title to the yearChart
+        yearChart.setTitle("Year");
+        yearChart.setLabelsVisible(true);
+        
+        // sample obserableList for the yearChart
+        ObservableList<PieChart.Data> yearData =
+            FXCollections.observableArrayList(
+                new PieChart.Data("2007", 2));
+      
+        // set the data to the yearChart
+        yearChart.setData(yearData);
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
