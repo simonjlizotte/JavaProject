@@ -1,5 +1,6 @@
 package Tabs;
 
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tab;
 
 /**
@@ -27,6 +28,12 @@ public class ChartTab extends Tab{
 	//constructor
 	private ChartTab() {
 		this.setText(TAB_TITLE);
+		
+		// pieChart for cities
+        PieChart citiesChart = new PieChart();
+        
+      
+     
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
