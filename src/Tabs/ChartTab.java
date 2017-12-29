@@ -31,22 +31,34 @@ public class ChartTab extends Tab{
 	private ChartTab() {
 		this.setText(TAB_TITLE);
 		
-		// pieChart for cities
+	    //------- citites chart -------//
         PieChart citiesChart = new PieChart();
+        
         // setting the title and labels
         citiesChart.setTitle("Cities");
         citiesChart.setLabelsVisible(true);
         
-        //Sample obserableList for the cities
+        // sample obserableList for the cities
         ObservableList<PieChart.Data> citiesData =
             FXCollections.observableArrayList(
                 new PieChart.Data("Windsor", 2));
         
-        //Set the data to the citiesChart
+        // set the data to the citiesChart
         citiesChart.setData(citiesData);
         
-        // pieChart for genre
+        //------- genre chart -------//
         PieChart genresChart = new PieChart();
+        
+        // setting the title and labels
+        genresChart.setTitle("Genres");
+        genresChart.setLabelsVisible(true);
+        
+        //Sample obserableList for the cities
+        ObservableList<PieChart.Data> genresData =
+            FXCollections.observableArrayList(
+                new PieChart.Data("Hard", 2));
+        //Set the data to the citiesChart
+        genresChart.setData(genresData);
         
         // pieChart for year
         PieChart yearChart = new PieChart();
