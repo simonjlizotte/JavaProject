@@ -1,7 +1,8 @@
 package Tabs;
 
-import javafx.scene.control.Tab;
 
+import javafx.scene.control.Tab;
+ 
 /**
  * 
  * @author josegeorges
@@ -20,6 +21,9 @@ public class AddConcertTab extends Tab{
 	//constructor
 	private AddConcertTab() {
 		this.setText(TAB_TITLE);
+		
+		
+		
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
