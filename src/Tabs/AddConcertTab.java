@@ -1,14 +1,9 @@
 package Tabs;
 
-import java.io.File;
-
 import database.Database;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import objects.Band;
@@ -16,6 +11,7 @@ import objects.Genre;
 import objects.Venue;
 import tables.ConcertTable;
 
+ 
 /**
  * 
  * @author josegeorges
