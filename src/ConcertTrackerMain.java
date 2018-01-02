@@ -76,7 +76,7 @@ public class ConcertTrackerMain extends Application{
 		selected.setOnAction((event) -> {
 			Stage selectedStage = new Stage();
 			selectedStage.setTitle("ConcertTesting");
-			selectedStage.setScene(new singleConcertViewScene());
+			//selectedStage.setScene(new singleConcertViewScene());
 			selectedStage.show();
 		});
 		
