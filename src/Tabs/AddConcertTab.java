@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import objects.Band;
 import objects.Genre;
 import objects.Venue;
-import tables.concertTable;
+import tables.ConcertTable;
 
 /**
  * 
@@ -51,7 +51,7 @@ public class AddConcertTab extends Tab{
 			// dont need the below line after 
 			Genre genre = new Genre(1, "punk");
 			Band band = new Band(2, "band newwdw", genre.getID());
-			concertTable.createConcert("0001-01-07", 1, "4", band, venue);
+			ConcertTable.createConcert("0001-01-07", 1, "4", band, venue);
 		});
 		
 		vbox.getChildren().add(button);

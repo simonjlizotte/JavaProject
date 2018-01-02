@@ -9,7 +9,7 @@ import objects.Genre;
  * @author josegeorges
  *
  */
-public interface genreDAO {
+public interface GenreDAO {
 	//Create
 	//Read
 	public static ArrayList<Genre> getAllGenres() {

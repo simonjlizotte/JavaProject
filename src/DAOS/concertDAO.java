@@ -7,7 +7,7 @@ import objects.Concert;
 import objects.Genre;
 import objects.Venue;
 
-public interface concertDAO {
+public interface ConcertDAO {
 		//Create
 		public static void createConcert(String date, int rating, String pic, Band band,Venue venue) {
 		}
