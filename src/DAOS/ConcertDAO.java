@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import objects.Band;
 import objects.Concert;
 import objects.Genre;
+import objects.Venue;
 
 public interface ConcertDAO {
 		//Create
-		public void createConcert(Concert concert, Band band, Genre genre);
+		public static void createConcert(String date, int rating, String pic, Band band,Venue venue) {
+		}
 		//Read
 		public ArrayList<Concert> getAllConcerts();
 		public Band getConcert(int concertID);
