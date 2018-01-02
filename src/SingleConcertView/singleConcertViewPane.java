@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.sound.sampled.LineUnavailableException;
 
+import org.controlsfx.control.Rating;
+
 //import org.controlsfx.control.Rating;
 
 import javafx.event.ActionEvent;
@@ -34,7 +36,7 @@ public class singleConcertViewPane extends BorderPane {
 		GridPane inputs = new GridPane();
 		
 		//Create a Raiting variable
-		//Rating rating = new Rating();
+		Rating rating = new Rating();
 		
 		// Title
 		Label title = new Label("Concert View");
@@ -106,9 +108,9 @@ public class singleConcertViewPane extends BorderPane {
 		DatePicker dateAttendedInput = new DatePicker();
 		inputs.add(dateAttendedInput, 1, 7);
 		//Eighth Row - Rating
-		//rating.setMax(5);
-		//rating.setUpdateOnHover(true);
-		//inputs.add(rating, 1, 8);
+		rating.setMax(5);
+		rating.setUpdateOnHover(true);
+		inputs.add(rating, 1, 8);
 		
 		
 		edit.setOnAction((event)->{
