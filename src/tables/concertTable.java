@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import DAOS.ConcertDAO;
+import DAOS.concertDAO;
 import database.Const;
 import database.Database;
 import objects.Band;
@@ -18,7 +18,7 @@ import objects.Venue;
  * @author josegeorges
 
  */
-public class ConcertTable implements ConcertDAO{
+public class concertTable implements concertDAO{
 
 	static //initializing db connection
 	Database db = Database.getInstance();

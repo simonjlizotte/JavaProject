@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import DAOS.GenreDAO;
+import DAOS.genreDAO;
 import database.Const;
 import database.Database;
 import objects.Genre;
@@ -15,7 +15,7 @@ import objects.Genre;
  * @author josegeorges
  *
  */
-public class GenreTable implements GenreDAO{
+public class GenreTable implements genreDAO{
 
 	//initializing db connection
 	static Database db = Database.getInstance();
