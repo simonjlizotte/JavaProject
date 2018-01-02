@@ -8,7 +8,7 @@ package database;
 public class Const {
 	
 	//credentials (could be placed in a different class that will be ignored by git)
-	public static final String DB_NAME = "database";
+	public static final String DB_NAME = "jgeorges222db";
 	public static final String DB_USERNAME = "username";
 	public static final String DB_PASSWORD = "password";
 		

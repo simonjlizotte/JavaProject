@@ -49,7 +49,7 @@ public class Database {
 			+ Const.BANDS_COLUMN_NAME + " VARCHAR(50), "
 			+ Const.BANDS_COLUMN_GENRE_ID + " int, "
 			+ "PRIMARY KEY(" + Const.BANDS_COLUMN_ID + "),"
-			+ "FOREIGN KEY(" + Const.GENRE_COLUMN_ID + ") REFERENCES " + Const.TABLE_GENRE + "(" + Const.GENRE_COLUMN_ID + "));";
+			+ "FOREIGN KEY(" + Const.BANDS_COLUMN_GENRE_ID + ") REFERENCES " + Const.TABLE_GENRE + "(" + Const.GENRE_COLUMN_ID + "));";
 		
 	/*
 	 * CREATE TABLE venueTable(
@@ -98,12 +98,20 @@ public class Database {
 	
 	//private constructor. so it is never called
 	private Database() {
+
 		if(connection == null) {
+			String url = "jdbc:mysql://192.168.64.2/JavaProject";
+			String user = "root";
+			String password = "";
 			try {
-				//this line is setting up what are we using for the connection
 				Class.forName("com.mysql.jdbc.Driver");
-				connection = DriverManager.getConnection("jdbc:mysql://php.scweb.ca/"+Const.DB_NAME+"?useSSL=false", Const.DB_USERNAME, Const.DB_PASSWORD);
+				connection = DriverManager.getConnection(url, user, password);
 				System.out.println("Connection Successfully created");
+				
+//				//this line is setting up what are we using for the connection
+//				Class.forName("com.mysql.jdbc.Driver");
+//				connection = DriverManager.getConnection("jdbc:mysql://php.scweb.ca/"+Const.DB_NAME+"?useSSL=false", Const.DB_USERNAME, Const.DB_PASSWORD);
+//				System.out.println("Connection Successfully created");
 			}catch(Exception e) {
 				System.out.println("Something went wrong with the connection");
 				e.printStackTrace();

@@ -1,4 +1,5 @@
 package objects;
+
 /**
  * 
  * @author simonlizotte
@@ -12,10 +13,14 @@ public class Genre {
 	private String genre;
 	
 	// Default constructor 
+
+
+		
 	public Genre() {
 		
 	}
 	
+
 	public Genre(String genre) {
 		this.genre = genre;
 	}
@@ -31,6 +36,15 @@ public class Genre {
 
 	public void setID(int iD) {
 		ID = iD;
+	}
+	
+
+	public int getId() {
+		return ID;
+	}
+
+	public void setId(int id) {
+		this.ID = id;
 	}
 
 	public String getGenre() {

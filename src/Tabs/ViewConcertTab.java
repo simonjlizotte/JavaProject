@@ -7,11 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import objects.Concert;
 
@@ -57,14 +54,14 @@ public class ViewConcertTab extends Tab{
 	}
 	
 	//ArrayList of band names TODO: Need to use this method eventually*
-	public void bandNameArrayList() {
-		bandNames = new ArrayList<Concert>();
-		bandNames.add(new Concert("Torture Kosher"));
-		bandNames.add(new Concert("Torture Kosher"));
-		bandNames.add(new Concert("Torture Kosher"));
-		bandNames.add(new Concert("Torture Kosher"));
-		bandNames.add(new Concert("Torture Kosher"));
-	}
+//	public void bandNameArrayList() {
+//		bandNames = new ArrayList<Concert>();
+//		bandNames.add(new Concert("Torture Kosher"));
+//		bandNames.add(new Concert("Torture Kosher"));
+//		bandNames.add(new Concert("Torture Kosher"));
+//		bandNames.add(new Concert("Torture Kosher"));
+//		bandNames.add(new Concert("Torture Kosher"));
+//	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
 	public static ViewConcertTab getInstance() {
