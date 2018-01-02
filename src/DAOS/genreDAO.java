@@ -11,15 +11,12 @@ import objects.Genre;
  */
 public interface GenreDAO {
 	//Create
+	public void createGenre(Genre genre);
 	//Read
-	public static ArrayList<Genre> getAllGenres() {
-		return null;
-	}
-	public static Genre getGenre(int genreID) {
-		return null;
-	}
+	public ArrayList<Genre> getAllGenres();
+	public Genre getGenre(int genreID);
 	//Update
-	//public void updateGenre(Genre genre);
+	public void updateGenre(Genre genre);
 	//Delete
-	//public void deleteGenre(Genre genre);
+	public void deleteGenre(Genre genre);
 }
