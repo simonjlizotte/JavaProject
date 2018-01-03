@@ -49,6 +49,7 @@ public class VenueTable implements VenueDAO{
 				System.out.println(venue.getVenue() + " successfully added to the table");
 				String selectAfterInsertQuery = "SELECT * FROM " + Const.TABLE_VENUE +  " WHERE " + Const.VENUE_COLUMN_NAME + " LIKE '" +venue.getVenue()+"';";
 				ResultSet newResult = getVenue.executeQuery(selectAfterInsertQuery);
+				newResult.next();
 				venue = new Venue(newResult.getInt(Const.VENUE_COLUMN_ID), newResult.getString(Const.VENUE_COLUMN_NAME), newResult.getString(Const.VENUE_COLUMN_CITY));
 				return venue;
 				}

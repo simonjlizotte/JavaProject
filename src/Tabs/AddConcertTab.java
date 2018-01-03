@@ -1,14 +1,10 @@
 package Tabs;
 
-import java.io.File;
 
 import database.Database;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import objects.Band;
@@ -47,11 +43,14 @@ public class AddConcertTab extends Tab{
 		Button button = new Button("submit");
 		button.setOnMouseClicked(e->{
 			System.out.println("pressed");
-			Venue venue = new Venue("simond", "city");
+			//If there is a different venue, it'll be added
+			Venue venue = new Venue("Colosseum", "Roma");
 			// dont need the below line after 
 			Genre genre = new Genre(1, "punk");
-			Band band = new Band(1, "band newwdw", genre.getID());
-			ConcertTable.createConcert("0001-01-01", 1, "4", band, venue);
+			//If there is a different band name, it'll be added
+			Band band = new Band("Green day", genre.getID());
+			//If there is a different date, it'll be added
+			ConcertTable.createConcert("0001-02-01", 1, "4", band, venue);
 		});
 		
 		vbox.getChildren().add(button);
