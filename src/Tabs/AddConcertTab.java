@@ -11,6 +11,7 @@ import objects.Band;
 import objects.Genre;
 import objects.Venue;
 import tables.ConcertTable;
+import tables.GenreTable;
 
 /**
  * 
@@ -46,6 +47,11 @@ public class AddConcertTab extends Tab{
 			//If there is a different venue, it'll be added
 			Venue venue = new Venue("Colosseum", "Roma");
 			// dont need the below line after 
+			/*
+			 * This line should be updated to something like:
+			 * 
+			 * Genre genre = GenreTable.getGenre(HERE THE OPTIONS FOR THE COMBO BOX);
+			 */
 			Genre genre = new Genre(1, "punk");
 			//If there is a different band name, it'll be added
 			Band band = new Band("Green day", genre.getID());
