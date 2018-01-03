@@ -36,7 +36,7 @@ public class AddConcertTab extends Tab{
 	//constructor
 	private AddConcertTab() {
 		this.setText(TAB_TITLE);
-		db = Database.getInstance();
+//		db = Database.getInstance();
 		
 		this.setText(TAB_TITLE);
 		
