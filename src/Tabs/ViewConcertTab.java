@@ -18,6 +18,7 @@ import objects.Concert;
  *
  * This tab is designed to follow a singleton pattern, meaning that there will only be access
  * to one instance of this tab.
+ * 
  */
 public class ViewConcertTab extends Tab{
 	private List<Concert> bandNames;

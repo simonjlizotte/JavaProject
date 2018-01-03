@@ -92,6 +92,7 @@ public class ConcertTrackerMain extends Application{
 		pane.setTop(menu);
 		// Set the tabPane to the center of the pane
 		pane.setCenter(tabPane);
+		
 		// Create scene
 		Scene scene = new Scene(pane, 1024, 768);
 		// Add scene to stage 
@@ -99,13 +100,7 @@ public class ConcertTrackerMain extends Application{
 		// Set Title 
 		primaryStage.setTitle("Concert Tracker");
 		// Show Stage
-		primaryStage.show();
-		
-		
-		
-		
-		
-		
+		primaryStage.show();		
 	}
 
 }
