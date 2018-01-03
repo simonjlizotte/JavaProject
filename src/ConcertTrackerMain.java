@@ -82,6 +82,7 @@ public class ConcertTrackerMain extends Application{
 		AddConcertTab addConcertTab = AddConcertTab.getInstance();
 		ViewConcertTab viewConcertTab = ViewConcertTab.getInstance();
 		ChartTab chartTab = ChartTab.getInstance();
+		
 		//Adding the tabs to the tabPane
 		tabPane.getTabs().addAll(addConcertTab, viewConcertTab, chartTab);
 		//setting the tabPane up so that the tabs are not closable
