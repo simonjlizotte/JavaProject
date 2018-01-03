@@ -8,8 +8,9 @@ public class Venue {
 	private String city;
 	
 	//constructors
-	public Venue() {
-		
+	public Venue(String venue, String city) {
+		this.city = city;
+		this.venue = venue;
 	}
 	
 	public Venue(int id, String venue, String city) {

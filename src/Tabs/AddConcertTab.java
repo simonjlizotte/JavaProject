@@ -47,7 +47,7 @@ public class AddConcertTab extends Tab{
 		Button button = new Button("submit");
 		button.setOnMouseClicked(e->{
 			System.out.println("pressed");
-			Venue venue = new Venue(2, "simond", "city");
+			Venue venue = new Venue("simond", "city");
 			// dont need the below line after 
 			Genre genre = new Genre(1, "punk");
 			Band band = new Band(1, "band newwdw", genre.getID());

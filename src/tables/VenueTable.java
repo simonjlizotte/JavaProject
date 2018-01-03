@@ -45,8 +45,11 @@ public class VenueTable implements VenueDAO{
 					
 				} else {
 
-				db.getConnection().createStatement().execute(insertQuery);
+				getVenue.execute(insertQuery);
 				System.out.println(venue.getVenue() + " successfully added to the table");
+				String selectAfterInsertQuery = "SELECT * FROM " + Const.TABLE_VENUE +  " WHERE " + Const.VENUE_COLUMN_NAME + " LIKE '" +venue.getVenue()+"';";
+				ResultSet newResult = getVenue.executeQuery(selectAfterInsertQuery);
+				venue = new Venue(newResult.getInt(Const.VENUE_COLUMN_ID), newResult.getString(Const.VENUE_COLUMN_NAME), newResult.getString(Const.VENUE_COLUMN_CITY));
 				return venue;
 				}
 		} catch (SQLException e2) {
@@ -87,10 +90,11 @@ public class VenueTable implements VenueDAO{
 	 * Query: SELECT * FROM venueTable WHERE id = 'id';
 	 */
 	@Override
-	public Venue getVenue(int venueID) {
-		String query = "SELECT * FROM " + Const.TABLE_VENUE + " WHERE " +
-				Const.TABLE_VENUE + " = " + venueID;
-	Venue venue = new Venue();
+	public Venue getVenue(String venueName) {
+		String query = "SELECT * FROM " 
+	+ Const.TABLE_VENUE +  " WHERE " + Const.VENUE_COLUMN_NAME + " LIKE '" + venueName+"';";
+
+	Venue venue = null;
 	try {
 		Statement getVenue = db.getConnection().createStatement();
 		ResultSet result = getVenue.executeQuery(query);
