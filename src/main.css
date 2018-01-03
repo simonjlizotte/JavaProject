@@ -32,3 +32,11 @@
  .viewTabTitle{
   -fx-font-size: 20pt;
  }
+ 
+ .chartTabTitle{
+   -fx-font-size: 20pt;
+ }
+ 
+ .chart {
+    -fx-padding: 10px;
+}
