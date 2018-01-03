@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -32,10 +33,14 @@ public class ChartTab extends Tab{
 	//Gridpane used to display the charts
 	public static GridPane pane;
 	
+	// used to store the title and gridpane
+	public static BorderPane paneHolder;
+	
 	//constructor
 	private ChartTab() {
 		this.setText(TAB_TITLE);
 		pane = new GridPane();
+		paneHolder = new BorderPane();
 		
 	    //------- citites chart -------//
         PieChart citiesChart = new PieChart();

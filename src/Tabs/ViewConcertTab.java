@@ -90,10 +90,14 @@ public class ViewConcertTab extends Tab{
 //	          }
 //	        });
 //		
-	
+	    // setting the borderpane
+	    borderPane.setTop(viewTabTitle);	  	    
 	    borderPane.setCenter(bandList);
 	    borderPane.setPadding(new Insets(10,10,10,10));
 	    borderPane.setMinHeight(768);
+	    
+	    //Cetting the postiion of the borderPane to center
+	    borderPane.setAlignment(viewTabTitle, Pos.CENTER);
 		this.setContent(borderPane);
 	}
 	
