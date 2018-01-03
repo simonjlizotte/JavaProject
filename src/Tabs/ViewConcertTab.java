@@ -7,8 +7,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import objects.Concert;
 
@@ -45,16 +48,14 @@ public class ViewConcertTab extends Tab{
 		this.setText(TAB_TITLE);
 		
 		// vBox to host the listView
-		VBox vbox = new VBox();
+		BorderPane borderPane = new BorderPane();
+		
+		// Label to set the title
+		Label viewTabTitle = new Label("View Concerts!");
 		
 		// observable list
 		bands = FXCollections.observableArrayList();
-					
-//	    // sample users
-//	    bands.add(new Concert("Carmen"));
-//	    bands.add(new Concert("John"));
-//	    bands.add(new Concert("simon"));
-	    
+					    
 		// listView
 		bandList = new ListView<Concert>(bands);
 		// setting the preferred width and height
@@ -89,19 +90,13 @@ public class ViewConcertTab extends Tab{
 //	          }
 //	        });
 //		
-		//ObservableList to populate the listview
-//		ObservableList<String> bands =FXCollections.observableArrayList (
-//		    "Band1", "Band2", "Band3", "Band4", "Band1", "Band2", "Band3", "Band4", "Band1", "Band2", "Band3", "Band4");
-//		bandList.setItems(bands);
-		
-		
 	
-		vbox.getChildren().add(bandList);
-		vbox.setPadding(new Insets(10,10,10,10));
-		vbox.setMinHeight(768);
-		vbox.setAlignment(Pos.TOP_CENTER);
-		this.setContent(vbox);
+	    borderPane.setCenter(bandList);
+	    borderPane.setPadding(new Insets(10,10,10,10));
+	    borderPane.setMinHeight(768);
+		this.setContent(borderPane);
 	}
+	
 	
 	//ArrayList of band names TODO: Need to use this method eventually*
 //	public void bandNameArrayList() {
