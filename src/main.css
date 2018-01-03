@@ -1,0 +1,34 @@
+.root{
+ 	-fx-text-fill: #393e41;
+	-fx-background-color: #ffffff;
+	-fx-font-family: avenir;
+	-fx-font-size: 10pt;
+}
+
+.button{
+    -fx-text-fill: #393e41;
+    -fx-border-color: #e94f37;
+    -fx-border-radius: 5;
+    -fx-padding: 3 6 6 6;
+    -fx-background-color: #e94f37;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color:#44bba4;
+    -fx-text-fill: white;
+}
+
+
+.list-cell:filled:hover {
+    -fx-background-color: #44bba4;
+    -fx-text-fill: white;
+}
+
+.list-cell{
+ -fx-cell-size: 35px;
+ -fx-font-size: 11pt;
+ }
+ 
+ .viewTabTitle{
+  -fx-font-size: 20pt;
+ }

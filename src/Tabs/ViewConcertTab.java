@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -31,6 +32,12 @@ public class ViewConcertTab extends Tab{
 	//observable list
 	ObservableList<Concert> bands;
 	
+	   public static final ObservableList names = 
+		        FXCollections.observableArrayList();
+		    public static final ObservableList data = 
+		        FXCollections.observableArrayList();
+		       
+		    
 	//Listview of band names
 	ListView<Concert> bandList;
 			
@@ -52,47 +59,68 @@ public class ViewConcertTab extends Tab{
 		
 		// Label to set the title
 		Label viewTabTitle = new Label("View Concerts!");
+		viewTabTitle.getStyleClass().add("viewTabTitle");
+//		// observable list
+//		bands = FXCollections.observableArrayList();
+//					    
+//		// listView
+//		bandList = new ListView<Concert>(bands);
+//		// setting the preferred width and height
+//		bandList.setPrefWidth(150);
+//	    bandList.setPrefHeight(150);
+//	   
+//	    
+////	    bandList.setCellFactory(new Callback<ListView<Concert>, ListCell<Concert>>() {
+////          public ListCell<Concert> call(ListView<Concert> param) {
+////            final ListCell<Concert> cell = new ListCell<Concert>() {
+////              @Override
+////              public void updateItem(Concert item, boolean empty) {
+////                super.updateItem(item, empty);
+////                if (item != null) {
+////                  setText(item.getBandName());
+////                }
+////              }
+////            }; // ListCell
+////            return cell;
+////          }
+////        }); 
+//	    
+////
+////	    bandList.getSelectionModel().selectedItemProperty()
+////	        .addListener(new ChangeListener<Concert>() {
+////	          public void changed(ObservableValue<? extends Concert> observable,
+////	              Concert oldValue, Concert newValue) { 
+////		            Stage selectedStage = new Stage();
+////		            	selectedStage.setTitle("Concert view");
+////					selectedStage.setScene(new singleConcertViewScene());
+////					selectedStage.show();
+////	          }
+////	        });
+//	    
+////		
 		
-		// observable list
-		bands = FXCollections.observableArrayList();
-					    
-		// listView
-		bandList = new ListView<Concert>(bands);
-		// setting the preferred width and height
-		bandList.setPrefWidth(150);
-	    bandList.setPrefHeight(150);
-	   
-	    
-//	    bandList.setCellFactory(new Callback<ListView<Concert>, ListCell<Concert>>() {
-//          public ListCell<Concert> call(ListView<Concert> param) {
-//            final ListCell<Concert> cell = new ListCell<Concert>() {
-//              @Override
-//              public void updateItem(Concert item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (item != null) {
-//                  setText(item.getBandName());
-//                }
-//              }
-//            }; // ListCell
-//            return cell;
-//          }
-//        }); 
-	    
-//
-//	    bandList.getSelectionModel().selectedItemProperty()
-//	        .addListener(new ChangeListener<Concert>() {
-//	          public void changed(ObservableValue<? extends Concert> observable,
-//	              Concert oldValue, Concert newValue) { 
-//		            Stage selectedStage = new Stage();
-//		            	selectedStage.setTitle("Concert view");
-//					selectedStage.setScene(new singleConcertViewScene());
-//					selectedStage.show();
-//	          }
-//	        });
-//		
+	      final ListView listView = new ListView(data);
+	        listView.setPrefSize(200, 250);
+	        listView.setEditable(true);
+	        
+	        names.addAll(
+	             "Adam", "Alex", "Alfred", "Albert",
+	             "Brenda", "Connie", "Derek", "Donny", 
+	             "Lynne", "Myrtle", "Rose", "Rudolph", 
+	             "Tony", "Trudy", "Williams", "Zach"
+	        );
+	         
+	        for (int i = 0; i < 18; i++) {
+	            data.add("anonym");
+	        }
+	          
+	        listView.setItems(data);
+	        listView.setCellFactory(ComboBoxListCell.forListView(names));              
+	               
+	        
 	    // setting the borderpane
 	    borderPane.setTop(viewTabTitle);	  	    
-	    borderPane.setCenter(bandList);
+	    borderPane.setCenter(listView);
 	    borderPane.setPadding(new Insets(10,10,10,10));
 	    borderPane.setMinHeight(768);
 	    

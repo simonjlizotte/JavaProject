@@ -96,6 +96,8 @@ public class ConcertTrackerMain extends Application{
 		
 		// Create scene
 		Scene scene = new Scene(pane, 1024, 768);
+		scene.getStylesheets().add("main.css");
+		
 		// Add scene to stage 
 		primaryStage.setScene(scene);
 		// Set Title 
