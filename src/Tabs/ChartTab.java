@@ -35,6 +35,7 @@ public class ChartTab extends Tab{
 	//constructor
 	private ChartTab() {
 		this.setText(TAB_TITLE);
+		pane = new GridPane();
 		
 	    //------- citites chart -------//
         PieChart citiesChart = new PieChart();
