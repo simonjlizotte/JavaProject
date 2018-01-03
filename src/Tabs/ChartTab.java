@@ -3,7 +3,9 @@ package Tabs;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -41,6 +43,8 @@ public class ChartTab extends Tab{
 		this.setText(TAB_TITLE);
 		pane = new GridPane();
 		paneHolder = new BorderPane();
+		// Label to set the title
+		Label chartTabTitle = new Label("CHARTS OF YOUR FAV DATA!");
 		
 	    //------- citites chart -------//
         PieChart citiesChart = new PieChart();
@@ -98,8 +102,11 @@ public class ChartTab extends Tab{
         pane.add(genresChart, 0, 1);
         pane.add(citiesChart, 1, 0);
         
+        paneHolder.setTop(chartTabTitle);
+        paneHolder.setAlignment(chartTabTitle, Pos.CENTER);
+        paneHolder.setCenter(pane);
         //setting the pane to the tab view
-        this.setContent(pane);
+        this.setContent(paneHolder);
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
