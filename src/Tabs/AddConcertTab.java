@@ -1,5 +1,4 @@
 package Tabs;
-
 import java.io.File;
 
 import database.Database;
