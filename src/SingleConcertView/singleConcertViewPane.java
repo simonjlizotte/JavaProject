@@ -2,19 +2,15 @@ package SingleConcertView;
 
 import java.util.ArrayList;
 
-import javax.sound.sampled.LineUnavailableException;
 
 //import org.controlsfx.control.Rating;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
 /**
  * Created a pane to store the credits of the program 
@@ -23,8 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class singleConcertViewPane extends BorderPane {
 	
@@ -34,7 +28,6 @@ public class singleConcertViewPane extends BorderPane {
 		GridPane inputs = new GridPane();
 		
 		//Create a Raiting variable
-		//Rating rating = new Rating();
 		
 		// Title
 		Label title = new Label("Concert View");
@@ -105,10 +98,7 @@ public class singleConcertViewPane extends BorderPane {
 		inputs.add(seatsInput, 1, 6);
 		DatePicker dateAttendedInput = new DatePicker();
 		inputs.add(dateAttendedInput, 1, 7);
-		//Eighth Row - Rating
-		//rating.setMax(5);
-		//rating.setUpdateOnHover(true);
-		//inputs.add(rating, 1, 8);
+		
 		
 		
 		edit.setOnAction((event)->{
