@@ -11,7 +11,6 @@ import objects.Band;
 import objects.Genre;
 import objects.Venue;
 import tables.ConcertTable;
-import tables.GenreTable;
 
 /**
  * 
