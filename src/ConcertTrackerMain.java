@@ -83,7 +83,7 @@ public class ConcertTrackerMain extends Application{
 		ViewConcertTab viewConcertTab = ViewConcertTab.getInstance();
 		ChartTab chartTab = ChartTab.getInstance();
 		
-		//Adding the tabs to the tabPane
+		//Adding the tabs to the tabPaneviewConcertTab
 		tabPane.getTabs().addAll(addConcertTab, viewConcertTab, chartTab);
 		//setting the tabPane up so that the tabs are not closable
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE); 
@@ -96,6 +96,8 @@ public class ConcertTrackerMain extends Application{
 		
 		// Create scene
 		Scene scene = new Scene(pane, 1024, 768);
+		scene.getStylesheets().add("main.css");
+		
 		// Add scene to stage 
 		primaryStage.setScene(scene);
 		// Set Title 
