@@ -12,7 +12,7 @@ public interface VenueDAO {
 		public static ArrayList<Venue> getAllVenues() {
 			return null;
 		}
-		public Venue getVenue(int venueID);
+		public Venue getVenue(String venueName);
 		//Update
 		public void updateVenue(Venue venue);
 		public void updateCity(Venue venue);
