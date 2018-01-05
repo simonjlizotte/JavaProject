@@ -2,8 +2,10 @@ package Tabs;
 
 
 import database.Database;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -13,6 +15,7 @@ import objects.Band;
 import objects.Genre;
 import objects.Venue;
 import tables.ConcertTable;
+import tables.GenreTable;
 
 /**
  * 
@@ -64,23 +67,18 @@ public class AddConcertTab extends Tab{
 		TextField cityInput = new TextField();
 		pane.add(cityInput, 1, 2);
 		
-		//Fourth Row - Opening Act
-		Text openingAct = new Text("Opening Act: ");
-		pane.add(openingAct, 0, 3);
-		TextField openingActInput = new TextField();
-		pane.add(openingActInput, 1, 3);
 		
 		//Fifth Row - Textfield for the genre, will change to a combobox when the ENUMS are made
 		Text genre = new Text("Genre:");
 		pane.add(genre, 0, 4);
-		TextField genreInput = new TextField();
-		pane.add(genreInput, 1, 4);
+//		TextField genreInput = new TextField();
+//		pane.add(genreInput, 1, 4);
 		
-		//Sixth Row - Seat Numbers
-		Text seatNumbers = new Text("Seat Numbers: ");
-		TextField seatNumbersInput = new TextField();
-		pane.add(seatNumbers, 0, 5);
-		pane.add(seatNumbersInput, 1, 5);
+		ComboBox<Genre> comboGenre = new ComboBox<>();
+		comboGenre.setItems(
+				FXCollections.observableArrayList(
+						GenreTable.getAllGenres()));
+		pane.add(comboGenre, 1, 4);
 		
 		//Seventh Row - Date attended
 		Text dateAttended = new Text("Date Attended: ");
