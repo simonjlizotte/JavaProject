@@ -118,18 +118,12 @@ public class AddConcertTab extends Tab{
 		button.setOnMouseClicked(e->{
 			System.out.println("pressed");
 			//If there is a different venue, it'll be added
-			Venue venueObject = new Venue("Colosseum", "Roma");
-			// dont need the below line after 
-			/*
-			 * This line should be updated to something like:
-			 * 
-			 * Genre genre = GenreTable.getGenre(HERE THE OPTIONS FOR THE COMBO BOX);
-			 */
-			Genre genreObject = new Genre(1, "punk");
+			Venue venueObject = new Venue(venueInput.getText().toString(), cityInput.getText().toString());
+
 			//If there is a different band name, it'll be added
-			Band band = new Band("Green day", genreObject.getID());
+			Band band = new Band(bandNameInput.getText().toString(), comboGenre.getValue().getId());
 			//If there is a different date, it'll be added
-			ConcertTable.createConcert("0001-02-01", 1, "4", band, venueObject);
+			ConcertTable.createConcert(date.getValue().toString(), 1, "4", band, venueObject);
 		});
 
 		
