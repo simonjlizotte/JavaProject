@@ -1,14 +1,15 @@
 package Tabs;
-import java.io.File;
+
 
 import database.Database;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+<<<<<<< HEAD
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+=======
+>>>>>>> staging
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -124,11 +125,27 @@ public class AddConcertTab extends Tab{
 		Button button = new Button("submit");
 		button.setOnAction(e->{
 			System.out.println("pressed");
+<<<<<<< HEAD
 			Venue venue1 = new Venue(2, "simond", "city");
 			// Don't need the below line after 
 			Genre genre1 = new Genre(1, "punk");
 			Band band = new Band(1, "band newwdw", genre1.getID());
 			ConcertTable.createConcert("0001-01-01", 1, "4", band, venue1);
+=======
+			//If there is a different venue, it'll be added
+			Venue venue = new Venue("Colosseum", "Roma");
+			// dont need the below line after 
+			/*
+			 * This line should be updated to something like:
+			 * 
+			 * Genre genre = GenreTable.getGenre(HERE THE OPTIONS FOR THE COMBO BOX);
+			 */
+			Genre genre = new Genre(1, "punk");
+			//If there is a different band name, it'll be added
+			Band band = new Band("Green day", genre.getID());
+			//If there is a different date, it'll be added
+			ConcertTable.createConcert("0001-02-01", 1, "4", band, venue);
+>>>>>>> staging
 		});
 		pane.add(button, 0, 9);
 	}
