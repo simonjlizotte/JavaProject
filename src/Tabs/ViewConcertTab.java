@@ -36,27 +36,22 @@ public class ViewConcertTab extends Tab{
 	//Database
 	Database db;
 	
-	private List<Concert> bands;
+	//List of bands
+	private ArrayList<Concert> bands;
 	
-//	   public static final ObservableList names = 
-//		        FXCollections.observableArrayList();
-//		    public static final ObservableList data = 
-//		        FXCollections.observableArrayList();
-//		       
-		    
-	//ListView of band names
+	// listView of band names
 	ListView<Concert> bandList;
-			
-	//Instance of the Concert object
-	ConcertTable conertNames = new ConcertTable();
+				
+	//Concert table
+	ConcertTable concertTable;
 	
 	//constants needed
 	public static final String TAB_TITLE = "View Concerts"; //title for the tab
 	
-	//AddConcertTab created
+	// addConcertTab created
 	private static ViewConcertTab tab;
 	
-	//constructor
+	// constructor
 	private ViewConcertTab() {
 		this.setText(TAB_TITLE);
 		
@@ -66,11 +61,15 @@ public class ViewConcertTab extends Tab{
 		// vBox to host the listView
 		BorderPane borderPane = new BorderPane();
 		
-		// Label to set the title
+		// label to set the title
 		Label viewTabTitle = new Label("View Concerts!");
 		viewTabTitle.getStyleClass().add("viewTabTitle");
-//		// observable list
-		bands = FXCollections.observableArrayList();
+		
+		// grabbing all the bands
+		bands = concertTable.getAllConcerts();
+		
+		//a dd those items to the ListView
+		bandList.setItems(FXCollections.observableArrayList(bands));
 		
 //					    
 //		// listView
@@ -145,7 +144,7 @@ public class ViewConcertTab extends Tab{
 	
 	//Create dummy list of MyObject
     private void addConcert(){
-        bands = new ArrayList<>();
+      
         
     }
     

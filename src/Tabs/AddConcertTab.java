@@ -119,21 +119,19 @@ public class AddConcertTab extends Tab{
 		
 		Button button = new Button("submit");
 		button.setOnMouseClicked(e->{
-
 			//If there is a different venue, it'll be added
 			if(venueInput.getText().isEmpty() || cityInput.getText().isEmpty() || bandNameInput.getText().isEmpty()
 					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null){
 				missingFields.setVisible(true);
-			}else {
-			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString());
-			//If there is a different band name, it'll be added
-			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
-			//If there is a different date, it'll be added
-			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, "4", band, venueObject);
-			missingFields.setVisible(false);
+			} else {
+				Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString());
+				//If there is a different band name, it'll be added
+				Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
+				//If there is a different date, it'll be added
+				ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, "4", band, venueObject);
+				missingFields.setVisible(false);
 			}
 		});
-
 		pane.add(button, 0, 9);
 	}
 	
