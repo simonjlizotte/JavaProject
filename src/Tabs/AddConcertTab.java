@@ -50,7 +50,6 @@ public class AddConcertTab extends Tab{
 		
 		//Declaring the Rating
 
-		
 		//First Row - Band		
 		Text bandName = new Text("Band:");
 		pane.add(bandName, 0, 0);
@@ -122,16 +121,15 @@ public class AddConcertTab extends Tab{
 		this.setContent(pane);
 		
 		Button button = new Button("submit");
-//		button.setOnMouseClicked(e->{
-//			System.out.println("pressed");
-//			Venue venue = new Venue(2, "simond", "city");
-//			// dont need the below line after 
-//			Genre genre = new Genre(1, "punk");
-//			Band band = new Band(1, "band newwdw", genre.getID());
-//			ConcertTable.createConcert("0001-01-01", 1, "4", band, venue);
-//		});
-		
-//		pane.add(button, 0, 9);
+		button.setOnMouseClicked(e->{
+			System.out.println("pressed");
+			Venue venue = new Venue(2, "simond", "city");
+			// dont need the below line after 
+			Genre genre = new Genre(1, "punk");
+			Band band = new Band(1, "band newwdw", genre.getID());
+			ConcertTable.createConcert("0001-01-01", 1, "4", band, venue);
+		});
+		pane.add(button, 0, 9);
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it

@@ -43,10 +43,12 @@ public class ChartTab extends Tab{
 		this.setText(TAB_TITLE);
 		pane = new GridPane();
 		paneHolder = new BorderPane();
+		
 		// Label to set the title
 		Label chartTabTitle = new Label("CHARTS OF YOUR FAV DATA!");
 		chartTabTitle.getStyleClass().add("chartTabTitle");
-	    //------- citites chart -------//
+	   
+		//------- citites chart -------//
         PieChart citiesChart = new PieChart();
         
         // setting the title and labels
