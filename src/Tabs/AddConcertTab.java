@@ -5,8 +5,8 @@ import database.Database;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -25,9 +25,12 @@ import tables.GenreTable;
  * to one instance of this tab.
  */
 public class AddConcertTab extends Tab{
-
+	
 	//Database
 	Database db;
+	
+	// concert table
+	ConcertTable concertTable = new ConcertTable();
 	
 	//constants needed
 	public static final String TAB_TITLE = "Add Concert"; //title for the tab
@@ -38,6 +41,7 @@ public class AddConcertTab extends Tab{
 	//constructor
 	private AddConcertTab() {
 		this.setText(TAB_TITLE);
+		
 		db = Database.getInstance();
 			
 		//VBox to host the listView
@@ -48,7 +52,6 @@ public class AddConcertTab extends Tab{
 		
 		//Declaring the Rating
 
-		
 		//First Row - Band		
 		Text bandName = new Text("Band:");
 		pane.add(bandName, 0, 0);
@@ -127,10 +130,9 @@ public class AddConcertTab extends Tab{
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
 			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, "4", band, venueObject);
 			missingFields.setVisible(false);
+
 			}
 		});
-
-		
 		pane.add(button, 0, 9);
 	}
 	
