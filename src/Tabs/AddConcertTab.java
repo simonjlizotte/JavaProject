@@ -118,6 +118,8 @@ public class AddConcertTab extends Tab{
 		Text uploadPic = new Text("Upload a picture: ");
 		Button btnLoad = new Button("Load");
 		ImageView imageDisplay = new ImageView();
+		imageDisplay.setFitHeight(200);
+		imageDisplay.setFitWidth(400);
 		pane.add(uploadPic, 0, 7);
 		pane.add(btnLoad, 1, 7);
 		pane.add(imageDisplay, 2, 7);
