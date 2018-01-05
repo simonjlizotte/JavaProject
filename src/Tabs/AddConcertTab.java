@@ -2,23 +2,22 @@ package Tabs;
 
 
 import database.Database;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-<<<<<<< HEAD
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
-=======
->>>>>>> staging
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import objects.Band;
 import objects.Genre;
 import objects.Venue;
 import tables.ConcertTable;
+import tables.GenreTable;
 
 /**
  * 
@@ -70,29 +69,25 @@ public class AddConcertTab extends Tab{
 		TextField cityInput = new TextField();
 		pane.add(cityInput, 1, 2);
 		
-		//Fourth Row - Opening Act
-		Text openingAct = new Text("Opening Act: ");
-		pane.add(openingAct, 0, 3);
-		TextField openingActInput = new TextField();
-		pane.add(openingActInput, 1, 3);
 		
-		//Fifth Row - Textfield for the genre, will change to a combobox when the ENUMS are made
+		//Fifth Row - Genre
 		Text genre = new Text("Genre:");
-		pane.add(genre, 0, 4);
-		TextField genreInput = new TextField();
-		pane.add(genreInput, 1, 4);
-		
-		//Sixth Row - Seat Numbers
-		Text seatNumbers = new Text("Seat Numbers: ");
-		TextField seatNumbersInput = new TextField();
-		pane.add(seatNumbers, 0, 5);
-		pane.add(seatNumbersInput, 1, 5);
+		pane.add(genre, 0, 4);		
+		ComboBox<Genre> comboGenre = new ComboBox<>();
+		comboGenre.setItems(
+				FXCollections.observableArrayList(
+						GenreTable.getAllGenres()));
+		pane.add(comboGenre, 1, 4);
 		
 		//Seventh Row - Date attended
 		Text dateAttended = new Text("Date Attended: ");
 		DatePicker date = new DatePicker();
 		pane.add(dateAttended, 0, 6);
 		pane.add(date, 1, 6);
+		
+		Text missingFields = new Text("MISSING SOME FIELDS");
+		missingFields.setVisible(false);
+		pane.add(missingFields, 0, 8);
 		
 		
 		//Eighth Row - Rating- I will fix this over the weekend
@@ -123,30 +118,22 @@ public class AddConcertTab extends Tab{
 		this.setContent(pane);
 		
 		Button button = new Button("submit");
-		button.setOnAction(e->{
-			System.out.println("pressed");
-<<<<<<< HEAD
-			Venue venue1 = new Venue(2, "simond", "city");
-			// Don't need the below line after 
-			Genre genre1 = new Genre(1, "punk");
-			Band band = new Band(1, "band newwdw", genre1.getID());
-			ConcertTable.createConcert("0001-01-01", 1, "4", band, venue1);
-=======
+		button.setOnMouseClicked(e->{
+
 			//If there is a different venue, it'll be added
-			Venue venue = new Venue("Colosseum", "Roma");
-			// dont need the below line after 
-			/*
-			 * This line should be updated to something like:
-			 * 
-			 * Genre genre = GenreTable.getGenre(HERE THE OPTIONS FOR THE COMBO BOX);
-			 */
-			Genre genre = new Genre(1, "punk");
+			if(venueInput.getText().isEmpty() || cityInput.getText().isEmpty() || bandNameInput.getText().isEmpty()
+					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null){
+				missingFields.setVisible(true);
+			}else {
+			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString());
 			//If there is a different band name, it'll be added
-			Band band = new Band("Green day", genre.getID());
+			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
 			//If there is a different date, it'll be added
-			ConcertTable.createConcert("0001-02-01", 1, "4", band, venue);
->>>>>>> staging
+			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, "4", band, venueObject);
+			missingFields.setVisible(false);
+			}
 		});
+
 		pane.add(button, 0, 9);
 	}
 	
