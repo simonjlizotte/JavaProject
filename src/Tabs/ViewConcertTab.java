@@ -3,6 +3,7 @@ package Tabs;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -27,6 +28,9 @@ import objects.Concert;
  * This tab will display every concert that the user added in a listview
  */
 public class ViewConcertTab extends Tab{
+	//Database
+	Database db;
+	
 	private List<Concert> bandNames;
 	
 	//observable list
@@ -54,6 +58,8 @@ public class ViewConcertTab extends Tab{
 	private ViewConcertTab() {
 		this.setText(TAB_TITLE);
 		
+		// databaseInstance
+		db = Database.getInstance();
 		// vBox to host the listView
 		BorderPane borderPane = new BorderPane();
 		
@@ -99,28 +105,28 @@ public class ViewConcertTab extends Tab{
 //	    
 ////		
 		
-	      final ListView listView = new ListView(data);
-	        listView.setPrefSize(200, 250);
-	        listView.setEditable(true);
-	        
-	        names.addAll(
-	             "Adam", "Alex", "Alfred", "Albert",
-	             "Brenda", "Connie", "Derek", "Donny", 
-	             "Lynne", "Myrtle", "Rose", "Rudolph", 
-	             "Tony", "Trudy", "Williams", "Zach"
-	        );
-	         
-	        for (int i = 0; i < 18; i++) {
-	            data.add("anonym");
-	        }
-	          
-	        listView.setItems(data);
-	        listView.setCellFactory(ComboBoxListCell.forListView(names));              
+//	      final ListView listView = new ListView(data);
+//	        listView.setPrefSize(200, 250);
+//	        listView.setEditable(true);
+//	        
+//	        names.addAll(
+//	             "Adam", "Alex", "Alfred", "Albert",
+//	             "Brenda", "Connie", "Derek", "Donny", 
+//	             "Lynne", "Myrtle", "Rose", "Rudolph", 
+//	             "Tony", "Trudy", "Williams", "Zach"
+//	        );
+//	         
+//	        for (int i = 0; i < 18; i++) {
+//	            data.add("anonym");
+//	        }
+//	          
+//	        listView.setItems(data);
+//	        listView.setCellFactory(ComboBoxListCell.forListView(names));              
 	               
 	        
 	    // setting the borderpane
 	    borderPane.setTop(viewTabTitle);	  	    
-	    borderPane.setCenter(listView);
+	    borderPane.setCenter(bandList);
 	    borderPane.setPadding(new Insets(10,10,10,10));
 	    borderPane.setMinHeight(768);
 	    
