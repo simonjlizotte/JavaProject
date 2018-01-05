@@ -15,7 +15,11 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import objects.Band;
 import objects.Concert;
+import objects.Genre;
+import objects.Venue;
+import tables.ConcertTable;
 
 /**
  * 
@@ -28,25 +32,23 @@ import objects.Concert;
  * This tab will display every concert that the user added in a listview
  */
 public class ViewConcertTab extends Tab{
+
 	//Database
 	Database db;
 	
-	private List<Concert> bandNames;
+	private List<Concert> bands;
 	
-	//observable list
-	ObservableList<Concert> bands;
-	
-	   public static final ObservableList names = 
-		        FXCollections.observableArrayList();
-		    public static final ObservableList data = 
-		        FXCollections.observableArrayList();
-		       
+//	   public static final ObservableList names = 
+//		        FXCollections.observableArrayList();
+//		    public static final ObservableList data = 
+//		        FXCollections.observableArrayList();
+//		       
 		    
-	//Listview of band names
+	//ListView of band names
 	ListView<Concert> bandList;
 			
 	//Instance of the Concert object
-	Concert conertNames = new Concert();
+	ConcertTable conertNames = new ConcertTable();
 	
 	//constants needed
 	public static final String TAB_TITLE = "View Concerts"; //title for the tab
@@ -58,8 +60,9 @@ public class ViewConcertTab extends Tab{
 	private ViewConcertTab() {
 		this.setText(TAB_TITLE);
 		
-		// databaseInstance
+		// database Instance
 		db = Database.getInstance();
+		
 		// vBox to host the listView
 		BorderPane borderPane = new BorderPane();
 		
@@ -67,15 +70,15 @@ public class ViewConcertTab extends Tab{
 		Label viewTabTitle = new Label("View Concerts!");
 		viewTabTitle.getStyleClass().add("viewTabTitle");
 //		// observable list
-//		bands = FXCollections.observableArrayList();
+		bands = FXCollections.observableArrayList();
+		
 //					    
 //		// listView
 //		bandList = new ListView<Concert>(bands);
 //		// setting the preferred width and height
 //		bandList.setPrefWidth(150);
 //	    bandList.setPrefHeight(150);
-//	   
-//	    
+		
 ////	    bandList.setCellFactory(new Callback<ListView<Concert>, ListCell<Concert>>() {
 ////          public ListCell<Concert> call(ListView<Concert> param) {
 ////            final ListCell<Concert> cell = new ListCell<Concert>() {
@@ -124,28 +127,28 @@ public class ViewConcertTab extends Tab{
 //	        listView.setCellFactory(ComboBoxListCell.forListView(names));              
 	               
 	        
-	    // setting the borderpane
+	    // setting the borderPane
 	    borderPane.setTop(viewTabTitle);	  	    
 	    borderPane.setCenter(bandList);
 	    borderPane.setPadding(new Insets(10,10,10,10));
 	    borderPane.setMinHeight(768);
 	    
-	    //Cetting the postiion of the borderPane to center
+	    //Getting the position of the borderPane to center
 	    borderPane.setAlignment(viewTabTitle, Pos.CENTER);
 		this.setContent(borderPane);
 	}
 	
+	Venue venue1 = new Venue(2, "simond", "city");
+	// Don't need the below line after 
+	Genre genre1 = new Genre(1, "punk");
+	Band band = new Band(1, "band newwdw", genre1.getID());
 	
-	//ArrayList of band names TODO: Need to use this method eventually*
-//	public void bandNameArrayList() {
-//		bandNames = new ArrayList<Concert>();
-//		bandNames.add(new Concert("Torture Kosher"));
-//		bandNames.add(new Concert("Torture Kosher"));
-//		bandNames.add(new Concert("Torture Kosher"));
-//		bandNames.add(new Concert("Torture Kosher"));
-//		bandNames.add(new Concert("Torture Kosher"));
-//	}
-	
+	//Create dummy list of MyObject
+    private void addConcert(){
+        bands = new ArrayList<>();
+        
+    }
+    
 	//this method will be call when needing the instance of the tab or when first creating it
 	public static ViewConcertTab getInstance() {
 		if(tab == null) {

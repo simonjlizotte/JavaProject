@@ -22,6 +22,7 @@ public class ConcertTable implements ConcertDAO{
 
 	static //initializing db connection
 	Database db = Database.getInstance();
+	
 	public static void createConcert(String date, int rating, String pic, Band band, Venue venue) {
 		Venue concertVenue = tables.VenueTable.createVenue(venue);
 		Band concertBand = tables.BandTable.createBand(band);

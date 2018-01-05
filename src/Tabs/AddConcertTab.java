@@ -125,7 +125,7 @@ public class AddConcertTab extends Tab{
 		button.setOnAction(e->{
 			System.out.println("pressed");
 			Venue venue1 = new Venue(2, "simond", "city");
-			// dont need the below line after 
+			// Don't need the below line after 
 			Genre genre1 = new Genre(1, "punk");
 			Band band = new Band(1, "band newwdw", genre1.getID());
 			ConcertTable.createConcert("0001-01-01", 1, "4", band, venue1);
