@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import objects.Band;
 import objects.Concert;
-import objects.Genre;
 import objects.Venue;
 
 public interface ConcertDAO {

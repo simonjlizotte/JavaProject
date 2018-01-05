@@ -3,7 +3,6 @@ package DAOS;
 import java.util.ArrayList;
 
 import objects.Band;
-import objects.Genre;
 
 /**
  * Interface to implement inside bandTable class. contains all the crud methods

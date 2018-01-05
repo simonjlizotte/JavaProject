@@ -10,7 +10,6 @@ import database.Const;
 import database.Database;
 import objects.Band;
 import objects.Concert;
-import objects.Genre;
 import objects.Venue;
 
 /**

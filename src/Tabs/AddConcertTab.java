@@ -68,12 +68,9 @@ public class AddConcertTab extends Tab{
 		pane.add(cityInput, 1, 2);
 		
 		
-		//Fifth Row - Textfield for the genre, will change to a combobox when the ENUMS are made
+		//Fifth Row - Genre
 		Text genre = new Text("Genre:");
-		pane.add(genre, 0, 4);
-//		TextField genreInput = new TextField();
-//		pane.add(genreInput, 1, 4);
-		
+		pane.add(genre, 0, 4);		
 		ComboBox<Genre> comboGenre = new ComboBox<>();
 		comboGenre.setItems(
 				FXCollections.observableArrayList(
@@ -125,11 +122,11 @@ public class AddConcertTab extends Tab{
 					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null){
 				missingFields.setVisible(true);
 			}else {
-			Venue venueObject = new Venue(venueInput.getText().toString(), cityInput.getText().toString());
+			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString());
 			//If there is a different band name, it'll be added
-			Band band = new Band(bandNameInput.getText().toString(), comboGenre.getValue().getId());
+			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
 			//If there is a different date, it'll be added
-			ConcertTable.createConcert(date.getValue().toString(), 1, "4", band, venueObject);
+			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, "4", band, venueObject);
 			missingFields.setVisible(false);
 			}
 		});
