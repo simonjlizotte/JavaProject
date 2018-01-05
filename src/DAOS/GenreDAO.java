@@ -10,7 +10,6 @@ import objects.Genre;
  *
  */
 public interface GenreDAO {
-	//Create
 	//Read
 	public static ArrayList<Genre> getAllGenres() {
 		return null;
@@ -18,8 +17,4 @@ public interface GenreDAO {
 	public static Genre getGenre(int genreID) {
 		return null;
 	}
-	//Update
-	//public void updateGenre(Genre genre);
-	//Delete
-	//public void deleteGenre(Genre genre);
 }
