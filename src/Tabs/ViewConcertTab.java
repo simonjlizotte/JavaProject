@@ -68,6 +68,8 @@ public class ViewConcertTab extends Tab{
 		
 		// refresh button
 		Button refreshButton = new Button("Refresh");
+		refreshButton.getStyleClass().add("refresh");
+		
 		refreshButton.setOnAction(e->{
 			bandList.setItems(
 					FXCollections.observableArrayList(bandTable.getAllBands()));
