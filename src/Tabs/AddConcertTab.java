@@ -116,10 +116,8 @@ public class AddConcertTab extends Tab{
 		
 		Button button = new Button("submit");
 		button.setOnMouseClicked(e->{
-			System.out.println("pressed");
 			//If there is a different venue, it'll be added
 			Venue venueObject = new Venue(venueInput.getText().toString(), cityInput.getText().toString());
-
 			//If there is a different band name, it'll be added
 			Band band = new Band(bandNameInput.getText().toString(), comboGenre.getValue().getId());
 			//If there is a different date, it'll be added
