@@ -1,9 +1,18 @@
 package Tabs;
 import java.io.File;
+import java.io.IOException;
+
+import java.awt.image.BufferedImage;
+
+
+import javax.imageio.ImageIO;
 
 import database.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,9 +20,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import objects.Band;
 import objects.Genre;
 import objects.Venue;
@@ -58,8 +70,8 @@ public class AddConcertTab extends Tab{
 		pane.add(bandNameInput, 1, 0);
 		
 		//Second Row - Venue
-		Text venue = new Text("Venue: ");
-		pane.add(venue, 0, 1);
+		Text venueLabel = new Text("Venue: ");
+		pane.add(venueLabel, 0, 1);
 		TextField venueInput = new TextField();
 		pane.add(venueInput, 1, 1);
 		
@@ -76,8 +88,8 @@ public class AddConcertTab extends Tab{
 		pane.add(openingActInput, 1, 3);
 		
 		//Fifth Row - Textfield for the genre, will change to a combobox when the ENUMS are made
-		Text genre = new Text("Genre:");
-		pane.add(genre, 0, 4);
+		Text genreLabel = new Text("Genre:");
+		pane.add(genreLabel, 0, 4);
 		TextField genreInput = new TextField();
 		pane.add(genreInput, 1, 4);
 		
@@ -102,10 +114,38 @@ public class AddConcertTab extends Tab{
 //		pane.add(ratingText, 0, 7);
 //		pane.add(rating, 1, 7);
 		
-//		//Final Row - Upload File
-//		FileChooser fc = new FileChooser();
-//		fc.setTitle("Upload Picture");
-//		
+//		btnLoad.setOnAction(new EventHandler<ActionEvent>() {
+		Text uploadPic = new Text("Upload a picture: ");
+		Button btnLoad = new Button("Load");
+		ImageView imageDisplay = new ImageView();
+		pane.add(uploadPic, 0, 7);
+		pane.add(btnLoad, 1, 7);
+		pane.add(imageDisplay, 2, 7);
+        btnLoad.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				 FileChooser fileChooser = new FileChooser();
+	             
+		            //Set extension filter
+		            FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+		            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+		            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+		              
+		            //Show open file dialog
+		            File file = fileChooser.showOpenDialog(null);
+		                       
+		            try {
+		                BufferedImage bufferedImage = ImageIO.read(file);
+		                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+		                imageDisplay.setImage(image);
+		            } catch (IOException ex) {
+		                ex.printStackTrace();
+		            }
+		 	
+			}
+        		
+        });//		
 		
 //		pane.add(fileTest, 0, 9);
 //		
@@ -122,16 +162,16 @@ public class AddConcertTab extends Tab{
 		this.setContent(pane);
 		
 		Button button = new Button("submit");
-//		button.setOnMouseClicked(e->{
-//			System.out.println("pressed");
-//			Venue venue = new Venue(2, "simond", "city");
-//			// dont need the below line after 
-//			Genre genre = new Genre(1, "punk");
-//			Band band = new Band(1, "band newwdw", genre.getID());
-//			ConcertTable.createConcert("0001-01-01", 1, "4", band, venue);
-//		});
+		button.setOnMouseClicked(e->{
+		System.out.println("pressed");
+			Venue venue = new Venue(2, "simond", "city");
+			// dont need the below line after 
+			Genre genre = new Genre(1, "punk");
+			Band band = new Band(1, "band newwdw", genre.getID());
+			ConcertTable.createConcert("0001-01-01", 1, "4", band, venue);
+		});
 		
-//		pane.add(button, 0, 9);
+		pane.add(button, 0, 9);
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
