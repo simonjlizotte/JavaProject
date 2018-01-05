@@ -50,16 +50,57 @@ public class ConcertTable implements ConcertDAO{
 		
 	}
 
+	/**
+	 * This method will SELECT ALL concerts from the table
+	 * 
+	 * Query: SELECT * FROM concertTable;
+	 */
 	@Override
 	public ArrayList<Concert> getAllConcerts() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM " + Const.TABLE_CONCERT;
+		ArrayList<Concert> concerts = new ArrayList<Concert>();
+		
+		try {
+			Statement getConcerts = db.getConnection().createStatement();
+			ResultSet result = getConcerts.executeQuery(query);
+			//this loop will iterate through each item in the result set and 
+				//when it gets to the last item will return false
+			while(result.next()) {
+				concerts.add(new Concert(result.getInt(Const.CONCERTS_COLUMN_ID),
+									result.getInt(Const.CONCERTS_COLUMN_BAND_ID),
+									result.getInt(Const.CONCERTS_COLUMN_VENUE_ID),
+									result.getString(Const.CONCERTS_COLUMN_DATE),
+									result.getInt(Const.CONCERTS_COLUMN_RATING),
+									result.getString(Const.CONCERTS_COLUMN_PIC)));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return concerts;
 	}
 
 	@Override
-	public Band getConcert(int concertID) {
-		// TODO Auto-generated method stub
-		return null;
+	public Concert getConcert(int concertID) {
+		String query = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE " +
+				Const.CONCERTS_COLUMN_ID + " = " + concertID;
+	Concert concert = new Concert();
+	try {
+		Statement getConcert = db.getConnection().createStatement();
+		ResultSet result = getConcert.executeQuery(query);
+		if(result.next()) {
+		concert = new Concert(result.getInt(Const.CONCERTS_COLUMN_ID),
+				result.getInt(Const.CONCERTS_COLUMN_BAND_ID),
+				result.getInt(Const.CONCERTS_COLUMN_VENUE_ID),
+				result.getString(Const.CONCERTS_COLUMN_DATE),
+				result.getInt(Const.CONCERTS_COLUMN_RATING),
+				result.getString(Const.CONCERTS_COLUMN_PIC)); 
+		} else {
+			System.out.println("Testing Concert");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return concert;
 	}
 
 	@Override

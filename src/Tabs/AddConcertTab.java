@@ -86,6 +86,10 @@ public class AddConcertTab extends Tab{
 		pane.add(dateAttended, 0, 6);
 		pane.add(date, 1, 6);
 		
+		Text missingFields = new Text("MISSING SOME FIELDS");
+		missingFields.setVisible(false);
+		pane.add(missingFields, 0, 8);
+		
 		
 		//Eighth Row - Rating- I will fix this over the weekend
 //		Text ratingText = new Text("Rating: ");
@@ -117,11 +121,17 @@ public class AddConcertTab extends Tab{
 		Button button = new Button("submit");
 		button.setOnMouseClicked(e->{
 			//If there is a different venue, it'll be added
+			if(venueInput.getText().isEmpty() || cityInput.getText().isEmpty() || bandNameInput.getText().isEmpty()
+					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null){
+				missingFields.setVisible(true);
+			}else {
 			Venue venueObject = new Venue(venueInput.getText().toString(), cityInput.getText().toString());
 			//If there is a different band name, it'll be added
 			Band band = new Band(bandNameInput.getText().toString(), comboGenre.getValue().getId());
 			//If there is a different date, it'll be added
 			ConcertTable.createConcert(date.getValue().toString(), 1, "4", band, venueObject);
+			missingFields.setVisible(false);
+			}
 		});
 
 		

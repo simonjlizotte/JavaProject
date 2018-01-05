@@ -13,7 +13,7 @@ public interface ConcertDAO {
 		}
 		//Read
 		public ArrayList<Concert> getAllConcerts();
-		public Band getConcert(int concertID);
+		public Concert getConcert(int concertID);
 		//Update
 		public void updateDate(Band band);
 		public void updateRating(Band band);
