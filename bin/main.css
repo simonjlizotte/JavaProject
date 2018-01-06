@@ -1,26 +1,31 @@
 .root{
  	-fx-text-fill: #393e41;
-	-fx-background-color: #ffffff;
+	-fx-background-color: #eeeeee;
 	-fx-font-family: avenir;
 	-fx-font-size: 10pt;
 }
 
 .button{
-    -fx-text-fill: #393e41;
-    -fx-border-color: #e94f37;
+    -fx-text-fill: #fffff5;
+    -fx-border-color: #dbc3dd;
     -fx-border-radius: 5;
     -fx-padding: 3 6 6 6;
-    -fx-background-color: #e94f37;
+    -fx-background-color: #dbc3dd;
+}
+
+.button:pressed{
+	-fx-background-color: #ffb3ba;
+	-fx-border-color:#ffb3ba;
 }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-background-color:#44bba4;
-    -fx-text-fill: white;
+    -fx-background-color:#ffb3ba;
+    -fx-text-fill: #fffff5; 
 }
 
 
 .list-cell:filled:hover {
-    -fx-background-color: #44bba4;
+    -fx-background-color: #dbc3dd;
     -fx-text-fill: white;
 }
 
@@ -28,6 +33,26 @@
  -fx-cell-size: 35px;
  -fx-font-size: 11pt;
  }
+ 
+ .tab-pane .tab{
+ -fx-border:none;
+ -fx-background-color:#dbc3dd;
+ }
+ 
+ .tab-pane .tab:selected{
+    -fx-background-color: #ffb3ba;
+    -fx-text-fill: #fffff5;
+    -fx-focus-color: transparent;
+}
+
+.text-field {
+    -fx-background-color: #fffff5;
+}
+
+.text-field:focused {
+    -fx-background-color: #fffff5;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
  
  .viewTabTitle{
   -fx-font-size: 20pt;
