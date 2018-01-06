@@ -105,7 +105,7 @@ public class ChartTab extends Tab{
         pane.add(citiesChart, 1, 0);
         
         paneHolder.setTop(chartTabTitle);
-        paneHolder.setAlignment(chartTabTitle, Pos.CENTER);
+        BorderPane.setAlignment(chartTabTitle, Pos.CENTER);
         paneHolder.setCenter(pane);
         //setting the pane to the tab view
         this.setContent(paneHolder);

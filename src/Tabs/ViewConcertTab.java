@@ -1,10 +1,8 @@
 package Tabs;
 
 import java.util.ArrayList;
-import java.util.List;
 import database.Database;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -53,26 +51,34 @@ public class ViewConcertTab extends Tab{
 		BandTable bandTable = new BandTable();
 		
 		// listView of band names
-		ListView<Band> bandList = new ListView<Band>();
+		ListView<String> bandList = new ListView<String>();
 		
 		// label to set the title
 		Label viewTabTitle = new Label("View Concerts!");
 		viewTabTitle.getStyleClass().add("viewTabTitle");
 				
-		// list of bands
-		// grabbing all the bands
-		ArrayList<Band> bands = bandTable.getAllBands();
+		//grabbing the date and band names from the tables to display
+		ConcertTable concertTable = new ConcertTable();		
+		ArrayList<String> itemDisplayList = new ArrayList<String>();
+		ArrayList<Concert> concerts = concertTable.getAllConcerts();
+		for (int i = 0; i < concerts.size() ; i++) {
+			Band concertBand = bandTable.getBand(concerts.get(i).getBandID());
+			String itemDisplay = concerts.get(i).getDate() + " , " + concertBand.getName();
+			itemDisplayList.add(itemDisplay);
+		}
+		
+		
+
 		
 		// add those items to the ListView
-		bandList.setItems(FXCollections.observableArrayList(bands));
+		bandList.setItems(FXCollections.observableArrayList(itemDisplayList));
 		
 		// refresh button
 		Button refreshButton = new Button("Refresh");
 		refreshButton.getStyleClass().add("refresh");
 		
 		refreshButton.setOnAction(e->{
-			bandList.setItems(
-					FXCollections.observableArrayList(bandTable.getAllBands()));
+			bandList.setItems(FXCollections.observableArrayList(itemDisplayList));
 		});
 		
 	    // setting the borderPane
@@ -82,8 +88,8 @@ public class ViewConcertTab extends Tab{
 	    borderPane.setPadding(new Insets(10,10,10,10));
 	    
 	    //Getting the position of the borderPane to center
-	    borderPane.setAlignment(viewTabTitle, Pos.CENTER);
-	    borderPane.setAlignment(refreshButton, Pos.CENTER);
+	    BorderPane.setAlignment(viewTabTitle, Pos.CENTER);
+	    BorderPane.setAlignment(refreshButton, Pos.CENTER);
 		this.setContent(borderPane);
 	}
 	//this method will be call when needing the instance of the tab or when first creating it

@@ -6,15 +6,12 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import objects.Band;
-import objects.Concert;
 import objects.Genre;
 import objects.Venue;
 import tables.ConcertTable;
@@ -122,20 +119,18 @@ public class AddConcertTab extends Tab{
 		this.setContent(pane);
 		
 		Button button = new Button("submit");
-		button.setOnAction(e->{
-			//If there is a different venue, it'll be added
+		button.setOnMouseClicked(e->{
+			//checking that there are no fields missing
 			if(venueInput.getText().isEmpty() || cityInput.getText().isEmpty() || bandNameInput.getText().isEmpty()
 					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null){
 				missingFields.setVisible(true);
-			} else {
-				Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString());
-				
-				//If there is a different band name, it'll be added
-				Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());		
-				
-//				//If there is a different date, it'll be added
-				ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, "4", band, venueObject);
-				missingFields.setVisible(false);
+			}else {
+			//create objects, fix the input and createConcert
+			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString());
+			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
+			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, "4", band, venueObject);
+			missingFields.setVisible(false);
+
 			}
 		});
 		pane.add(button, 0, 9);
