@@ -3,12 +3,14 @@ package Tabs;
 import java.util.ArrayList;
 import database.Database;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import objects.Band;
 import objects.Concert;
@@ -63,15 +65,21 @@ public class ViewConcertTab extends Tab{
 		ArrayList<Concert> concerts = concertTable.getAllConcerts();
 		for (int i = 0; i < concerts.size() ; i++) {
 			Band concertBand = bandTable.getBand(concerts.get(i).getBandID());
-			String itemDisplay = concerts.get(i).getDate() + " , " + concertBand.getName();
+			String itemDisplay = concerts.get(i).getDate() + ", " + concertBand.getName();
 			itemDisplayList.add(itemDisplay);
 		}
 		
-		
-
-		
 		// add those items to the ListView
 		bandList.setItems(FXCollections.observableArrayList(itemDisplayList));
+		
+		// this is a mouse event function which currently will print out the selected item
+		bandList.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+	          @Override
+	          public void handle(MouseEvent arg0) {
+	        	  	System.out.println(bandList.getSelectionModel().getSelectedItem());
+	          }
+	      });
 		
 		// refresh button
 		Button refreshButton = new Button("Refresh");

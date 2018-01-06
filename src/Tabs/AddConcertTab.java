@@ -130,7 +130,6 @@ public class AddConcertTab extends Tab{
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
 			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, "4", band, venueObject);
 			missingFields.setVisible(false);
-
 			}
 		});
 		pane.add(button, 0, 9);
