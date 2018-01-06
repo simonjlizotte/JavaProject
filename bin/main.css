@@ -18,6 +18,7 @@
     -fx-text-fill: #ffffff;
     -fx-border-color: #e94f37;
     -fx-background-color: #e94f37;
+    -fx-background-color: #e94f37;
 }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
