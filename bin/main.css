@@ -50,13 +50,22 @@
 }
 
 .text-field:focused {
-    -fx-background-color: #fffff5;
+    -fx-background-color: #ADD8E6;
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
 }
  
  .viewTabTitle{
   -fx-font-size: 20pt;
  }
+ 
+ .menu-item {
+ 	-fx-background-color:#ADD8E6;
+ 	-fx-text-fill:black;
+}
+
+.menu-item .label{
+    -fx-text-fill: blue;
+}
  
  .chartTabTitle{
    -fx-font-size: 20pt;
