@@ -5,6 +5,19 @@
 	-fx-font-size: 10pt;
 }
 
+.menu-bar{
+	-fx-background-color:#ffb3ba;
+}
+
+.menu-item:hover{
+	-fx-background-color:none;
+	-fx-text-fill:green;
+}
+
+.menu{
+	-fx-background-color:none;
+}
+
 .button{
     -fx-text-fill: #fffff5;
     -fx-border-color: #dbc3dd;
@@ -25,8 +38,8 @@
 
 
 .list-cell:filled:hover {
-    -fx-background-color: #dbc3dd;
-    -fx-text-fill: white;
+    -fx-background-color: none;
+    -fx-text-fill: green;
 }
 
 .list-cell{
@@ -59,12 +72,16 @@
  }
  
  .menu-item {
- 	-fx-background-color:#ADD8E6;
- 	-fx-text-fill:black;
+ 	-fx-background-color:none;
+ 	-fx-text-fill: orange;
 }
 
 .menu-item .label{
+	-fx-background-color:none;
     -fx-text-fill: blue;
+}
+.menu-item:focused .label{
+	-fx-text-fill:green;
 }
  
  .chartTabTitle{
