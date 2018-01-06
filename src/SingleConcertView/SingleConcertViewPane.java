@@ -92,10 +92,7 @@ public class SingleConcertViewPane extends BorderPane{
 		DatePicker dateAttendedInput = new DatePicker();
 		inputs.add(dateAttendedInput, 1, 7);
 		
-		
-		
 		edit.setOnAction((event)->{
-			
 			whatBandInput.setEditable(true);
 			whereAtInput.setEditable(true);
 			whatCityInput.setEditable(true);
@@ -109,7 +106,6 @@ public class SingleConcertViewPane extends BorderPane{
 		});
 		
 		saveEdits.setOnAction((event)->{
-					
 					whatBandInput.setEditable(false);
 					whereAtInput.setEditable(false);
 					whatCityInput.setEditable(false);

@@ -1,17 +1,24 @@
 package Tabs;
 
 import java.util.ArrayList;
+
+import SingleConcertView.SingleConcertViewPane;
+import SingleConcertView.SingleConcertViewScene;
 import database.Database;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import objects.Band;
 import objects.Concert;
 import tables.BandTable;
@@ -28,7 +35,15 @@ import tables.ConcertTable;
  * This tab will display every concert that the user added in a listView
  */
 public class ViewConcertTab extends Tab{
-
+	// concert selected
+	private static Concert concertSelected;
+	
+	// concert band
+	Band concertBand;
+	
+	// concert displayed
+	String itemDisplay;
+	
 	//Database
 	Database db;
 							
@@ -64,22 +79,36 @@ public class ViewConcertTab extends Tab{
 		ArrayList<String> itemDisplayList = new ArrayList<String>();
 		ArrayList<Concert> concerts = concertTable.getAllConcerts();
 		for (int i = 0; i < concerts.size() ; i++) {
-			Band concertBand = bandTable.getBand(concerts.get(i).getBandID());
-			String itemDisplay = concerts.get(i).getDate() + ", " + concertBand.getName();
+			concertBand = bandTable.getBand(concerts.get(i).getBandID());
+			itemDisplay = concerts.get(i).getDate() + ", " + concertBand.getName();
 			itemDisplayList.add(itemDisplay);
 		}
 		
 		// add those items to the ListView
 		bandList.setItems(FXCollections.observableArrayList(itemDisplayList));
 		
-		// this is a mouse event function which currently will print out the selected item
-		bandList.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-	          @Override
-	          public void handle(MouseEvent arg0) {
-	        	  	System.out.println(bandList.getSelectionModel().getSelectedItem());
-	          }
-	      });
+//		// this is a mouse event function which currently will o
+//		bandList.setOnMouseClicked(new EventHandler<MouseEvent>(){
+//
+//	          @Override
+//	          public void handle(MouseEvent arg0) {
+//	        	  	Stage nameStage = new Stage();
+//	        	  	Scene scene = new SingleConcertViewScene();
+//	    			nameStage.setTitle("concert");
+//	    			nameStage.setScene(scene);
+//	    			scene.getStylesheets().add("main.css");
+//	    			nameStage.show();
+//	        	  	System.out.println(bandList.getSelectionModel().getSelectedItem());
+//	          }
+//	      });
+		
+		bandList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+			
+				System.out.println("ListView Selection Changed (newValue: " + newValue + ")\n");
+			}
+		});
 		
 		// refresh button
 		Button refreshButton = new Button("Refresh");
