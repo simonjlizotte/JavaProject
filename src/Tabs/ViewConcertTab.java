@@ -21,8 +21,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import objects.Band;
 import objects.Concert;
+import objects.Venue;
 import tables.BandTable;
 import tables.ConcertTable;
+import tables.VenueTable;
 
 /**
  * 
@@ -35,14 +37,25 @@ import tables.ConcertTable;
  * This tab will display every concert that the user added in a listView
  */
 public class ViewConcertTab extends Tab{
+	
 	// concert selected
-	private static Concert concertSelected;
+	public static int num;
+	
+	private static String bandNameFill;
+	private static String venueName;
+	private static String dateFill;
 	
 	// concert band
 	Band concertBand;
 	
+	public static int num2;
+	
+	Venue venueObject;
+	
 	// concert displayed
 	String itemDisplay;
+	
+	public static String number;
 	
 	//Database
 	Database db;
@@ -56,6 +69,7 @@ public class ViewConcertTab extends Tab{
 	// constructor
 	private ViewConcertTab() {
 		this.setText(TAB_TITLE);
+		
 		// database Instance
 		db = Database.getInstance();
 		// vBox to host the listView
@@ -75,12 +89,16 @@ public class ViewConcertTab extends Tab{
 		viewTabTitle.getStyleClass().add("viewTabTitle");
 				
 		//grabbing the date and band names from the tables to display
-		ConcertTable concertTable = new ConcertTable();		
+		ConcertTable concertTable = new ConcertTable();	
+		VenueTable venueTable = new VenueTable();
 		ArrayList<String> itemDisplayList = new ArrayList<String>();
+		
 		ArrayList<Concert> concerts = concertTable.getAllConcerts();
+		ArrayList<Venue> venue = venueTable.getAllVenues();
 		for (int i = 0; i < concerts.size() ; i++) {
+			num = concertTable.getAllConcerts().get(i).getId();
 			concertBand = bandTable.getBand(concerts.get(i).getBandID());
-			itemDisplay = concerts.get(i).getDate() + ", " + concertBand.getName();
+			itemDisplay = concerts.get(i).getDate() + ", " + concertBand.getName() + num;
 			itemDisplayList.add(itemDisplay);
 		}
 		
@@ -105,8 +123,18 @@ public class ViewConcertTab extends Tab{
 		bandList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-			
-				System.out.println("ListView Selection Changed (newValue: " + newValue + ")\n");
+//				for(int j = 0; j < concerts.size(); j++) {
+//					num = concertTable.getAllConcerts().get(j).getId();
+////					System.out.println("ListView Selection Changed (newValue: " + newValue + i + ")\n");
+//				}
+				
+			System.out.println("ListView Selection Changed (newValue: " + newValue +  ")\n");
+			Stage nameStage = new Stage();
+        	  	Scene scene = new SingleConcertViewScene();
+    			nameStage.setTitle("concert");
+    			nameStage.setScene(scene);
+    			scene.getStylesheets().add("main.css");
+    			nameStage.show();
 			}
 		});
 		

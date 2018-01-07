@@ -2,6 +2,7 @@ package SingleConcertView;
 
 import java.util.ArrayList;
 
+import Tabs.ViewConcertTab;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,15 +13,36 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import objects.Band;
+import objects.Concert;
+import objects.Venue;
+import tables.BandTable;
+import tables.ConcertTable;
 
 public class SingleConcertViewPane extends BorderPane{
 
+	ViewConcertTab viewConcert;
+	
+	Concert itemSelected;
 	public SingleConcertViewPane() {
 		// Create a Vbox 
 		HBox buttonBox = new HBox();
 		GridPane inputs = new GridPane();
 		
-		//Create a Raiting variable
+		viewConcert.getInstance();
+		
+		int concertId = viewConcert.num2;
+		
+		ConcertTable concertTable = new ConcertTable();
+		
+		Concert concertObject = concertTable.getConcert(concertId);
+		
+		BandTable bandTable = new BandTable();
+		
+		Band bandObject = bandTable.getBand(concertObject.getBandID());
+		
+		bandObject.getName();
+		System.out.println(concertId);
 		
 		// Title
 		Label title = new Label("Concert View");
@@ -68,7 +90,7 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		//Create the TextFields, DatePicker, and ComboBox for the values
 		TextField whatBandInput = new TextField();
-		whatBandInput.setPromptText("Band Name");
+		whatBandInput.setPromptText(bandObject.getName());
 		whatBandInput.setEditable(false);
 		inputs.add(whatBandInput, 1, 1);
 		TextField whereAtInput = new TextField();
