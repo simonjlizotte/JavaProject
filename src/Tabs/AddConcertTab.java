@@ -1,15 +1,13 @@
 package Tabs;
 
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 
 import database.Database;
 import javafx.collections.FXCollections;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,7 +16,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -37,6 +34,9 @@ import tables.GenreTable;
  * to one instance of this tab.
  */
 public class AddConcertTab extends Tab{
+	
+	//file String
+	String file;
 	
 	//Database
 	Database db;
@@ -125,20 +125,12 @@ public class AddConcertTab extends Tab{
 				 FileChooser fileChooser = new FileChooser();
 	             
 		            //Set extension filter
-		            FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+		           // FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
 		            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-		            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+		            fileChooser.getExtensionFilters().addAll(extFilterPNG);
 		              
 		            //Show open file dialog
-		            File file = fileChooser.showOpenDialog(null);
-		                       
-		            try {
-		                BufferedImage bufferedImage = ImageIO.read(file);
-		                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-		                imageDisplay.setImage(image);
-		            } catch (IOException ex) {
-		                ex.printStackTrace();
-		            }
+		            file = fileChooser.showOpenDialog(null).getAbsolutePath();
 		 	
 			}
         		
@@ -157,10 +149,51 @@ public class AddConcertTab extends Tab{
 					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null){
 				missingFields.setVisible(true);
 			}else {
-			//create objects, fix the input and createConcert
+			
+				FileInputStream fis = null;
+				try {
+					fis = new FileInputStream(file);
+				} catch (FileNotFoundException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString());
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
-			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, "4", band, venueObject);
+			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, fis, band, venueObject);
+
+			
+			
+			// This is the code to select an image and populate in the computer directory, we need to be able to select 
+			// an entry by its id then use this on the singleconcertpage to query and display that image.
+//			String sql8 = "SELECT picture FROM  concertTable WHERE id = 1273";
+//		    PreparedStatement stmt;
+//			try {
+//				stmt = db.getConnection().prepareStatement(sql8);
+//				   ResultSet resultSet = stmt.executeQuery();
+//				    while (resultSet.next()) {
+//				      File image = new File("/Users/simonlizotte/Downloads/readImage3.png");
+//				      //@SuppressWarnings("resource")
+//					FileOutputStream fos = new FileOutputStream(image);
+//
+//				      byte[] buffer = new byte[1];
+//				      InputStream is = resultSet.getBinaryStream("picture");
+//				      while (is.read(buffer) > 0) {
+//				        fos.write(buffer);
+//				      }
+//				      fos.close();
+//				    }
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			} catch (FileNotFoundException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			} catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+		 
+
 			missingFields.setVisible(false);
 
 			}
@@ -175,5 +208,6 @@ public class AddConcertTab extends Tab{
 		}
 		return tab;
 	}
+
 	
 }
