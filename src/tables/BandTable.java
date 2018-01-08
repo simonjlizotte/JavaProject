@@ -167,13 +167,13 @@ public class BandTable implements BandDAO{
 		WHERE id = 'id';
 	 */
 	@Override
-	public void updateBand(Band band) {
+	public void updateBand(int bandId, String newBand) {
 		String query = "UPDATE " + Const.TABLE_BAND +
-				"SET " + Const.BANDS_COLUMN_NAME + " = '" + band.getName() + "' WHERE "
-				+ Const.BANDS_COLUMN_ID + " = '" + band.getId() + "';";
+				" SET " + Const.BANDS_COLUMN_NAME + " = '" + newBand + "' WHERE "
+				+ Const.BANDS_COLUMN_ID + " = '" + bandId + "';";
 		try {
 			db.getConnection().createStatement().execute(query);
-			System.out.println(band.getName() + " updated from the table");
+			System.out.println(newBand + " updated from the table");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
