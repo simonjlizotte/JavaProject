@@ -137,13 +137,13 @@ public class VenueTable implements VenueDAO{
 		WHERE id = 'id';
 	 */
 	@Override
-	public void updateCity(Venue venue) {
+	public void updateCity(int venueID, String newCity) {
 		String query = "UPDATE " + Const.TABLE_VENUE +
-				" SET " + Const.VENUE_COLUMN_CITY + " = '" + venue.getCity() + "' WHERE "
-				+ Const.VENUE_COLUMN_ID + " = '" + venue.getId() + "';";
+				" SET " + Const.VENUE_COLUMN_CITY + " = '" + newCity + "' WHERE "
+				+ Const.VENUE_COLUMN_ID + " = '" + venueID + "';";
 		try {
 			db.getConnection().createStatement().execute(query);
-			System.out.println(venue.getCity() + " updated from the table");
+			System.out.println(newCity + " updated from the table");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

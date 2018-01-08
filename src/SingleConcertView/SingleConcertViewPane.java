@@ -33,10 +33,10 @@ public class SingleConcertViewPane extends BorderPane{
 		GridPane inputs = new GridPane();
 		
 		//instance of viewConcert
-		viewConcert.getInstance();
+		ViewConcertTab.getInstance();
 		
 		// id of the concert
-		int concertId = viewConcert.num2;
+		int concertId = ViewConcertTab.num2;
 		
 		// concertTable created
 		ConcertTable concertTable = new ConcertTable();
@@ -54,9 +54,8 @@ public class SingleConcertViewPane extends BorderPane{
 		Band bandObject = bandTable.getBand(concertObject.getBandID());
 		
 		// genre table
-		GenreTable genreTable = new GenreTable();
 		Genre genreObject = new Genre();
-		genreObject = genreTable.getGenre(bandObject.getGenreId());
+		genreObject = GenreTable.getGenre(bandObject.getGenreId());
 		
 		// get the venue id
 		Venue venueObject = venueTable.getVenue(concertObject.getVenueID());
@@ -133,7 +132,7 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(whatCityInput, 1, 3);
 		
 		
-		ComboBox<ArrayList> genereInput = new ComboBox<>();
+		ComboBox<Genre> genereInput = new ComboBox<>();
 		inputs.add(genereInput, 1, 5);
 		inputs.getChildren().remove(genereInput);
 		Label genreDisplay = new Label(genreName);
@@ -168,9 +167,10 @@ public class SingleConcertViewPane extends BorderPane{
 					
 					//venue update
 					venueTable.updateVenue(concertObject.getVenueID(), whereAtInput.getText().toString());
-					//check  to see if the new value is already a venue
-					//if it is, then added into it
-					//else, create that new value and added
+					//city update
+					venueTable.updateCity(concertObject.getVenueID(), whatCityInput.getText().toString());
+					//band update
+					bandTable.updateBand(concertObject.getBandID(), whatBandInput.getText().toString());
 					
 				});
 		
