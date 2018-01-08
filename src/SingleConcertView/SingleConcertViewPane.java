@@ -61,7 +61,6 @@ public class SingleConcertViewPane extends BorderPane{
 		// get the venue id
 		Venue venueObject = venueTable.getVenue(concertObject.getVenueID());
 		
-		venueObject.getVenue();
 		//Storing the objects values
 		String objectName = bandObject.getName();
 		String venueName = venueObject.getVenue();

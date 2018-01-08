@@ -139,9 +139,9 @@ public class ViewConcertTab extends Tab{
 		Button refreshButton = new Button("Refresh");
 		refreshButton.getStyleClass().add("refresh");
 		
-//		refreshButton.setOnAction(e->{
-//			bandList.setItems(FXCollections.observableArrayList(itemDisplayList));
-//		});
+		refreshButton.setOnAction(e->{
+			bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
+		});
 //		
 	    // setting the borderPane
 	    borderPane.setTop(viewTabTitle);	  	    
