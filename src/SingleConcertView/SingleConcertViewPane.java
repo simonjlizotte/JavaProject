@@ -59,10 +59,12 @@ public class SingleConcertViewPane extends BorderPane{
 		genreObject = genreTable.getGenre(bandObject.getGenreId());
 		
 		// get the venue id
-//		Venue venueObject = venueObject.getId();
+		Venue venueObject = venueTable.getVenue(concertObject.getVenueID());
+		
+		venueObject.getVenue();
 		//Storing the objects values
 		String objectName = bandObject.getName();
-//		String objectVenue = concertObject.get
+		String venueName = venueObject.getVenue();
 		String genreName = genreObject.getGenre();
 		String dateAdded = concertObject.getDate();
 		System.out.println(concertId);
@@ -117,27 +119,34 @@ public class SingleConcertViewPane extends BorderPane{
 		whatBandInput.setText(objectName);
 		whatBandInput.setEditable(false);
 		inputs.add(whatBandInput, 1, 1);
+		
 		TextField whereAtInput = new TextField();
 		whereAtInput.setPromptText("Venue Name");
+		whereAtInput.setText(venueName);
 		whereAtInput.setEditable(false);
 		inputs.add(whereAtInput, 1, 2);
+		
 		TextField whatCityInput = new TextField();
 		whatCityInput.setEditable(false);
 		whatCityInput.setPromptText("City");
 		inputs.add(whatCityInput, 1, 3);
+		
 		TextField openingActInput = new TextField();
 		openingActInput.setEditable(false);
 		openingActInput.setPromptText("Opening Act");
 		inputs.add(openingActInput, 1, 4);
+		
 		ComboBox<ArrayList> genereInput = new ComboBox<>();
 		inputs.add(genereInput, 1, 5);
 		inputs.getChildren().remove(genereInput);
 		Label genreDisplay = new Label(genreName);
 		inputs.add(genreDisplay, 1, 5);
+		
 		TextField seatsInput = new TextField();
 		seatsInput.setEditable(false);
 		seatsInput.setPromptText("Seats and Section");
 		inputs.add(seatsInput, 1, 6);
+		
 		DatePicker dateAttendedInput = new DatePicker();
 		Label dateDisplay = new Label(dateAdded);
 		inputs.add(dateAttendedInput, 1, 7);

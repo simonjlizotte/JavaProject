@@ -91,9 +91,9 @@ public class VenueTable implements VenueDAO{
 	 * Query: SELECT * FROM venueTable WHERE id = 'id';
 	 */
 	@Override
-	public Venue getVenue(String venueName) {
+	public Venue getVenue(int venueId) {
 		String query = "SELECT * FROM " 
-	+ Const.TABLE_VENUE +  " WHERE " + Const.VENUE_COLUMN_NAME + " LIKE '" + venueName+"';";
+	+ Const.TABLE_VENUE +  " WHERE " + Const.VENUE_COLUMN_ID + " LIKE '" + venueId+"';";
 
 	Venue venue = null;
 	try {
