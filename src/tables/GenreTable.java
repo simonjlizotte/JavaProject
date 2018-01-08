@@ -39,7 +39,7 @@ public class GenreTable implements GenreDAO{
 			//this loop will iterate through each item in the result set and 
 				//when it gets to the last item will return false
 			while(result.next()) {
-				genres.add(new Genre(
+				genres.add(new Genre(result.getInt(Const.GENRE_COLUMN_ID),
 									result.getString(Const.GENRE_COLUMN_NAME)));
 			}
 		}catch(SQLException e) {
@@ -71,4 +71,6 @@ public class GenreTable implements GenreDAO{
 		}
 		return genre;
 	}
+
+	
 }
