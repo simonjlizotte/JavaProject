@@ -37,14 +37,6 @@ import tables.VenueTable;
  * This tab will display every concert that the user added in a listView
  */
 public class ViewConcertTab extends Tab{
-	
-	// concert selected
-	public static int num;
-	
-	private static String bandNameFill;
-	private static String venueName;
-	private static String dateFill;
-	
 	// concert band
 	Band concertBand;
 	
@@ -54,8 +46,6 @@ public class ViewConcertTab extends Tab{
 	
 	// concert displayed
 	String itemDisplay;
-	
-	public static String number;
 	
 	//Database
 	Database db;
@@ -72,6 +62,7 @@ public class ViewConcertTab extends Tab{
 		
 		// database Instance
 		db = Database.getInstance();
+		
 		// vBox to host the listView
 		BorderPane borderPane = new BorderPane();
 				
@@ -82,7 +73,7 @@ public class ViewConcertTab extends Tab{
 		BandTable bandTable = new BandTable();
 		
 		// listView of band names
-		ListView<String> bandList = new ListView<String>();
+		ListView<Concert> bandList = new ListView<Concert>();
 		
 		// label to set the title
 		Label viewTabTitle = new Label("View Concerts!");
@@ -94,20 +85,26 @@ public class ViewConcertTab extends Tab{
 		ArrayList<String> itemDisplayList = new ArrayList<String>();
 		
 		ArrayList<Concert> concerts = concertTable.getAllConcerts();
-		ArrayList<Venue> venue = venueTable.getAllVenues();
-		for (int i = 0; i < concerts.size() ; i++) {
-			num = concertTable.getAllConcerts().get(i).getId();
-			concertBand = bandTable.getBand(concerts.get(i).getBandID());
-			itemDisplay = concerts.get(i).getDate() + ", " + concertBand.getName() + num;
-			itemDisplayList.add(itemDisplay);
-		}
 		
 		// add those items to the ListView
-		bandList.setItems(FXCollections.observableArrayList(itemDisplayList));
-		
-//		// this is a mouse event function which currently will o
+		bandList.setItems(FXCollections.observableArrayList(concerts));
+	   
+		bandList.getSelectionModel().selectedItemProperty().addListener(
+	            (ObservableValue<? extends Concert> ov, Concert old_val, 
+	                Concert new_val) -> {   
+	                	num2 = new_val.getId();
+	                	Stage nameStage = new Stage();
+		        	  	Scene scene = new SingleConcertViewScene();
+		    			nameStage.setTitle("concert");
+		    			nameStage.setScene(scene);
+		    			scene.getStylesheets().add("main.css");
+		    			nameStage.show();
+		    		
+	                	System.out.println(new_val.getId());
+	        });
+	    
+////		// this is a mouse event function which currently will o
 //		bandList.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//
 //	          @Override
 //	          public void handle(MouseEvent arg0) {
 //	        	  	Stage nameStage = new Stage();
@@ -120,32 +117,32 @@ public class ViewConcertTab extends Tab{
 //	          }
 //	      });
 		
-		bandList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//				for(int j = 0; j < concerts.size(); j++) {
-//					num = concertTable.getAllConcerts().get(j).getId();
-////					System.out.println("ListView Selection Changed (newValue: " + newValue + i + ")\n");
-//				}
-				
-			System.out.println("ListView Selection Changed (newValue: " + newValue +  ")\n");
-			Stage nameStage = new Stage();
-        	  	Scene scene = new SingleConcertViewScene();
-    			nameStage.setTitle("concert");
-    			nameStage.setScene(scene);
-    			scene.getStylesheets().add("main.css");
-    			nameStage.show();
-			}
-		});
-		
+//		bandList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+//			@Override
+//			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+////				for(int j = 0; j < concerts.size(); j++) {
+////					num = concertTable.getAllConcerts().get(j).getId();
+//////					System.out.println("ListView Selection Changed (newValue: " + newValue + i + ")\n");
+////				}
+//				
+//			System.out.println("ListView Selection Changed (newValue: " + newValue +  ")\n");
+//			Stage nameStage = new Stage();
+//        	  	Scene scene = new SingleConcertViewScene();
+//    			nameStage.setTitle("concert");
+//    			nameStage.setScene(scene);
+//    			scene.getStylesheets().add("main.css");
+//    			nameStage.show();
+//			}
+//		});
+//		
 		// refresh button
 		Button refreshButton = new Button("Refresh");
 		refreshButton.getStyleClass().add("refresh");
 		
-		refreshButton.setOnAction(e->{
-			bandList.setItems(FXCollections.observableArrayList(itemDisplayList));
-		});
-		
+//		refreshButton.setOnAction(e->{
+//			bandList.setItems(FXCollections.observableArrayList(itemDisplayList));
+//		});
+//		
 	    // setting the borderPane
 	    borderPane.setTop(viewTabTitle);	  	    
 	    borderPane.setCenter(bandList);

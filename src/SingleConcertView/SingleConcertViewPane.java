@@ -29,19 +29,26 @@ public class SingleConcertViewPane extends BorderPane{
 		HBox buttonBox = new HBox();
 		GridPane inputs = new GridPane();
 		
+		//instance of viewConcert
 		viewConcert.getInstance();
 		
+		// id of the concert
 		int concertId = viewConcert.num2;
 		
+		// concertTable created
 		ConcertTable concertTable = new ConcertTable();
 		
-		Concert concertObject = concertTable.getConcert(concertId);
-		
+		// bandTable created
 		BandTable bandTable = new BandTable();
 		
+		// Getting the concert id of the object passed
+		Concert concertObject = concertTable.getConcert(concertId);
+
+		// get the band id 
 		Band bandObject = bandTable.getBand(concertObject.getBandID());
 		
-		bandObject.getName();
+		String ObjectName = bandObject.getName();
+		
 		System.out.println(concertId);
 		
 		// Title
@@ -90,7 +97,8 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		//Create the TextFields, DatePicker, and ComboBox for the values
 		TextField whatBandInput = new TextField();
-		whatBandInput.setPromptText(bandObject.getName());
+		whatBandInput.setPromptText("");
+		whatBandInput.setText(ObjectName);
 		whatBandInput.setEditable(false);
 		inputs.add(whatBandInput, 1, 1);
 		TextField whereAtInput = new TextField();
