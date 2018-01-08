@@ -11,7 +11,7 @@
 
 .menu-item:hover{
 	-fx-background-color:none;
-	-fx-text-fill:green;
+	-fx-text-fill:#222222;
 }
 
 .menu{
