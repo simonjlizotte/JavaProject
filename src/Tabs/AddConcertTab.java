@@ -196,7 +196,6 @@ public class AddConcertTab extends Tab{
 		 
 
 			missingFields.setVisible(false);
-
 			}
 		});
 		pane.add(button, 0, 9);
