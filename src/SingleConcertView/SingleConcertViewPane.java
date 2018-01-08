@@ -67,7 +67,6 @@ public class SingleConcertViewPane extends BorderPane{
 		String genreName = genreObject.getGenre();
 		String dateAdded = concertObject.getDate();
 		String cityName = venueObject.getCity();
-		System.out.println(concertId);
 		
 		// Title
 		Label title = new Label("Concert View");
@@ -94,22 +93,24 @@ public class SingleConcertViewPane extends BorderPane{
 		//Creating the input fields labels
 		Label whatBand = new Label("What band?");
 		inputs.add(whatBand, 0, 1);
+		
 		Label whereAt = new Label("What Venue?");
 		inputs.add(whereAt, 0, 2);
+		
 		Label whatCity = new Label("What City?");
 		inputs.add(whatCity, 0, 3);
-		Label openingAct = new Label("Who was the opening act?");
-		inputs.add(openingAct, 0, 4);
+		
 		Label genere = new Label("Genere:");
 		inputs.add(genere, 0, 5);
-		Label seats = new Label("Seat Numbers & Section:");
-		inputs.add(seats, 0, 6);
+		
 		Label dateAttended = new Label("Date Attended:");
-		Label dateFormat = new Label("dd/mm/yyyy");
+		Label dateFormat = new Label("(yyyydd/mm/dd)");
 		inputs.add(dateAttended, 0, 7);
 		inputs.add(dateFormat, 2, 7);
+		
 		Label overallRating = new Label("Overall Rating:");
 		inputs.add(overallRating, 0, 8);
+		
 		Label pictures = new Label("Pictures from the Event:");
 		inputs.add(pictures, 0, 9);
 		
@@ -131,23 +132,13 @@ public class SingleConcertViewPane extends BorderPane{
 		whatCityInput.setPromptText("City");
 		whatCityInput.setText(cityName);
 		inputs.add(whatCityInput, 1, 3);
-		
-		TextField openingActInput = new TextField();
-		openingActInput.setEditable(false);
-		openingActInput.setPromptText("Opening Act");
-		inputs.add(openingActInput, 1, 4);
-		
+				
 		ComboBox<ArrayList> genereInput = new ComboBox<>();
 		inputs.add(genereInput, 1, 5);
 		inputs.getChildren().remove(genereInput);
 		Label genreDisplay = new Label(genreName);
 		inputs.add(genreDisplay, 1, 5);
-		
-		TextField seatsInput = new TextField();
-		seatsInput.setEditable(false);
-		seatsInput.setPromptText("Seats and Section");
-		inputs.add(seatsInput, 1, 6);
-		
+				
 		DatePicker dateAttendedInput = new DatePicker();
 		Label dateDisplay = new Label(dateAdded);
 		inputs.add(dateAttendedInput, 1, 7);
@@ -155,12 +146,14 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(dateDisplay, 1, 7);
 		
 		edit.setOnAction((event)->{
+			// setting the edit boxes to true
 			whatBandInput.setEditable(true);
 			whereAtInput.setEditable(true);
 			whatCityInput.setEditable(true);
-			openingActInput.setEditable(true);
-			seatsInput.setEditable(true);
 			
+			//adding the input boxes back to the grid pane
+			
+			// setting the text view visibility
 			edit.setVisible(false);
 			saveEdits.setVisible(true);
 			updatesValues.setVisible(true);
@@ -171,8 +164,6 @@ public class SingleConcertViewPane extends BorderPane{
 					whatBandInput.setEditable(false);
 					whereAtInput.setEditable(false);
 					whatCityInput.setEditable(false);
-					openingActInput.setEditable(false);
-					seatsInput.setEditable(false);
 					
 					edit.setVisible(true);
 					saveEdits.setVisible(false);
@@ -183,7 +174,6 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		
 		// add nodes to pane 
-		
 		this.setTop(title);
 		this.setCenter(inputs);
 		this.setBottom(buttonBox);
