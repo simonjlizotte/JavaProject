@@ -18,8 +18,7 @@ public class Band {
 	public Band() {
 		
 	}
-	
-	
+		
 	//constructor with args
 	public Band(int id, String name, int genreId) {
 		this.id = id;
@@ -55,6 +54,8 @@ public class Band {
 	public void setGenreId(int genreId) {
 		this.genreId = genreId;
 	}
+	
+	
 	
 	
 }
