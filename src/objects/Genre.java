@@ -55,6 +55,9 @@ public class Genre {
 		this.genre = genre;
 	}
 	
+	public String toString() {
+		return this.getGenre();
+	}
 	
 	
 }
