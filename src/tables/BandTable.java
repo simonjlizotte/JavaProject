@@ -63,6 +63,9 @@ public class BandTable implements BandDAO{
 
 				db.getConnection().createStatement().execute(query);
 				System.out.println(band.getName() + " successfully added to the table");
+				ResultSet newResult = getBand.executeQuery(selectQuery);
+				newResult.next();
+				band = new Band(newResult.getInt(Const.BANDS_COLUMN_ID), newResult.getString(Const.BANDS_COLUMN_NAME), newResult.getInt(Const.BANDS_COLUMN_GENRE_ID));				
 				return band;
 				}
 		} catch (SQLException e2) {

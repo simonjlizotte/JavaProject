@@ -14,27 +14,15 @@ import objects.Genre;
  * The purpose of this class is to manage crud operations for the Genre items inside the Genre table
  * @author josegeorges
  *
+ *
+ *UPDATE: we deleted Insert, Update and delete since we decided that genre will be already populated and the user
+ * will not have the power to do any of this.
  */
 public class GenreTable implements GenreDAO{
 
 	//initializing db connection
 	static Database db = Database.getInstance();
-	
-	/**
-	 * This method will INSERT a new genre INTO the table
-	 * 
-	 * Query: INSERT INTO genreTable (genre_name) values ('genre');
-	 */
-//	public void createGenre(Genre genre) {
-//		String query = "INSERT INTO " + Const.TABLE_GENRE + 
-//				"(" + Const.GENRE_COLUMN_NAME + ") values ('" +	genre.getGenre() + "')";
-//		try {
-//			db.getConnection().createStatement().execute(query);
-//			System.out.println(genre.getGenre() + " successfully added to the table");
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 
 	/**
 	 * This method will SELECT ALL genres from the table
@@ -83,40 +71,4 @@ public class GenreTable implements GenreDAO{
 		}
 		return genre;
 	}
-
-	/**
-	 * This method will UPDATE a genre FROM the table WHERE id matches
-	 * 
-	 * UPDATE genreTable 
-		SET genre_name = 'genre' 
-		WHERE id = 'id';
-	 */
-//	@Override
-//	public void updateGenre(Genre genre) {
-//		String query = "UPDATE " + Const.TABLE_GENRE +
-//				"SET " + Const.GENRE_COLUMN_NAME + " = '" + genre.getGenre() + "' WHERE "
-//				+ Const.GENRE_COLUMN_ID + " = '" + genre.getId() + "';";
-//		try {
-//			db.getConnection().createStatement().execute(query);
-//			System.out.println(genre.getGenre() + " updated from the table");
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
-	 * This method will DELETE a genre FROM the table WHERE id matches
-	 * 
-	 * Query: DELETE FROM genreTable WHERE id = 'id';
-	 */
-//	public void deleteGenre(Genre genre) {
-//		String query = "DELETE FROM " + Const.TABLE_GENRE + " WHERE " +
-//				Const.GENRE_COLUMN_ID + " = " + genre.getId();
-//		try {
-//			db.getConnection().createStatement().execute(query);
-//			System.out.println(genre.getGenre() + " deleted from the table");
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-	
 }

@@ -27,6 +27,12 @@ public class Band {
 		this.genreId = genreId;
 	}
 	
+	public Band(String name, int genreId) {
+		this.name = name;
+		this.genreId = genreId;
+	}
+
+
 	//getters and setters
 	public int getId() {
 		return id;
