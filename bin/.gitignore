@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 /Tabs/
 /database/
 /objects/
 /tables/
 /DAOS/
+=======
+/DAOS/
+/SingleConcertView/
+/database/
+/enums/
+/main.css
+/tables/
+>>>>>>> origin/staging

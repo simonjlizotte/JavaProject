@@ -190,7 +190,7 @@ public class ConcertTable implements ConcertDAO{
 						stmt = db.getConnection().prepareStatement(sql8);
 						   ResultSet resultSet = stmt.executeQuery();
 						    while (resultSet.next()) {
-						      File image = new File("/Users/simonlizotte/Downloads/readImage3.png");
+						      File image = new File("selectedImg.png");
 						      //@SuppressWarnings("resource")
 							FileOutputStream fos = new FileOutputStream(image);
 		
