@@ -50,7 +50,7 @@ public class SingleConcertViewPane extends BorderPane{
 		// Getting the concert id of the object passed
 		Concert concertObject = concertTable.getConcert(concertId);
 
-		// get the band id 
+		// Band object get the band id 
 		Band bandObject = bandTable.getBand(concertObject.getBandID());
 		
 		// genre table
@@ -67,6 +67,7 @@ public class SingleConcertViewPane extends BorderPane{
 		String venueName = venueObject.getVenue();
 		String genreName = genreObject.getGenre();
 		String dateAdded = concertObject.getDate();
+		String cityName = venueObject.getCity();
 		System.out.println(concertId);
 		
 		// Title
@@ -129,6 +130,7 @@ public class SingleConcertViewPane extends BorderPane{
 		TextField whatCityInput = new TextField();
 		whatCityInput.setEditable(false);
 		whatCityInput.setPromptText("City");
+		whatCityInput.setText(cityName);
 		inputs.add(whatCityInput, 1, 3);
 		
 		TextField openingActInput = new TextField();
