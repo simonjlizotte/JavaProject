@@ -5,7 +5,7 @@
 	-fx-font-size: 10pt;
 }
 
-.button{
+.refresh{
     -fx-text-fill: #393e41;
     -fx-border-color: #e94f37;
     -fx-border-radius: 5;

@@ -19,7 +19,6 @@ public class Concert {
 	public Concert() {
 		
 	}
-	
 
 	public Concert(int id, int bandID, int venueID, String date, int rating, String pic) {
 		this.id = id;
