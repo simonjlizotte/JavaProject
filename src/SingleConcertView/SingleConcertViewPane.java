@@ -15,9 +15,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import objects.Band;
 import objects.Concert;
+import objects.Genre;
 import objects.Venue;
 import tables.BandTable;
 import tables.ConcertTable;
+import tables.GenreTable;
+import tables.VenueTable;
 
 public class SingleConcertViewPane extends BorderPane{
 
@@ -41,14 +44,27 @@ public class SingleConcertViewPane extends BorderPane{
 		// bandTable created
 		BandTable bandTable = new BandTable();
 		
+		// venueTable
+		VenueTable venueTable = new VenueTable();
+		
 		// Getting the concert id of the object passed
 		Concert concertObject = concertTable.getConcert(concertId);
 
 		// get the band id 
 		Band bandObject = bandTable.getBand(concertObject.getBandID());
 		
-		String ObjectName = bandObject.getName();
+		// genre table
+		GenreTable genreTable = new GenreTable();
+		Genre genreObject = new Genre();
+		genreObject = genreTable.getGenre(bandObject.getGenreId());
 		
+		// get the venue id
+//		Venue venueObject = venueObject.getId();
+		//Storing the objects values
+		String objectName = bandObject.getName();
+//		String objectVenue = concertObject.get
+		String genreName = genreObject.getGenre();
+		String dateAdded = concertObject.getDate();
 		System.out.println(concertId);
 		
 		// Title
@@ -98,7 +114,7 @@ public class SingleConcertViewPane extends BorderPane{
 		//Create the TextFields, DatePicker, and ComboBox for the values
 		TextField whatBandInput = new TextField();
 		whatBandInput.setPromptText("");
-		whatBandInput.setText(ObjectName);
+		whatBandInput.setText(objectName);
 		whatBandInput.setEditable(false);
 		inputs.add(whatBandInput, 1, 1);
 		TextField whereAtInput = new TextField();
@@ -115,12 +131,18 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(openingActInput, 1, 4);
 		ComboBox<ArrayList> genereInput = new ComboBox<>();
 		inputs.add(genereInput, 1, 5);
+		inputs.getChildren().remove(genereInput);
+		Label genreDisplay = new Label(genreName);
+		inputs.add(genreDisplay, 1, 5);
 		TextField seatsInput = new TextField();
 		seatsInput.setEditable(false);
 		seatsInput.setPromptText("Seats and Section");
 		inputs.add(seatsInput, 1, 6);
 		DatePicker dateAttendedInput = new DatePicker();
+		Label dateDisplay = new Label(dateAdded);
 		inputs.add(dateAttendedInput, 1, 7);
+		inputs.getChildren().remove(dateAttendedInput);
+		inputs.add(dateDisplay, 1, 7);
 		
 		edit.setOnAction((event)->{
 			whatBandInput.setEditable(true);

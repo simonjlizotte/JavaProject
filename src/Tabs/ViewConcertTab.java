@@ -99,7 +99,7 @@ public class ViewConcertTab extends Tab{
 		    			nameStage.setScene(scene);
 		    			scene.getStylesheets().add("main.css");
 		    			nameStage.show();
-		    		
+		  
 	                	System.out.println(new_val.getId());
 	        });
 	    
