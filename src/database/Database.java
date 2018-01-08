@@ -100,7 +100,7 @@ public class Database {
 	private Database() {
 
 		if(connection == null) {
-			String url = "jdbc:mysql://localhost/JavaProject";
+			String url = "jdbc:mysql://192.168.64.2/JavaProject";
 			String user = "root";
 			String password = "";
 			try {
