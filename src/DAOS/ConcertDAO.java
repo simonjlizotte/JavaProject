@@ -18,5 +18,5 @@ public interface ConcertDAO {
 		public void updateRating(Band band);
 		public void updatePicture(Band band);
 		//Delete
-		public void deleteBand(Band band);
+		public void deleteConcert(int concertId);
 }

@@ -14,7 +14,7 @@ public interface VenueDAO {
 		}
 		public Venue getVenue(int venueId);
 		//Update
-		public void updateVenue(Venue venue);
+		public void updateVenue(int venueID, String newVenue);
 		public void updateCity(Venue venue);
 		//Delete
 		public void deleteVenue(Venue venue);

@@ -145,9 +145,15 @@ public class ConcertTable implements ConcertDAO{
 	}
 
 	@Override
-	public void deleteBand(Band band) {
-		// TODO Auto-generated method stub
-		
+	public void deleteConcert(int concertId) {
+		String query = "DELETE FROM " + Const.TABLE_CONCERT + " WHERE " +
+				Const.CONCERTS_COLUMN_ID + " = " + concertId;
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("concert deleted from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * 
