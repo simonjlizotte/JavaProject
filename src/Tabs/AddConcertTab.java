@@ -115,6 +115,8 @@ public class AddConcertTab extends Tab{
 		Text uploadPic = new Text("Upload a picture: ");
 		Button btnLoad = new Button("Load");
 		ImageView imageDisplay = new ImageView();
+		imageDisplay.setFitHeight(50);
+		imageDisplay.setPreserveRatio(true);
 		pane.add(uploadPic, 0, 7);
 		pane.add(btnLoad, 1, 7);
 		pane.add(imageDisplay, 2, 7);
@@ -124,16 +126,14 @@ public class AddConcertTab extends Tab{
 			public void handle(ActionEvent event) {
 				 FileChooser fileChooser = new FileChooser();
 	             
-		            //Set extension filter
-		           // FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+		            //Setting filters so that the user can only add jpg and png
+				 FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
 		            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-		            fileChooser.getExtensionFilters().addAll(extFilterPNG);
+		            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 		              
 		            //Show open file dialog
 		            file = fileChooser.showOpenDialog(null).getAbsolutePath();
-		 	
 			}
-        		
         });
 		
 		

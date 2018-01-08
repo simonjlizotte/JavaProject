@@ -33,10 +33,10 @@ public class SingleConcertViewPane extends BorderPane{
 		GridPane inputs = new GridPane();
 		
 		//instance of viewConcert
-		viewConcert.getInstance();
+		ViewConcertTab.getInstance();
 		
 		// id of the concert
-		int concertId = viewConcert.num2;
+		int concertId = ViewConcertTab.num2;
 		
 		// concertTable created
 		ConcertTable concertTable = new ConcertTable();
@@ -54,9 +54,8 @@ public class SingleConcertViewPane extends BorderPane{
 		Band bandObject = bandTable.getBand(concertObject.getBandID());
 		
 		// genre table
-		GenreTable genreTable = new GenreTable();
 		Genre genreObject = new Genre();
-		genreObject = genreTable.getGenre(bandObject.getGenreId());
+		genreObject = GenreTable.getGenre(bandObject.getGenreId());
 		
 		// get the venue id
 		Venue venueObject = venueTable.getVenue(concertObject.getVenueID());
@@ -87,6 +86,10 @@ public class SingleConcertViewPane extends BorderPane{
 		buttonBox.setAlignment(Pos.CENTER);
 		buttonBox.setPadding(new Insets(10,10,10,10));
 		
+		remove.setOnMouseClicked(e->{
+			concertTable.deleteConcert(concertId);
+		});
+		
 		inputs.setPadding(new Insets(10,10,10,10));
 		inputs.setVgap(10);
 		inputs.setHgap(10);
@@ -98,12 +101,8 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(whereAt, 0, 2);
 		Label whatCity = new Label("What City?");
 		inputs.add(whatCity, 0, 3);
-		Label openingAct = new Label("Who was the opening act?");
-		inputs.add(openingAct, 0, 4);
-		Label genere = new Label("Genere:");
+		Label genere = new Label("Genre:");
 		inputs.add(genere, 0, 5);
-		Label seats = new Label("Seat Numbers & Section:");
-		inputs.add(seats, 0, 6);
 		Label dateAttended = new Label("Date Attended:");
 		Label dateFormat = new Label("dd/mm/yyyy");
 		inputs.add(dateAttended, 0, 7);
@@ -132,21 +131,13 @@ public class SingleConcertViewPane extends BorderPane{
 		whatCityInput.setText(cityName);
 		inputs.add(whatCityInput, 1, 3);
 		
-		TextField openingActInput = new TextField();
-		openingActInput.setEditable(false);
-		openingActInput.setPromptText("Opening Act");
-		inputs.add(openingActInput, 1, 4);
 		
-		ComboBox<ArrayList> genereInput = new ComboBox<>();
+		ComboBox<Genre> genereInput = new ComboBox<>();
 		inputs.add(genereInput, 1, 5);
 		inputs.getChildren().remove(genereInput);
 		Label genreDisplay = new Label(genreName);
 		inputs.add(genreDisplay, 1, 5);
 		
-		TextField seatsInput = new TextField();
-		seatsInput.setEditable(false);
-		seatsInput.setPromptText("Seats and Section");
-		inputs.add(seatsInput, 1, 6);
 		
 		DatePicker dateAttendedInput = new DatePicker();
 		Label dateDisplay = new Label(dateAdded);
@@ -158,8 +149,6 @@ public class SingleConcertViewPane extends BorderPane{
 			whatBandInput.setEditable(true);
 			whereAtInput.setEditable(true);
 			whatCityInput.setEditable(true);
-			openingActInput.setEditable(true);
-			seatsInput.setEditable(true);
 			
 			edit.setVisible(false);
 			saveEdits.setVisible(true);
@@ -171,12 +160,17 @@ public class SingleConcertViewPane extends BorderPane{
 					whatBandInput.setEditable(false);
 					whereAtInput.setEditable(false);
 					whatCityInput.setEditable(false);
-					openingActInput.setEditable(false);
-					seatsInput.setEditable(false);
 					
 					edit.setVisible(true);
 					saveEdits.setVisible(false);
 					updatesValues.setVisible(false);
+					
+					//venue update
+					venueTable.updateVenue(concertObject.getVenueID(), whereAtInput.getText().toString());
+					//city update
+					venueTable.updateCity(concertObject.getVenueID(), whatCityInput.getText().toString());
+					//band update
+					bandTable.updateBand(concertObject.getBandID(), whatBandInput.getText().toString());
 					
 				});
 		
