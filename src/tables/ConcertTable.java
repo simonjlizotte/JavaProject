@@ -39,7 +39,7 @@ public class ConcertTable implements ConcertDAO{
 				+ Const.CONCERTS_COLUMN_VENUE_ID + ", " + Const.CONCERTS_COLUMN_DATE + ", " + Const.CONCERTS_COLUMN_RATING + "," + Const.CONCERTS_COLUMN_PIC + ")" +
 				"VALUES( 0, " + concertBand.getId() +  ", " + concertVenue.getId() + ", '" +  date + "', '" + rating  + "', null);"; 
 		
-		String selectQuery = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE " + Const.CONCERTS_COLUMN_DATE + " LIKE '" + date +"';";
+		String selectQuery = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE " + Const.CONCERTS_COLUMN_DATE + " LIKE '" + date +"' AND " + Const.CONCERTS_COLUMN_BAND_ID + " = " + concertBand.getId();
 
 		try {
 			Statement getBand = db.getConnection().createStatement();
