@@ -105,7 +105,7 @@ public class VenueTable implements VenueDAO{
 	}catch(SQLException e) {
 		e.printStackTrace();
 	}
-	return venue;
+		return venue;
 	}
 
 	/**
@@ -128,7 +128,8 @@ public class VenueTable implements VenueDAO{
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	/**
 	 * This method will UPDATE a venue FROM the table WHERE id matches
 	 * 
