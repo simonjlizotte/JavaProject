@@ -56,25 +56,20 @@ public class ChartTab extends Tab{
 		pane = new GridPane();
 		paneHolder = new BorderPane();
 		
+		VenueTable venueTable = new VenueTable();
+				
 		ArrayList<Venue> cityCount = venueTable.getAllVenues();
 			
 		ArrayList<String> cityCounter = new ArrayList<String>();
 		
-		for(int i = 0; i < cityCount.size(); i++) {
-			String cityName = cityCount.get(i).getCity();
-			System.out.println(cityName);
-			cityCounter.add(cityName);
-		}
 		
-		System.out.println(cityCounter);
-	
-
 		// Label to set the title
 		Label chartTabTitle = new Label("CHARTS OF YOUR FAV DATA!");
 		chartTabTitle.getStyleClass().add("chartTabTitle");
 	   
 		//------- citites chart -------//
         PieChart citiesChart = new PieChart();
+ 
        
         // set the data to the citiesChart
 //        citiesChart.setData("");

@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -106,6 +107,10 @@ public class ViewConcertTab extends Tab{
 //		    			nameStage.show();
 //	        });
 
+		// refresh button
+		Button refreshButton = new Button("Refresh");
+		refreshButton.getStyleClass().add("refresh");	
+		
 		bandList.getSelectionModel().selectedItemProperty()
 		.addListener(new ChangeListener<Concert>() {
 			@Override
@@ -122,13 +127,27 @@ public class ViewConcertTab extends Tab{
 	    			nameStage.setTitle("concert");
 	    			nameStage.setScene(scene);
 	    			scene.getStylesheets().add("main.css");
-	    			nameStage.show();    
+	    			nameStage.show();  
+	    			
 			}
 		});
 		
-		// refresh button
-		Button refreshButton = new Button("Refresh");
-		refreshButton.getStyleClass().add("refresh");	
+//		bandList.getSelectionModel().selectedItemProperty().setOnMouseClicked(new EventHandler<MouseEvent>() {
+//		    @Override
+//		    public void handle(MouseEvent mouseEvent) {
+//		        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+//		            if(mouseEvent.getClickCount() == 2){
+//		            	Stage nameStage = new Stage();
+//		        	  	Scene scene = new SingleConcertViewScene();
+//		    			nameStage.setTitle("concert");
+//		    			nameStage.setScene(scene);
+//		    			scene.getStylesheets().add("main.css");
+//		    			nameStage.show(); 
+//		            }
+//		        }
+//		    }
+//		});
+	
 		
 		refreshButton.setOnMouseClicked(e->{
 			bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
