@@ -3,6 +3,7 @@ package SingleConcertView;
 import java.util.ArrayList;
 
 import Tabs.ViewConcertTab;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -57,6 +58,7 @@ public class SingleConcertViewPane extends BorderPane{
 		GenreTable genreTable = new GenreTable();
 		Genre genreObject = new Genre();
 		genreObject = genreTable.getGenre(bandObject.getGenreId());
+		ArrayList<Genre> genreObjectAll = genreTable.getAllGenres();
 		
 		// get the venue id
 		Venue venueObject = venueTable.getVenue(concertObject.getVenueID());
@@ -82,7 +84,7 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(updatesValues, 0, 0);
 		updatesValues.setVisible(false);
 		
-		buttonBox.getChildren().addAll(edit, remove, saveEdits);
+		buttonBox.getChildren().addAll(edit, saveEdits, remove);
 		buttonBox.setAlignment(Pos.CENTER);
 		buttonBox.setPadding(new Insets(10,10,10,10));
 		
@@ -90,6 +92,7 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.setVgap(10);
 		inputs.setHgap(10);
 		
+		remove.setVisible(false);
 		//Creating the input fields labels
 		Label whatBand = new Label("What band?");
 		inputs.add(whatBand, 0, 1);
@@ -104,7 +107,9 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(genere, 0, 5);
 		
 		Label dateAttended = new Label("Date Attended:");
-		Label dateFormat = new Label("(yyyydd/mm/dd)");
+		Label dateFormat = new Label("(yyyy/mm/dd)");
+		// setting the dataformat to hide
+		dateFormat.setVisible(false);
 		inputs.add(dateAttended, 0, 7);
 		inputs.add(dateFormat, 2, 7);
 		
@@ -133,17 +138,24 @@ public class SingleConcertViewPane extends BorderPane{
 		whatCityInput.setText(cityName);
 		inputs.add(whatCityInput, 1, 3);
 				
-		ComboBox<ArrayList> genereInput = new ComboBox<>();
+		ComboBox<Genre> genereInput = new ComboBox<>();
 		inputs.add(genereInput, 1, 5);
+		
+		// removing the genre input box
 		inputs.getChildren().remove(genereInput);
+		
+		// creating a genreDisplay and adding it to the GridPane
 		Label genreDisplay = new Label(genreName);
 		inputs.add(genreDisplay, 1, 5);
 				
 		DatePicker dateAttendedInput = new DatePicker();
-		Label dateDisplay = new Label(dateAdded);
 		inputs.add(dateAttendedInput, 1, 7);
+		// removing the datePicker from the gridPane
 		inputs.getChildren().remove(dateAttendedInput);
+		// creating a label and adding it to the GridPane
+		Label dateDisplay = new Label(dateAdded);
 		inputs.add(dateDisplay, 1, 7);
+		
 		
 		edit.setOnAction((event)->{
 			// setting the edit boxes to true
@@ -152,12 +164,22 @@ public class SingleConcertViewPane extends BorderPane{
 			whatCityInput.setEditable(true);
 			
 			//adding the input boxes back to the grid pane
+			inputs.getChildren().remove(genreDisplay);
+			inputs.add(genereInput, 1, 5);
+			genereInput.setItems(FXCollections.observableArrayList(
+						genreObjectAll));
 			
+			inputs.getChildren().remove(dateDisplay);
+			inputs.add(dateAttendedInput, 1, 7);
+			
+			// showing the date format to show
+			dateFormat.setVisible(true);
 			// setting the text view visibility
 			edit.setVisible(false);
 			saveEdits.setVisible(true);
 			updatesValues.setVisible(true);
-			
+			buttonBox.getChildren().remove(edit);
+			remove.setVisible(true);
 		});
 		
 		saveEdits.setOnAction((event)->{
@@ -165,10 +187,19 @@ public class SingleConcertViewPane extends BorderPane{
 					whereAtInput.setEditable(false);
 					whatCityInput.setEditable(false);
 					
+					//adding the input boxes back
+					//adding the input boxes back to the grid pane
+					inputs.getChildren().remove(genereInput);
+					inputs.add(genreDisplay, 1, 5);
+				
+					inputs.getChildren().remove(dateAttendedInput);
+					inputs.add(dateDisplay, 1, 7);
+					
 					edit.setVisible(true);
 					saveEdits.setVisible(false);
 					updatesValues.setVisible(false);
-					
+					buttonBox.getChildren().add(0, edit);
+					remove.setVisible(false);
 				});
 		
 		
