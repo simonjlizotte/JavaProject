@@ -133,6 +133,22 @@ public class BandTable implements BandDAO{
 		}
 	}
 	
+	
+	
+
+	@Override
+	public void updateGenre(int genreId, int bandId) {
+		String query = "UPDATE " + Const.TABLE_BAND +
+				" SET " + Const.BANDS_COLUMN_GENRE_ID + " = '" + genreId + "' WHERE "
+				+ Const.BANDS_COLUMN_ID + " = '" + bandId + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println( " updated GENRE from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	/**
 	 * This method will DELETE a band FROM the table WHERE id matches
