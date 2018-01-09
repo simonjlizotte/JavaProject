@@ -59,8 +59,8 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		// genre table
 		Genre genreObject = new Genre();
-		genreObject = genreTable.getGenre(bandObject.getGenreId());
-		ArrayList<Genre> genreObjectAll = genreTable.getAllGenres();
+		genreObject = GenreTable.getGenre(bandObject.getGenreId());
+		ArrayList<Genre> genreObjectAll = GenreTable.getAllGenres();
 
 		// get the venue id
 		Venue venueObject = venueTable.getVenue(concertObject.getVenueID());
@@ -109,8 +109,8 @@ public class SingleConcertViewPane extends BorderPane{
 		Label whatCity = new Label("What City?");
 		inputs.add(whatCity, 0, 3);
 		
-		Label genere = new Label("Genere:");
-		inputs.add(genere, 0, 5);
+		Label genre = new Label("Genre:");
+		inputs.add(genre, 0, 5);
 		
 		Label dateAttended = new Label("Date Attended:");
 		Label dateFormat = new Label("(yyyy/mm/dd)");
@@ -144,11 +144,11 @@ public class SingleConcertViewPane extends BorderPane{
 		whatCityInput.setText(cityName);
 		inputs.add(whatCityInput, 1, 3);
 
-		ComboBox<Genre> genereInput = new ComboBox<>();
-		inputs.add(genereInput, 1, 5);
+		ComboBox<Genre> genreInput = new ComboBox<>();
+		inputs.add(genreInput, 1, 5);
 		
 		// removing the genre input box
-		inputs.getChildren().remove(genereInput);
+		inputs.getChildren().remove(genreInput);
 		
 		// creating a genreDisplay and adding it to the GridPane
 		Label genreDisplay = new Label(genreName);
@@ -171,9 +171,11 @@ public class SingleConcertViewPane extends BorderPane{
 			
 			//adding the input boxes back to the grid pane
 			inputs.getChildren().remove(genreDisplay);
-			inputs.add(genereInput, 1, 5);
-			genereInput.setItems(FXCollections.observableArrayList(
+			inputs.add(genreInput, 1, 5);
+			genreInput.setItems(FXCollections.observableArrayList(
 						genreObjectAll));
+			
+			genreInput.setValue(GenreTable.getGenre(bandObject.getGenreId()));
 			
 			inputs.getChildren().remove(dateDisplay);
 			inputs.add(dateAttendedInput, 1, 7);
@@ -195,7 +197,7 @@ public class SingleConcertViewPane extends BorderPane{
 
 					//adding the input boxes back
 					//adding the input boxes back to the grid pane
-					inputs.getChildren().remove(genereInput);
+					inputs.getChildren().remove(genreInput);
 					inputs.add(genreDisplay, 1, 5);
 				
 					inputs.getChildren().remove(dateAttendedInput);
@@ -213,6 +215,8 @@ public class SingleConcertViewPane extends BorderPane{
 					venueTable.updateCity(concertObject.getVenueID(), whatCityInput.getText().toString());
 					//band update
 					bandTable.updateBand(concertObject.getBandID(), whatBandInput.getText().toString());
+					bandTable.updateGenre(genreInput.getSelectionModel().getSelectedItem().getId(), concertObject.getBandID());
+					genreDisplay.setText(genreInput.getSelectionModel().getSelectedItem().getGenre());
 				});
 		
 		
