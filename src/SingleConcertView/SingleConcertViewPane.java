@@ -22,7 +22,11 @@ import tables.BandTable;
 import tables.ConcertTable;
 import tables.GenreTable;
 import tables.VenueTable;
-
+/**
+ * 
+ * @author carmenkerim
+ * Populated the singleconcertview to display concerts from the database
+ */
 public class SingleConcertViewPane extends BorderPane{
 
 	ViewConcertTab viewConcert;
