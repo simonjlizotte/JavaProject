@@ -128,7 +128,33 @@ public class VenueTable implements VenueDAO{
 			e.printStackTrace();
 		}
 	}
-
+	
+	
+	/**
+	 * @author carmenkerim
+	 * Created this method to get the city count
+	 * @param Venue
+	 * @return
+	 */
+	public int getCityCount(Venue city) {
+		String query = "SELECT * FROM " + Const.TABLE_VENUE + " WHERE "
+						+ Const.VENUE_COLUMN_CITY + " = '" + city + "'";
+		ArrayList<Venue> items = new ArrayList<Venue>();
+		try {
+			Statement getItems = db.getConnection().createStatement();
+			ResultSet data = getItems.executeQuery(query);
+			while(data.next()) {
+				//Build each item and add it to the ArrayList
+				items.add(new Venue(data.getInt(Const.VENUE_COLUMN_ID),
+								    data.getString(Const.VENUE_COLUMN_NAME),
+									data.getString(Const.VENUE_COLUMN_CITY)));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return items.size();
+	}
+	
 	/**
 	 * This method will UPDATE a venue FROM the table WHERE id matches
 	 * 
