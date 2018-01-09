@@ -157,7 +157,7 @@ public class AddConcertTab extends Tab{
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString());
+			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString().toUpperCase());
 			System.out.println(comboGenre.getValue().getId());
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
 			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, fis, band, venueObject);

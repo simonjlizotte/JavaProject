@@ -1,14 +1,19 @@
 package Tabs;
 
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import objects.Venue;
+import tables.VenueTable;
 
 /**
  * 
@@ -25,7 +30,11 @@ import javafx.scene.layout.GridPane;
  * 3.year chart
  */
 public class ChartTab extends Tab{
-
+	
+	ViewConcertTab viewConcert;
+	//instance of venueTable
+	VenueTable venueTable = new VenueTable();
+	
 	//constants needed
 	public static final String TAB_TITLE = "Charts"; //title for the tab
 	
@@ -41,8 +50,18 @@ public class ChartTab extends Tab{
 	//constructor
 	private ChartTab() {
 		this.setText(TAB_TITLE);
+		 
+		viewConcert.getInstance();
+		
 		pane = new GridPane();
 		paneHolder = new BorderPane();
+		
+		VenueTable venueTable = new VenueTable();
+				
+		ArrayList<Venue> cityCount = venueTable.getAllVenues();
+			
+		ArrayList<String> cityCounter = new ArrayList<String>();
+		
 		
 		// Label to set the title
 		Label chartTabTitle = new Label("CHARTS OF YOUR FAV DATA!");
@@ -50,18 +69,20 @@ public class ChartTab extends Tab{
 	   
 		//------- citites chart -------//
         PieChart citiesChart = new PieChart();
+ 
+       
+        // set the data to the citiesChart
+//        citiesChart.setData("");
         
         // setting the title and labels
         citiesChart.setTitle("Cities");
         citiesChart.setLabelsVisible(true);
         
-        // sample obserableList for the cities
-        ObservableList<PieChart.Data> citiesData =
-            FXCollections.observableArrayList(
-                new PieChart.Data("Windsor", 2));
-        
-        // set the data to the citiesChart
-        citiesChart.setData(citiesData);
+//        // sample obserableList for the cities
+//        ObservableList<PieChart.Data> citiesData =
+//            FXCollections.observableArrayList(
+//                new PieChart.Data("Windsor", 2));
+
         
         //------- genre chart -------//
         PieChart genresChart = new PieChart();
