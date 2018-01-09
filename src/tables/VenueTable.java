@@ -54,7 +54,6 @@ public class VenueTable implements VenueDAO{
 				return venue;
 				}
 		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		return null;	
@@ -117,13 +116,14 @@ public class VenueTable implements VenueDAO{
 		WHERE id = 'id';
 	 */
 	@Override
-	public void updateVenue(Venue venue) {
+	public void updateVenue(int venueID, String newVenue) {
 		String query = "UPDATE " + Const.TABLE_VENUE +
-				"SET " + Const.VENUE_COLUMN_NAME + " = '" + venue.getVenue() + "' WHERE "
-				+ Const.VENUE_COLUMN_ID + " = '" + venue.getId() + "';";
+				" SET " + Const.VENUE_COLUMN_NAME + " = '" + newVenue + "' WHERE "
+				+ Const.VENUE_COLUMN_ID + " = " + venueID + ";";
+		System.out.println(query);
 		try {
 			db.getConnection().createStatement().execute(query);
-			System.out.println(venue.getVenue() + " updated from the table");
+			System.out.println(newVenue + " updated from the table");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -158,18 +158,18 @@ public class VenueTable implements VenueDAO{
 	/**
 	 * This method will UPDATE a venue FROM the table WHERE id matches
 	 * 
-	 * UPDATE genreTable 
+	 * UPDATE venueTable 
 		SET city = 'city' 
 		WHERE id = 'id';
 	 */
 	@Override
-	public void updateCity(Venue venue) {
+	public void updateCity(int venueID, String newCity) {
 		String query = "UPDATE " + Const.TABLE_VENUE +
-				"SET " + Const.VENUE_COLUMN_CITY + " = '" + venue.getCity() + "' WHERE "
-				+ Const.VENUE_COLUMN_ID + " = '" + venue.getId() + "';";
+				" SET " + Const.VENUE_COLUMN_CITY + " = '" + newCity + "' WHERE "
+				+ Const.VENUE_COLUMN_ID + " = '" + venueID + "';";
 		try {
 			db.getConnection().createStatement().execute(query);
-			System.out.println(venue.getCity() + " updated from the table");
+			System.out.println(newCity + " updated from the table");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

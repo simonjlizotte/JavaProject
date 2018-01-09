@@ -34,16 +34,19 @@ public class SingleConcertViewPane extends BorderPane{
 		GridPane inputs = new GridPane();
 		
 		//instance of viewConcert
-		viewConcert.getInstance();
+		ViewConcertTab.getInstance();
 		
 		// id of the concert
-		int concertId = viewConcert.num2;
+		int concertId = ViewConcertTab.num2;
 		
 		// concertTable created
 		ConcertTable concertTable = new ConcertTable();
 		
 		// bandTable created
 		BandTable bandTable = new BandTable();
+		
+		// genreTable
+		GenreTable genreTable = new GenreTable();
 		
 		// venueTable
 		VenueTable venueTable = new VenueTable();
@@ -55,11 +58,10 @@ public class SingleConcertViewPane extends BorderPane{
 		Band bandObject = bandTable.getBand(concertObject.getBandID());
 		
 		// genre table
-		GenreTable genreTable = new GenreTable();
 		Genre genreObject = new Genre();
 		genreObject = genreTable.getGenre(bandObject.getGenreId());
 		ArrayList<Genre> genreObjectAll = genreTable.getAllGenres();
-		
+
 		// get the venue id
 		Venue venueObject = venueTable.getVenue(concertObject.getVenueID());
 		
@@ -87,6 +89,10 @@ public class SingleConcertViewPane extends BorderPane{
 		buttonBox.getChildren().addAll(edit, saveEdits, remove);
 		buttonBox.setAlignment(Pos.CENTER);
 		buttonBox.setPadding(new Insets(10,10,10,10));
+		
+		remove.setOnMouseClicked(e->{
+			concertTable.deleteConcert(concertId);
+		});
 		
 		inputs.setPadding(new Insets(10,10,10,10));
 		inputs.setVgap(10);
@@ -137,7 +143,7 @@ public class SingleConcertViewPane extends BorderPane{
 		whatCityInput.setPromptText("City");
 		whatCityInput.setText(cityName);
 		inputs.add(whatCityInput, 1, 3);
-				
+
 		ComboBox<Genre> genereInput = new ComboBox<>();
 		inputs.add(genereInput, 1, 5);
 		
@@ -147,7 +153,7 @@ public class SingleConcertViewPane extends BorderPane{
 		// creating a genreDisplay and adding it to the GridPane
 		Label genreDisplay = new Label(genreName);
 		inputs.add(genreDisplay, 1, 5);
-				
+		
 		DatePicker dateAttendedInput = new DatePicker();
 		inputs.add(dateAttendedInput, 1, 7);
 		// removing the datePicker from the gridPane
@@ -186,7 +192,7 @@ public class SingleConcertViewPane extends BorderPane{
 					whatBandInput.setEditable(false);
 					whereAtInput.setEditable(false);
 					whatCityInput.setEditable(false);
-					
+
 					//adding the input boxes back
 					//adding the input boxes back to the grid pane
 					inputs.getChildren().remove(genereInput);
@@ -194,14 +200,20 @@ public class SingleConcertViewPane extends BorderPane{
 				
 					inputs.getChildren().remove(dateAttendedInput);
 					inputs.add(dateDisplay, 1, 7);
-					
+
 					edit.setVisible(true);
 					saveEdits.setVisible(false);
 					updatesValues.setVisible(false);
 					buttonBox.getChildren().add(0, edit);
 					remove.setVisible(false);
+					
+					//venue update
+					venueTable.updateVenue(concertObject.getVenueID(), whereAtInput.getText().toString());
+					//city update
+					venueTable.updateCity(concertObject.getVenueID(), whatCityInput.getText().toString());
+					//band update
+					bandTable.updateBand(concertObject.getBandID(), whatBandInput.getText().toString());
 				});
-		
 		
 		
 		// add nodes to pane 
