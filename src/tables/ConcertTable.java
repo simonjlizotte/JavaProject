@@ -152,6 +152,7 @@ public class ConcertTable implements ConcertDAO{
 		String query = "DELETE FROM " + Const.TABLE_CONCERT + " WHERE " +
 				Const.CONCERTS_COLUMN_ID + " = " + concertId;
 		try {
+			
 			db.getConnection().createStatement().execute(query);
 			System.out.println("concert deleted from the table");
 		}catch(SQLException e) {

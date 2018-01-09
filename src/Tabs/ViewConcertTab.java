@@ -133,37 +133,14 @@ public class ViewConcertTab extends Tab{
 	    			
 			}
 		});
-		
-//		bandList.getSelectionModel().selectedItemProperty().setOnMouseClicked(new EventHandler<MouseEvent>() {
-//		    @Override
-//		    public void handle(MouseEvent mouseEvent) {
-//		        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-//		            if(mouseEvent.getClickCount() == 2){
-//		            	Stage nameStage = new Stage();
-//		        	  	Scene scene = new SingleConcertViewScene();
-//		    			nameStage.setTitle("concert");
-//		    			nameStage.setScene(scene);
-//		    			scene.getStylesheets().add("main.css");
-//		    			nameStage.show(); 
-//		            }
-//		        }
-//		    }
-//		});
-	
-		
-//		refreshButton.setOnMouseClicked(e->{
-//			bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
-//		});
-		
+				
 	    // setting the borderPane
 	    borderPane.setTop(viewTabTitle);	  	    
 	    borderPane.setCenter(bandList);
-//	    borderPane.setBottom(refreshButton);
 	    borderPane.setPadding(new Insets(10,10,10,10));
 	    
 	    //Getting the position of the borderPane to center
 	    BorderPane.setAlignment(viewTabTitle, Pos.CENTER);
-//	    BorderPane.setAlignment(refreshButton, Pos.CENTER);
 		this.setContent(borderPane);
 	}
 	//this method will be call when needing the instance of the tab or when first creating it

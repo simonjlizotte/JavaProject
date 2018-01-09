@@ -146,7 +146,7 @@ public class AddConcertTab extends Tab{
 		button.setOnMouseClicked(e->{
 			//checking that there are no fields missing
 			if(venueInput.getText().isEmpty() || cityInput.getText().isEmpty() || bandNameInput.getText().isEmpty()
-					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null){
+					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null || file == null){
 				missingFields.setVisible(true);
 			}else {
 			
@@ -162,40 +162,10 @@ public class AddConcertTab extends Tab{
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
 			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, fis, band, venueObject);
 			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
-			
-			
-			// This is the code to select an image and populate in the computer directory, we need to be able to select 
-			// an entry by its id then use this on the singleconcertpage to query and display that image.
-//			String sql8 = "SELECT picture FROM  concertTable WHERE id = 1273";
-//		    PreparedStatement stmt;
-//			try {
-//				stmt = db.getConnection().prepareStatement(sql8);
-//				   ResultSet resultSet = stmt.executeQuery();
-//				    while (resultSet.next()) {
-//				      File image = new File("/Users/simonlizotte/Downloads/readImage3.png");
-//				      //@SuppressWarnings("resource")
-//					FileOutputStream fos = new FileOutputStream(image);
-//
-//				      byte[] buffer = new byte[1];
-//				      InputStream is = resultSet.getBinaryStream("picture");
-//				      while (is.read(buffer) > 0) {
-//				        fos.write(buffer);
-//				      }
-//				      fos.close();
-//				    }
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			} catch (FileNotFoundException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-		 
-
 			missingFields.setVisible(false);
+			venueInput.clear();
+			bandNameInput.clear();
+			cityInput.clear();
 			}
 		});
 		pane.add(button, 0, 9);
