@@ -128,9 +128,16 @@ public class ConcertTable implements ConcertDAO{
 
 
 	@Override
-	public void updateDate(Band band) {
-		// TODO Auto-generated method stub
-		
+	public void updateDate(String date, int concertId) {
+		String query = "UPDATE " + Const.TABLE_CONCERT +
+				" SET " + Const.CONCERTS_COLUMN_DATE + " = '" + date + "' WHERE "
+				+ Const.BANDS_COLUMN_ID + " = '" + concertId + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println( " updated date from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -139,11 +146,6 @@ public class ConcertTable implements ConcertDAO{
 		
 	}
 
-	@Override
-	public void updatePicture(Band band) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void deleteConcert(int concertId) {
@@ -221,5 +223,7 @@ public class ConcertTable implements ConcertDAO{
 		return null;
 		
 	}
+
+	
 
 }

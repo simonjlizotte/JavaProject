@@ -40,8 +40,10 @@ import tables.VenueTable;
 public class ViewConcertTab extends Tab{
 	// concert band
 	Band concertBand;
+	public static Stage nameStage = new Stage();
 	
 	public static int num2;
+	public static ListView<Concert> bandList;
 	
 	Venue venueObject;
 	
@@ -74,7 +76,7 @@ public class ViewConcertTab extends Tab{
 		BandTable bandTable = new BandTable();
 		
 		// listView of band names
-		ListView<Concert> bandList = new ListView<Concert>();
+		 bandList = new ListView<Concert>();
 		
 		// label to set the title
 		Label viewTabTitle = new Label("View Concerts!");
@@ -107,9 +109,9 @@ public class ViewConcertTab extends Tab{
 //		    			nameStage.show();
 //	        });
 
-		// refresh button
-		Button refreshButton = new Button("Refresh");
-		refreshButton.getStyleClass().add("refresh");	
+//		// refresh button
+//		Button refreshButton = new Button("Refresh");
+//		refreshButton.getStyleClass().add("refresh");	
 		
 		bandList.getSelectionModel().selectedItemProperty()
 		.addListener(new ChangeListener<Concert>() {
@@ -122,7 +124,7 @@ public class ViewConcertTab extends Tab{
 	            		System.out.println("No value");
 	            	}
 	            	
-	            	Stage nameStage = new Stage();
+	            	
 	        	  	Scene scene = new SingleConcertViewScene();
 	    			nameStage.setTitle("concert");
 	    			nameStage.setScene(scene);
@@ -149,19 +151,19 @@ public class ViewConcertTab extends Tab{
 //		});
 	
 		
-		refreshButton.setOnMouseClicked(e->{
-			bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
-		});
+//		refreshButton.setOnMouseClicked(e->{
+//			bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
+//		});
 		
 	    // setting the borderPane
 	    borderPane.setTop(viewTabTitle);	  	    
 	    borderPane.setCenter(bandList);
-	    borderPane.setBottom(refreshButton);
+//	    borderPane.setBottom(refreshButton);
 	    borderPane.setPadding(new Insets(10,10,10,10));
 	    
 	    //Getting the position of the borderPane to center
 	    BorderPane.setAlignment(viewTabTitle, Pos.CENTER);
-	    BorderPane.setAlignment(refreshButton, Pos.CENTER);
+//	    BorderPane.setAlignment(refreshButton, Pos.CENTER);
 		this.setContent(borderPane);
 	}
 	//this method will be call when needing the instance of the tab or when first creating it
@@ -170,6 +172,10 @@ public class ViewConcertTab extends Tab{
 			tab = new ViewConcertTab();
 		}
 		return tab;
+	}
+	
+	public void closeNameStage() {
+		this.nameStage.close();
 	}
 	
 }

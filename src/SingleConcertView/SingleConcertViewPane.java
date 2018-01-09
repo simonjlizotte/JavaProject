@@ -1,8 +1,10 @@
 package SingleConcertView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Tabs.ViewConcertTab;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -92,6 +94,8 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		remove.setOnMouseClicked(e->{
 			concertTable.deleteConcert(concertId);
+			ViewConcertTab.nameStage.close();
+			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));		
 		});
 		
 		inputs.setPadding(new Insets(10,10,10,10));
@@ -176,7 +180,9 @@ public class SingleConcertViewPane extends BorderPane{
 						genreObjectAll));
 			
 			genreInput.setValue(GenreTable.getGenre(bandObject.getGenreId()));
-			
+			// Setting current date value so it doesnt add a null value
+			LocalDate inputDate = LocalDate.parse(dateAdded);
+			dateAttendedInput.setValue(inputDate);
 			inputs.getChildren().remove(dateDisplay);
 			inputs.add(dateAttendedInput, 1, 7);
 			
@@ -217,6 +223,10 @@ public class SingleConcertViewPane extends BorderPane{
 					bandTable.updateBand(concertObject.getBandID(), whatBandInput.getText().toString());
 					bandTable.updateGenre(genreInput.getSelectionModel().getSelectedItem().getId(), concertObject.getBandID());
 					genreDisplay.setText(genreInput.getSelectionModel().getSelectedItem().getGenre());
+					concertTable.updateDate(dateAttendedInput.getValue().toString().toUpperCase().trim(), concertObject.getId());
+					dateDisplay.setText(dateAttendedInput.getValue().toString());
+					ViewConcertTab.nameStage.close();
+					
 				});
 		
 		

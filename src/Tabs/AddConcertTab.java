@@ -161,7 +161,7 @@ public class AddConcertTab extends Tab{
 			System.out.println(comboGenre.getValue().getId());
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
 			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, fis, band, venueObject);
-
+			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
 			
 			
 			// This is the code to select an image and populate in the computer directory, we need to be able to select 
