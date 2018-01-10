@@ -2,6 +2,7 @@ package Tabs;
 
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -37,7 +38,8 @@ import tables.GenreTable;
 public class AddConcertTab extends Tab{
 	
 	//file String
-	String file;
+	File file;
+	String filePath;
 	
 	//Database
 	Database db;
@@ -134,9 +136,13 @@ public class AddConcertTab extends Tab{
 		            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 		              
 		            //Show open file dialog
-		            file = fileChooser.showOpenDialog(null).getAbsolutePath();
+		            if ( (file = fileChooser.showOpenDialog(null)) != null) {
+		            		filePath = file.getAbsolutePath();
+		            }
+		            //file = fileChooser.showOpenDialog(null).getAbsolutePath();
 			}
         });
+        btnLoad.getStyleClass().add("buttonLoad");
 		
 		pane.setAlignment(Pos.CENTER);
 		pane.setPadding(insets);
@@ -145,16 +151,17 @@ public class AddConcertTab extends Tab{
 		this.setContent(pane);
 		
 		Button button = new Button("submit");
+		button.getStyleClass().add("submit");
 		button.setOnMouseClicked(e->{
 			//checking that there are no fields missing
 			if(venueInput.getText().isEmpty() || cityInput.getText().isEmpty() || bandNameInput.getText().isEmpty()
-					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null){
+					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null || file == null){
 				missingFields.setVisible(true);
 			}else {
 			
 				FileInputStream fis = null;
 				try {
-					fis = new FileInputStream(file);
+					fis = new FileInputStream(filePath);
 				} catch (FileNotFoundException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -163,44 +170,14 @@ public class AddConcertTab extends Tab{
 			System.out.println(comboGenre.getValue().getId());
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
 			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, fis, band, venueObject);
-
-			
-			
-			// This is the code to select an image and populate in the computer directory, we need to be able to select 
-			// an entry by its id then use this on the singleconcertpage to query and display that image.
-//			String sql8 = "SELECT picture FROM  concertTable WHERE id = 1273";
-//		    PreparedStatement stmt;
-//			try {
-//				stmt = db.getConnection().prepareStatement(sql8);
-//				   ResultSet resultSet = stmt.executeQuery();
-//				    while (resultSet.next()) {
-//				      File image = new File("/Users/simonlizotte/Downloads/readImage3.png");
-//				      //@SuppressWarnings("resource")
-//					FileOutputStream fos = new FileOutputStream(image);
-//
-//				      byte[] buffer = new byte[1];
-//				      InputStream is = resultSet.getBinaryStream("picture");
-//				      while (is.read(buffer) > 0) {
-//				        fos.write(buffer);
-//				      }
-//				      fos.close();
-//				    }
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			} catch (FileNotFoundException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-		 
-
+			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
 			missingFields.setVisible(false);
+			venueInput.clear();
+			bandNameInput.clear();
+			cityInput.clear();
 			}
 		});
-		pane.add(button, 0, 9);
+		pane.add(button, 1, 9);
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it

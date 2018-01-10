@@ -26,19 +26,9 @@ public class BandTable implements BandDAO{
 	/**
 	 * This method will INSERT a new band INTO the table
 	 * 
-	 * Query:INSERT INTO bandTable(band_name, genre_id)
-			SELECT 'Joe The Gays', id
-  			FROM genreTable
- 			WHERE genre_name = 'this'
- 			LIMIT 1
- 			//Check dupes
- 			result = SELECT * from tablename where band_name LIKE %band.getName()%
- 			IF (result.numrows >0){
- 			set new record to existing id 
- 		//	GengreTable genre = new GenreTable();
- 			Grenre genre = GenreTable.getGenre(menu.getValue());
- 			INSERT INTO bandTable ('0', band.getName(), genre.getId()); 
+	 * Query Insert: INSERT INTO bandTable ('0', band.getName(), genre.getId()); 
  			
+ 		Query Select: SELECT * FROM bandTable WHERE bandName LIKE band.getName()
 	 */
 	// needs to receive the getSelectionmodel.getGenre.GetID() as the selectedGenreValue
 	public static Band createBand(Band band) {
@@ -73,42 +63,6 @@ public class BandTable implements BandDAO{
 			e2.printStackTrace();
 		}
 		return null;	
-//
-//		try {
-//			getBand = db.getConnection().createStatement();
-//		} catch (SQLException e2) {
-//			// TODO Auto-generated catch block
-//			e2.printStackTrace();
-//		}
-//
-//		try {
-//			result = getBand.executeQuery(selectQuery);
-//		} catch (SQLException e2) {
-//			// TODO Auto-generated catch block
-//			e2.printStackTrace();
-//		}
-//		
-//
-//		try {
-//			if (db.getConnection().createStatement().execute(selectQuery)) {
-//				Band existingBand = new Band(result.getInt(Const.BANDS_COLUMN_ID), result.getString(Const.BANDS_COLUMN_NAME), result.getInt(Const.BANDS_COLUMN_GENRE_ID));
-//				return existingBand;
-//				
-//			} else {
-//				try {
-//					db.getConnection().createStatement().execute(query);
-//					System.out.println(band.getName() + " successfully added to the table");
-//					return band;
-//				}catch(SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//	
-//		return band;
 	}
 
 	/**
@@ -179,6 +133,22 @@ public class BandTable implements BandDAO{
 		}
 	}
 	
+	
+	
+
+	@Override
+	public void updateGenre(int genreId, int bandId) {
+		String query = "UPDATE " + Const.TABLE_BAND +
+				" SET " + Const.BANDS_COLUMN_GENRE_ID + " = '" + genreId + "' WHERE "
+				+ Const.BANDS_COLUMN_ID + " = '" + bandId + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println( " updated GENRE from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	/**
 	 * This method will DELETE a band FROM the table WHERE id matches

@@ -19,6 +19,8 @@ public interface BandDAO {
 	public Band getBand(int bandID);
 	//Update
 	public void updateBand(int bandId, String newBand);
+	public void updateGenre(int genreId, int bandId);
+
 	//Delete
 	public void deleteBand(Band band);
 }
