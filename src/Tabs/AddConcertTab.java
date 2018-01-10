@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ComboBox;
@@ -58,6 +59,7 @@ public class AddConcertTab extends Tab{
 			
 		//VBox to host the listView
 		GridPane pane = new GridPane();
+		pane.getStyleClass().add("paneS");
 		
 		//Declaring insets
 		Insets insets = new Insets(10,10,10,10);
@@ -136,7 +138,7 @@ public class AddConcertTab extends Tab{
 			}
         });
 		
-		
+		pane.setAlignment(Pos.CENTER);
 		pane.setPadding(insets);
 		pane.setVgap(10);
 		pane.setHgap(10);
