@@ -39,7 +39,7 @@ public class ConcertTable implements ConcertDAO{
 				+ Const.CONCERTS_COLUMN_VENUE_ID + ", " + Const.CONCERTS_COLUMN_DATE + ", " + Const.CONCERTS_COLUMN_RATING + "," + Const.CONCERTS_COLUMN_PIC + ")" +
 				"VALUES( 0, " + concertBand.getId() +  ", " + concertVenue.getId() + ", '" +  date + "', '" + rating  + "', null);"; 
 		
-		String selectQuery = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE " + Const.CONCERTS_COLUMN_DATE + " LIKE '" + date +"';";
+		String selectQuery = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE " + Const.CONCERTS_COLUMN_DATE + " LIKE '" + date +"' AND " + Const.CONCERTS_COLUMN_BAND_ID + " = " + concertBand.getId();
 
 		try {
 			Statement getBand = db.getConnection().createStatement();
@@ -126,10 +126,18 @@ public class ConcertTable implements ConcertDAO{
 	return concert;
 	}
 
+
 	@Override
-	public void updateDate(Band band) {
-		// TODO Auto-generated method stub
-		
+	public void updateDate(String date, int concertId) {
+		String query = "UPDATE " + Const.TABLE_CONCERT +
+				" SET " + Const.CONCERTS_COLUMN_DATE + " = '" + date + "' WHERE "
+				+ Const.BANDS_COLUMN_ID + " = '" + concertId + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println( " updated date from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -138,17 +146,13 @@ public class ConcertTable implements ConcertDAO{
 		
 	}
 
-	@Override
-	public void updatePicture(Band band) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void deleteConcert(int concertId) {
 		String query = "DELETE FROM " + Const.TABLE_CONCERT + " WHERE " +
 				Const.CONCERTS_COLUMN_ID + " = " + concertId;
 		try {
+			
 			db.getConnection().createStatement().execute(query);
 			System.out.println("concert deleted from the table");
 		}catch(SQLException e) {
@@ -220,5 +224,7 @@ public class ConcertTable implements ConcertDAO{
 		return null;
 		
 	}
+
+	
 
 }
