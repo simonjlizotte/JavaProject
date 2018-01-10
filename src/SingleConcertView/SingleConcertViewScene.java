@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 public class SingleConcertViewScene extends Scene {
 
 	public SingleConcertViewScene(){
-			super (new SingleConcertViewPane(), 1024, 768);
+			super (new SingleConcertViewPane(), 1000, 748);
 	}
 
 }
