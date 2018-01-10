@@ -15,7 +15,7 @@ public interface ConcertDAO {
 		public Concert getConcert(int concertID);
 		//Update
 		public void updateDate(String date, int concertId);
-		public void updateRating(Band band);
+		public void updateRating(int newRating, int concertId);
 		//Delete
 		public void deleteConcert(int concertId);
 }
