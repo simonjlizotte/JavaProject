@@ -19,6 +19,9 @@
 	-fx-text-fill:#212121;
 }
 
+.inputsLay{
+	  -fx-padding: 100 0 0 0;
+}
 .menu{
 	-fx-background-color:none;
 }

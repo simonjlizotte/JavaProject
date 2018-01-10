@@ -241,7 +241,12 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		saveEdits.getStyleClass().add("buttonLoad");
 		
-		inputs.setAlignment(Pos.CENTER);
+		inputs.setAlignment(Pos.TOP_CENTER);
+		inputs.getStyleClass().add("inputsLay");
+		// Set Alignment
+		SingleConcertViewPane.setAlignment(title, Pos.CENTER);
+		SingleConcertViewPane.setAlignment(inputs, Pos.TOP_CENTER);
+		SingleConcertViewPane.setAlignment(buttonBox, Pos.CENTER);	
 		
 		// add nodes to pane 
 		this.setTop(title);
