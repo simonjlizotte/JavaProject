@@ -237,6 +237,7 @@ public class SingleConcertViewPane extends BorderPane{
 		// add nodes to pane 
 		this.setTop(title);
 		this.setCenter(inputs);
+		this.setAlignment(inputs, Pos.CENTER);
 		this.setBottom(buttonBox);
 		
 		
