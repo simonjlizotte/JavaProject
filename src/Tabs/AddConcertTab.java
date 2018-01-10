@@ -4,7 +4,7 @@ package Tabs;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
+import java.util.ArrayList;
 
 import database.Database;
 import javafx.collections.FXCollections;
@@ -104,12 +104,19 @@ public class AddConcertTab extends Tab{
 		
 		
 		//Eighth Row - Rating- I will fix this over the weekend
-//		Text ratingText = new Text("Rating: ");
-//		rating.setMax(5);
-//		rating.setUpdateOnHover(false);
-//		rating.setPartialRating(true);
-//		pane.add(ratingText, 0, 7);
-//		pane.add(rating, 1, 7);
+		Text ratingText = new Text("Rating: ");
+		ComboBox<Integer> comboRating = new ComboBox<>();
+		ArrayList<Integer> ratingArray = new ArrayList<Integer>();
+		ratingArray.add(1);
+		ratingArray.add(2);
+		ratingArray.add(3);
+		ratingArray.add(4);
+		ratingArray.add(5);
+		comboRating.setItems(
+				FXCollections.observableArrayList(ratingArray));
+		comboRating.setValue(ratingArray.get(0));
+		pane.add(ratingText, 0, 7);
+		pane.add(comboRating, 1, 7);
 		
 		//Final Row - Upload File
 		Text uploadPic = new Text("Upload a picture: ");
@@ -117,9 +124,9 @@ public class AddConcertTab extends Tab{
 		ImageView imageDisplay = new ImageView();
 		imageDisplay.setFitHeight(50);
 		imageDisplay.setPreserveRatio(true);
-		pane.add(uploadPic, 0, 7);
-		pane.add(btnLoad, 1, 7);
-		pane.add(imageDisplay, 2, 7);
+		pane.add(uploadPic, 0, 8);
+		pane.add(btnLoad, 1, 8);
+		pane.add(imageDisplay, 2, 8);
         btnLoad.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -146,7 +153,7 @@ public class AddConcertTab extends Tab{
 		button.setOnMouseClicked(e->{
 			//checking that there are no fields missing
 			if(venueInput.getText().isEmpty() || cityInput.getText().isEmpty() || bandNameInput.getText().isEmpty()
-					|| comboGenre.getSelectionModel().isEmpty() || date.getValue() == null || file == null){
+					|| comboGenre.getSelectionModel().isEmpty() || comboRating.getSelectionModel().isEmpty() || date.getValue() == null || file == null){
 				missingFields.setVisible(true);
 			}else {
 			
@@ -160,7 +167,7 @@ public class AddConcertTab extends Tab{
 			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString().toUpperCase());
 			System.out.println(comboGenre.getValue().getId());
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
-			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), 1, fis, band, venueObject);
+			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), comboRating.getValue(), fis, band, venueObject);
 			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
 			missingFields.setVisible(false);
 			venueInput.clear();

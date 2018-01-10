@@ -141,9 +141,16 @@ public class ConcertTable implements ConcertDAO{
 	}
 
 	@Override
-	public void updateRating(Band band) {
-		// TODO Auto-generated method stub
-		
+	public void updateRating(int newRating, int concertId) {
+		String query = "UPDATE " + Const.TABLE_CONCERT +
+				" SET " + Const.CONCERTS_COLUMN_RATING + " = '" + newRating + "' WHERE "
+				+ Const.BANDS_COLUMN_ID + " = '" + concertId + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println( " updated rating from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
