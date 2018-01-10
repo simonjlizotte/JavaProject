@@ -127,8 +127,23 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(dateAttended, 0, 7);
 		inputs.add(dateFormat, 2, 7);
 		
+		
 		Label overallRating = new Label("Overall Rating:");
 		inputs.add(overallRating, 0, 8);
+		Label overallRatingInput = new Label(concertObject.getRating() + "");
+		inputs.add(overallRatingInput, 1, 8);
+		ComboBox<Integer> comboRating = new ComboBox<>();
+		ArrayList<Integer> ratingArray = new ArrayList<Integer>();
+		ratingArray.add(1);
+		ratingArray.add(2);
+		ratingArray.add(3);
+		ratingArray.add(4);
+		ratingArray.add(5);
+		comboRating.setItems(
+				FXCollections.observableArrayList(ratingArray));
+		comboRating.setValue(concertObject.getRating());
+		inputs.add(comboRating, 1, 8);
+		comboRating.setVisible(false);
 		
 		Label pictures = new Label("Pictures from the Event:");
 		inputs.add(pictures, 0, 9);
@@ -169,6 +184,7 @@ public class SingleConcertViewPane extends BorderPane{
 		// creating a label and adding it to the GridPane
 		Label dateDisplay = new Label(dateAdded);
 		inputs.add(dateDisplay, 1, 7);
+	
 		
 		
 		edit.setOnAction((event)->{
@@ -198,12 +214,17 @@ public class SingleConcertViewPane extends BorderPane{
 			updatesValues.setVisible(true);
 			buttonBox.getChildren().remove(edit);
 			remove.setVisible(true);
+			comboRating.setVisible(true);
+			overallRatingInput.setVisible(false);
 		});
 		
 		saveEdits.setOnAction((event)->{
 					whatBandInput.setEditable(false);
 					whereAtInput.setEditable(false);
 					whatCityInput.setEditable(false);
+					comboRating.setVisible(false);
+					overallRatingInput.setVisible(true);
+
 
 					//adding the input boxes back
 					//adding the input boxes back to the grid pane
@@ -228,6 +249,7 @@ public class SingleConcertViewPane extends BorderPane{
 					bandTable.updateGenre(genreInput.getSelectionModel().getSelectedItem().getId(), concertObject.getBandID());
 					genreDisplay.setText(genreInput.getSelectionModel().getSelectedItem().getGenre());
 					concertTable.updateDate(dateAttendedInput.getValue().toString().toUpperCase().trim(), concertObject.getId());
+					concertTable.updateRating(comboRating.getValue(), concertObject.getId());
 					dateDisplay.setText(dateAttendedInput.getValue().toString());
 					ViewConcertTab.nameStage.close();
 					
