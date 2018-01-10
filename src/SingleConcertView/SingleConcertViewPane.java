@@ -80,6 +80,7 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		// Title
 		Label title = new Label("Concert View");
+		title.getStyleClass().add("singleViewTitle");
 		
 		//Creating the remove and edit buttons
 		Button edit = new Button("Update Concert");
@@ -94,7 +95,7 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		buttonBox.getChildren().addAll(edit, saveEdits, remove);
 		buttonBox.setAlignment(Pos.CENTER);
-		buttonBox.setPadding(new Insets(10,10,10,10));
+//		buttonBox.setPadding(new Insets(10,10,10,10));
 		
 		remove.setOnMouseClicked(e->{
 			concertTable.deleteConcert(concertId);
@@ -102,19 +103,21 @@ public class SingleConcertViewPane extends BorderPane{
 			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));		
 		});
 		
-		inputs.setPadding(new Insets(10,10,10,10));
-		inputs.setVgap(10);
-		inputs.setHgap(10);
+		// style class to add the removeButton
+	     remove.getStyleClass().add("removeButton");
+		
+		inputs.setVgap(15);
+		inputs.setHgap(15);
 		
 		remove.setVisible(false);
 		//Creating the input fields labels
-		Label whatBand = new Label("What band?");
+		Label whatBand = new Label("What band:");
 		inputs.add(whatBand, 0, 1);
 		
-		Label whereAt = new Label("What Venue?");
+		Label whereAt = new Label("What Venue:");
 		inputs.add(whereAt, 0, 2);
 		
-		Label whatCity = new Label("What City?");
+		Label whatCity = new Label("What City:");
 		inputs.add(whatCity, 0, 3);
 		
 		Label genre = new Label("Genre:");
@@ -122,6 +125,7 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		Label dateAttended = new Label("Date Attended:");
 		Label dateFormat = new Label("(yyyy/mm/dd)");
+		
 		// setting the dataformat to hide
 		dateFormat.setVisible(false);
 		inputs.add(dateAttended, 0, 7);
@@ -218,6 +222,8 @@ public class SingleConcertViewPane extends BorderPane{
 			overallRatingInput.setVisible(false);
 		});
 		
+		edit.getStyleClass().add("buttonLoad");
+		
 		saveEdits.setOnAction((event)->{
 					whatBandInput.setEditable(false);
 					whereAtInput.setEditable(false);
@@ -255,17 +261,20 @@ public class SingleConcertViewPane extends BorderPane{
 					
 				});
 		
+		saveEdits.getStyleClass().add("buttonLoad");
+		
+		inputs.setAlignment(Pos.TOP_CENTER);
+		inputs.getStyleClass().add("inputsLay");
+		// Set Alignment
+		SingleConcertViewPane.setAlignment(title, Pos.CENTER);
+		SingleConcertViewPane.setAlignment(inputs, Pos.TOP_CENTER);
+		SingleConcertViewPane.setAlignment(buttonBox, Pos.CENTER);	
 		
 		// add nodes to pane 
 		this.setTop(title);
 		this.setCenter(inputs);
 		this.setBottom(buttonBox);
-		
-		
-		// Set Alignment
-		SingleConcertViewPane.setAlignment(title, Pos.CENTER);
-		SingleConcertViewPane.setAlignment(buttonBox, Pos.CENTER);
-		
+				
 	
 	}
 }

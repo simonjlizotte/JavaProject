@@ -2,6 +2,7 @@ package Tabs;
 
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ComboBox;
@@ -36,7 +38,8 @@ import tables.GenreTable;
 public class AddConcertTab extends Tab{
 	
 	//file String
-	String file;
+	File file;
+	String filePath;
 	
 	//Database
 	Database db;
@@ -58,6 +61,7 @@ public class AddConcertTab extends Tab{
 			
 		//VBox to host the listView
 		GridPane pane = new GridPane();
+		pane.getStyleClass().add("paneS");
 		
 		//Declaring insets
 		Insets insets = new Insets(10,10,10,10);
@@ -102,7 +106,6 @@ public class AddConcertTab extends Tab{
 		missingFields.setVisible(false);
 		pane.add(missingFields, 0, 10);
 		
-		
 		//Eighth Row - Rating- I will fix this over the weekend
 		Text ratingText = new Text("Rating: ");
 		ComboBox<Integer> comboRating = new ComboBox<>();
@@ -139,17 +142,22 @@ public class AddConcertTab extends Tab{
 		            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 		              
 		            //Show open file dialog
-		            file = fileChooser.showOpenDialog(null).getAbsolutePath();
+		            if ( (file = fileChooser.showOpenDialog(null)) != null) {
+		            		filePath = file.getAbsolutePath();
+		            }
+		            //file = fileChooser.showOpenDialog(null).getAbsolutePath();
 			}
         });
+        btnLoad.getStyleClass().add("buttonLoad");
 		
-		
+		pane.setAlignment(Pos.CENTER);
 		pane.setPadding(insets);
 		pane.setVgap(10);
 		pane.setHgap(10);
 		this.setContent(pane);
 		
 		Button button = new Button("submit");
+		button.getStyleClass().add("submit");
 		button.setOnMouseClicked(e->{
 			//checking that there are no fields missing
 			if(venueInput.getText().isEmpty() || cityInput.getText().isEmpty() || bandNameInput.getText().isEmpty()
@@ -159,7 +167,7 @@ public class AddConcertTab extends Tab{
 			
 				FileInputStream fis = null;
 				try {
-					fis = new FileInputStream(file);
+					fis = new FileInputStream(filePath);
 				} catch (FileNotFoundException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -175,7 +183,7 @@ public class AddConcertTab extends Tab{
 			cityInput.clear();
 			}
 		});
-		pane.add(button, 0, 9);
+		pane.add(button, 1, 9);
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it

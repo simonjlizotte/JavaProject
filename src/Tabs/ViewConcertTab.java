@@ -138,7 +138,6 @@ public class ViewConcertTab extends Tab{
 	    borderPane.setTop(viewTabTitle);	  	    
 	    borderPane.setCenter(bandList);
 	    borderPane.setPadding(new Insets(10,10,10,10));
-	    
 	    //Getting the position of the borderPane to center
 	    BorderPane.setAlignment(viewTabTitle, Pos.CENTER);
 		this.setContent(borderPane);
