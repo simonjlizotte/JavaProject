@@ -7,12 +7,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import SingleConcertView.SingleConcertViewScene;
+import confirmationMessage.ConfirmationMessageScene;
 import database.Database;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ComboBox;
@@ -22,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import objects.Band;
 import objects.Genre;
 import objects.Venue;
@@ -40,6 +44,9 @@ public class AddConcertTab extends Tab{
 	//file String
 	File file;
 	String filePath;
+	
+	//stage
+	public static Stage nameStage = new Stage();
 	
 	//Database
 	Database db;
@@ -181,6 +188,11 @@ public class AddConcertTab extends Tab{
 			venueInput.clear();
 			bandNameInput.clear();
 			cityInput.clear();
+			
+			Scene scene = new ConfirmationMessageScene();
+			nameStage.setScene(scene);
+			scene.getStylesheets().add("main.css");
+			nameStage.show();  
 			}
 		});
 		pane.add(button, 1, 9);
