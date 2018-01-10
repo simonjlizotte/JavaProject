@@ -1,5 +1,7 @@
 package confirmationMessage;
 
-public class ConfirmationMessagePane {
+import javafx.scene.layout.BorderPane;
+
+public class ConfirmationMessagePane extends BorderPane{
 
 }
