@@ -91,8 +91,7 @@ public class ViewConcertTab extends Tab{
 		
 		// add those items to the ListView
 		bandList.setItems(FXCollections.observableArrayList(concerts));
-
-		
+	
 		bandList.getSelectionModel().selectedItemProperty()
 		.addListener(new ChangeListener<Concert>() {
 			@Override

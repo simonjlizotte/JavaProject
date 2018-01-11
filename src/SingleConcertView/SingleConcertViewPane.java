@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Tabs.ViewConcertTab;
-import javafx.application.Platform;
+import confirmationMessage.DeleteMessageScene;
 import javafx.collections.FXCollections;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import objects.Band;
 import objects.Concert;
 import objects.Genre;
@@ -32,6 +33,14 @@ import tables.VenueTable;
 public class SingleConcertViewPane extends BorderPane{
 
 	ViewConcertTab viewConcert;
+	//stage
+	public static Stage nameStage = new Stage();
+	
+	//TextFields
+	TextField whatBandInput;
+	
+	//DatePicker
+	DatePicker dateAttendedInput;
 	
 	Concert itemSelected;
 	public SingleConcertViewPane() {
@@ -100,10 +109,15 @@ public class SingleConcertViewPane extends BorderPane{
 		buttonBox.setAlignment(Pos.CENTER);
 //		buttonBox.setPadding(new Insets(10,10,10,10));
 		
+		/**
+		 * Have to pass the concertId and concertTable so that we can delete the concert right in the confirmation button
+		 */
 		remove.setOnMouseClicked(e->{
-			concertTable.deleteConcert(concertId);
-			ViewConcertTab.nameStage.close();
-			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));		
+			Scene scene = new DeleteMessageScene(whatBandInput.getText().toString(), dateAttendedInput.getValue().toString(), concertId, concertTable );
+			nameStage.setScene(scene);
+			scene.getStylesheets().add("main.css");
+			nameStage.show();
+					
 		});
 		
 		// style class to add the removeButton
@@ -156,7 +170,7 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(pictures, 0, 9);
 		
 		//Create the TextFields, DatePicker, and ComboBox for the values
-		TextField whatBandInput = new TextField();
+		whatBandInput = new TextField();
 		whatBandInput.setPromptText("");
 		whatBandInput.setText(objectName);
 		whatBandInput.setEditable(false);
@@ -184,7 +198,7 @@ public class SingleConcertViewPane extends BorderPane{
 		Label genreDisplay = new Label(genreName);
 		inputs.add(genreDisplay, 1, 5);
 		
-		DatePicker dateAttendedInput = new DatePicker();
+		dateAttendedInput = new DatePicker();
 		inputs.add(dateAttendedInput, 1, 7);
 		// removing the datePicker from the gridPane
 		inputs.getChildren().remove(dateAttendedInput);
