@@ -6,9 +6,13 @@
 }
 
 .singleViewTitle{
-	-fx-font-size: 30pt;
+	-fx-font-size: 23pt;
 	-fx-padding: 5 25 5 25;
 }
+.singleViewTitleEdit{
+ 	-fx-text-fill: #e53935;
+}
+
 
 .menu-bar{
 	-fx-background-color:#dadad9;
@@ -17,6 +21,10 @@
 .menu-item:hover{
 	-fx-background-color:none;
 	-fx-text-fill:#212121;
+}
+
+.buttonBox{
+		-fx-padding: 15;
 }
 
 .inputsLay{
@@ -54,7 +62,8 @@
 
 .submit{
     -fx-text-fill: #212121;
-    -fx-padding: 8 50 8 50;
+    -fx-padding: 9 80 9 80;
+    	-fx-font-size: 12pt;
     -fx-background-color: #ffffff;
 }
 
@@ -109,7 +118,10 @@
 .tab .tab-label {
     -fx-text-fill: white ;
 } 
+
 .text-field {
+    -fx-min-width: 310;
+    -fx-min-height: 35;
     -fx-background-color: #ffffff;
 }
 
@@ -131,7 +143,7 @@
 }
 
 .combo-box-base  {
-    -fx-background-color: white, white, white, white;
+    -fx-background-color: white;
     -fx-background-radius: 5, 5, 4, 3;
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
     -fx-padding: 0;

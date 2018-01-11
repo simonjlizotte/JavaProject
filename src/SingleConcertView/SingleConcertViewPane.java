@@ -37,6 +37,9 @@ public class SingleConcertViewPane extends BorderPane{
 	public SingleConcertViewPane() {
 		// Create a Vbox 
 		HBox buttonBox = new HBox();
+		buttonBox.getStyleClass().add("buttonBox");
+		buttonBox.setSpacing(20);
+		
 		GridPane inputs = new GridPane();
 		
 		//instance of viewConcert
@@ -79,7 +82,7 @@ public class SingleConcertViewPane extends BorderPane{
 		String cityName = venueObject.getCity();
 		
 		// Title
-		Label title = new Label("Concert View");
+		Label title = new Label("Concert view");
 		title.getStyleClass().add("singleViewTitle");
 		
 		//Creating the remove and edit buttons
@@ -157,7 +160,7 @@ public class SingleConcertViewPane extends BorderPane{
 		whatBandInput.setPromptText("");
 		whatBandInput.setText(objectName);
 		whatBandInput.setEditable(false);
-		inputs.add(whatBandInput, 1, 1);
+		inputs.add(whatBandInput, 0, 2);
 		
 		TextField whereAtInput = new TextField();
 		whereAtInput.setPromptText("Venue Name");
@@ -187,15 +190,14 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.getChildren().remove(dateAttendedInput);
 		// creating a label and adding it to the GridPane
 		Label dateDisplay = new Label(dateAdded);
-		inputs.add(dateDisplay, 1, 7);
-	
-		
+		inputs.add(dateDisplay, 1, 7);		
 		
 		edit.setOnAction((event)->{
 			// setting the edit boxes to true
 			whatBandInput.setEditable(true);
 			whereAtInput.setEditable(true);
 			whatCityInput.setEditable(true);
+			title.getStyleClass().add("singleViewTitleEdit");
 			
 			//adding the input boxes back to the grid pane
 			inputs.getChildren().remove(genreDisplay);
@@ -215,7 +217,8 @@ public class SingleConcertViewPane extends BorderPane{
 			// setting the text view visibility
 			edit.setVisible(false);
 			saveEdits.setVisible(true);
-			updatesValues.setVisible(true);
+//			updatesValues.setVisible(true);
+			title.setText("Update Values");
 			buttonBox.getChildren().remove(edit);
 			remove.setVisible(true);
 			comboRating.setVisible(true);
@@ -225,6 +228,7 @@ public class SingleConcertViewPane extends BorderPane{
 		edit.getStyleClass().add("buttonLoad");
 		
 		saveEdits.setOnAction((event)->{
+					title.setText("ConcertView");
 					whatBandInput.setEditable(false);
 					whereAtInput.setEditable(false);
 					whatCityInput.setEditable(false);

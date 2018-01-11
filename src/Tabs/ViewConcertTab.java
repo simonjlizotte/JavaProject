@@ -91,27 +91,7 @@ public class ViewConcertTab extends Tab{
 		
 		// add those items to the ListView
 		bandList.setItems(FXCollections.observableArrayList(concerts));
-//	   
-//		bandList.getSelectionModel().selectedItemProperty().addListener(
-//	            (ObservableValue<? extends Concert> ov, Concert old_val, 
-//	                Concert new_val) -> {   
-//	                	if(new_val != null) {
-//	                    	num2 = new_val.getId();
-//	                	}else {
-//	                		System.out.println("No value");
-//	                	}
-//	                	
-//	                	Stage nameStage = new Stage();
-//		        	  	Scene scene = new SingleConcertViewScene();
-//		    			nameStage.setTitle("concert");
-//		    			nameStage.setScene(scene);
-//		    			scene.getStylesheets().add("main.css");
-//		    			nameStage.show();
-//	        });
 
-//		// refresh button
-//		Button refreshButton = new Button("Refresh");
-//		refreshButton.getStyleClass().add("refresh");	
 		
 		bandList.getSelectionModel().selectedItemProperty()
 		.addListener(new ChangeListener<Concert>() {
