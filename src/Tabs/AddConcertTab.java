@@ -7,12 +7,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import confirmationMessage.ConfirmationMessageScene;
 import database.Database;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ComboBox;
@@ -22,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import objects.Band;
 import objects.Genre;
 import objects.Venue;
@@ -40,6 +43,9 @@ public class AddConcertTab extends Tab{
 	//file String
 	File file;
 	String filePath;
+	
+	//stage
+	public static Stage nameStage = new Stage();
 	
 	//Database
 	Database db;
@@ -169,18 +175,23 @@ public class AddConcertTab extends Tab{
 				try {
 					fis = new FileInputStream(filePath);
 				} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString().toUpperCase());
 			System.out.println(comboGenre.getValue().getId());
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
-			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), comboRating.getValue(), fis, band, venueObject);
+			String confirmation = ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), comboRating.getValue(), fis, band, venueObject);
 			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
 			missingFields.setVisible(false);
 			venueInput.clear();
 			bandNameInput.clear();
 			cityInput.clear();
+			
+			
+			Scene scene = new ConfirmationMessageScene(confirmation);
+			nameStage.setScene(scene);
+			scene.getStylesheets().add("main.css");
+			nameStage.show();  
 			}
 		});
 		pane.add(button, 1, 9);

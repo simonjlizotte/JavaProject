@@ -30,7 +30,19 @@ public class ConcertTable implements ConcertDAO{
 	static //initializing db connection
 	Database db = Database.getInstance();
 	
-	public static void createConcert(String date, int rating, FileInputStream pic, Band band, Venue venue) {
+	/**
+	 * 
+	 * This method adds concerts to the concertTable
+	 * 
+	 * @param date date of the concert
+	 * @param rating of the concert
+	 * @param pic of the concert
+	 * @param band to get the band from the table and access the id
+	 * @param venue to get the venue from the table and access the id
+	 * @return a confirmation message that will be passed to the ConfirmationMessageScene to display if the 
+	 * 	concert was successfully inserted or it was in the table already
+	 */
+	public static String createConcert(String date, int rating, FileInputStream pic, Band band, Venue venue) {
 		Venue concertVenue = tables.VenueTable.createVenue(venue);
 		Band concertBand = tables.BandTable.createBand(band);
 		int concertID = 0;
@@ -43,12 +55,9 @@ public class ConcertTable implements ConcertDAO{
 
 		try {
 			Statement getBand = db.getConnection().createStatement();
-			ResultSet result = getBand.executeQuery(selectQuery);
-			
-			System.out.println("result: " + result.toString());
+			ResultSet result = getBand.executeQuery(selectQuery);			
 				if (result.next()) {
-					System.out.println("already in table");					
-					
+					return band.getName() + " already in table";
 				} else {
 
 					db.getConnection().createStatement().execute(query);
@@ -62,14 +71,12 @@ public class ConcertTable implements ConcertDAO{
 					// This calls the function within this class which updates the just entered concerts picture   
 					concerts.updatePicture(pic, concertID);
 					concerts.getConcertImage(concertID);
-					System.out.println(band.getName() + " successfully added to the table");
+					return band.getName() + " successfully added to the table";
 				}
-			
-			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 
 	/**
