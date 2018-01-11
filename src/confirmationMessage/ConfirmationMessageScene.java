@@ -4,8 +4,8 @@ import javafx.scene.Scene;
 
 public class ConfirmationMessageScene extends Scene{
 
-	public ConfirmationMessageScene() {
-		super(new ConfirmationMessagePane(), 600, 400);
+	public ConfirmationMessageScene(String message) {
+		super(new ConfirmationMessagePane(message), 600, 400);
 	}
 
 }

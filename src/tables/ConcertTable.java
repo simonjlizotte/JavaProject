@@ -30,7 +30,7 @@ public class ConcertTable implements ConcertDAO{
 	static //initializing db connection
 	Database db = Database.getInstance();
 	
-	public static void createConcert(String date, int rating, FileInputStream pic, Band band, Venue venue) {
+	public static String createConcert(String date, int rating, FileInputStream pic, Band band, Venue venue) {
 		Venue concertVenue = tables.VenueTable.createVenue(venue);
 		Band concertBand = tables.BandTable.createBand(band);
 		int concertID = 0;
@@ -48,7 +48,7 @@ public class ConcertTable implements ConcertDAO{
 			System.out.println("result: " + result.toString());
 				if (result.next()) {
 					System.out.println("already in table");					
-					
+					return band.getName() + " already in table";
 				} else {
 
 					db.getConnection().createStatement().execute(query);
@@ -63,13 +63,14 @@ public class ConcertTable implements ConcertDAO{
 					concerts.updatePicture(pic, concertID);
 					concerts.getConcertImage(concertID);
 					System.out.println(band.getName() + " successfully added to the table");
+					return band.getName() + " successfully added to the table";
 				}
 			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 
 	/**

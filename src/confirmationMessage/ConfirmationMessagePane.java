@@ -8,8 +8,8 @@ import javafx.util.Duration;
 
 public class ConfirmationMessagePane extends BorderPane{
 
-	public ConfirmationMessagePane() {
-		Label confirmationMessage = new Label("Your Concert has been added");
+	public ConfirmationMessagePane(String message) {
+		Label confirmationMessage = new Label(message);
 		this.setCenter(confirmationMessage);
 		
 		PauseTransition delay = new PauseTransition(Duration.seconds(3));

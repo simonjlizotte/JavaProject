@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import SingleConcertView.SingleConcertViewScene;
 import confirmationMessage.ConfirmationMessageScene;
 import database.Database;
 import javafx.collections.FXCollections;
@@ -176,20 +175,19 @@ public class AddConcertTab extends Tab{
 				try {
 					fis = new FileInputStream(filePath);
 				} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 			Venue venueObject = new Venue(venueInput.getText().toString().toUpperCase().trim(), cityInput.getText().toString().toUpperCase());
 			System.out.println(comboGenre.getValue().getId());
 			Band band = new Band(bandNameInput.getText().toString().toUpperCase().trim(), comboGenre.getValue().getId());
-			ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), comboRating.getValue(), fis, band, venueObject);
+			String confirmation = ConcertTable.createConcert(date.getValue().toString().toUpperCase().trim(), comboRating.getValue(), fis, band, venueObject);
 			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
 			missingFields.setVisible(false);
 			venueInput.clear();
 			bandNameInput.clear();
 			cityInput.clear();
 			
-			Scene scene = new ConfirmationMessageScene();
+			Scene scene = new ConfirmationMessageScene(confirmation);
 			nameStage.setScene(scene);
 			scene.getStylesheets().add("main.css");
 			nameStage.show();  
