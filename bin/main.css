@@ -53,7 +53,7 @@
 }
  
 .buttonLoad{
-    -fx-text-fill: #212121;
+    -fx-text-fill: #FF9800;
     -fx-padding: 5 25 5 25;
     -fx-background-color: #ffffff;
 }
@@ -79,7 +79,7 @@
 }
 
 .submit{
-    -fx-text-fill: #212121;
+    -fx-text-fill: #FF9800;
     -fx-padding: 9 80 9 80;
     	-fx-font-size: 12pt;
     -fx-background-color: #ffffff;

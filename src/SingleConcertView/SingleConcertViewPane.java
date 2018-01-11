@@ -1,5 +1,6 @@
 package SingleConcertView;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -61,7 +62,8 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		// concertTable created
 		ConcertTable concertTable = new ConcertTable();
-		
+		//updates image to selected concert
+		concertTable.getConcertImage(concertId);
 		// bandTable created
 		BandTable bandTable = new BandTable();
 		
@@ -91,6 +93,7 @@ public class SingleConcertViewPane extends BorderPane{
 		String genreName = genreObject.getGenre();
 		String dateAdded = concertObject.getDate();
 		String cityName = venueObject.getCity();
+		
 		
 		// Title
 		Label title = new Label("Concert view");
@@ -208,18 +211,22 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(dateAttendedInput, 0, 9);
 		
 		// imageview of the image the user added
-//		ImageView imageDisplay = new ImageView();
-//		imageDisplay.setImage(new Image("selectedImg.png"));
-//		inputs.add(imageDisplay, 1, 14);
-//		imageDisplay.setFitHeight(50);
-//		imageDisplay.setPreserveRatio(true);
+		ImageView imageDisplay = new ImageView();
+		File file = new File("selectedImg.png");
+        Image image = new Image(file.toURI().toString());
+        imageDisplay.setImage(image);		
+        this.setRight(imageDisplay); 
+		imageDisplay.setFitWidth(150);
+		BorderPane.setAlignment(imageDisplay, Pos.CENTER_RIGHT);
+		imageDisplay.setPreserveRatio(true);
 		
 		// removing the datePicker from the gridPane
 		inputs.getChildren().remove(dateAttendedInput);
+		
 		// creating a label and adding it to the GridPane
 		Label dateDisplay = new Label(dateAdded);
 		inputs.add(dateDisplay, 0, 9);		
-		
+	
 		edit.setOnAction((event)->{
 			// setting the edit boxes to true
 			whatBandInput.setEditable(true);

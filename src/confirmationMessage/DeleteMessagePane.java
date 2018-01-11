@@ -31,6 +31,7 @@ public class DeleteMessagePane extends BorderPane{
 		BorderPane.setAlignment(message, Pos.CENTER);
 		this.setTop(message);
 		
+		
 		//buttons
 		HBox buttons = new HBox();
 		Button yes = new Button("Yes");

@@ -91,27 +91,31 @@ public class ViewConcertTab extends Tab{
 		
 		// add those items to the ListView
 		bandList.setItems(FXCollections.observableArrayList(concerts));
-	
-		bandList.getSelectionModel().selectedItemProperty()
-		.addListener(new ChangeListener<Concert>() {
-			@Override
-			public void changed(ObservableValue<? extends Concert> observable, 
-					Concert oldValue, Concert newValue) {
-	          	if(newValue != null) {
-	                	num2 = newValue.getId();
-	            	}else {
-	            		System.out.println("No value");
-	            	}
+		
+		// onClick event which will if the selected item and diselect it. It will pass the id
+		//and call the scene
+		bandList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(final MouseEvent mouseEvent) {
+		      Concert selected = bandList.getSelectionModel().getSelectedItem();
+		      int selectedNum = bandList.getSelectionModel().getSelectedIndex();
+		        if (bandList.getSelectionModel().isSelected(selectedNum)){
+		            bandList.getSelectionModel().clearSelection(selectedNum);
+		            if(selected != null) {
+	                		num2 = selected.getId();
+		            }else {
+	            			System.out.println("No value");
+		            }
 	            	
-	        	  	Scene scene = new SingleConcertViewScene();
-	    			nameStage.setTitle("concert");
-	    			nameStage.setScene(scene);
-	    			scene.getStylesheets().add("main.css");
-	    			nameStage.show();  
-	    			
-			}
+		        	  	Scene scene = new SingleConcertViewScene();
+		    			nameStage.setTitle("concert");
+		    			nameStage.setScene(scene);
+		    			scene.getStylesheets().add("main.css");
+		    			nameStage.show();    
+		        }
+		    }
 		});
-				
+	
 	    // setting the borderPane
 	    borderPane.setTop(viewTabTitle);	  	    
 	    borderPane.setCenter(bandList);
