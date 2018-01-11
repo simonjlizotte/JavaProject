@@ -72,6 +72,10 @@ public class AddConcertTab extends Tab{
 		Label title = new Label("Add a concert");
 		title.getStyleClass().add("singleViewTitle");
 		
+		//prompt that the photo was added
+		Label photoAddedLabel = new Label("Photo Attached");
+		photoAddedLabel.getStyleClass().add("photoAddedLabel");
+		
 		//VBox to host the listView
 		GridPane pane = new GridPane();
 		
@@ -140,12 +144,9 @@ public class AddConcertTab extends Tab{
 		//Final Row - Upload File
 		Text uploadPic = new Text("Upload a picture: ");
 		Button btnLoad = new Button("Load");
-		ImageView imageDisplay = new ImageView();
-		imageDisplay.setFitHeight(50);
-		imageDisplay.setPreserveRatio(true);
+		
 		pane.add(uploadPic, 0, 10);
 		pane.add(btnLoad, 0,11);
-		pane.add(imageDisplay, 0, 14);
         btnLoad.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -160,10 +161,14 @@ public class AddConcertTab extends Tab{
 		            //Show open file dialog
 		            if ( (file = fileChooser.showOpenDialog(null)) != null) {
 		            		filePath = file.getAbsolutePath();
+		            		uploadPic.setVisible(false);
+		            		pane.add(photoAddedLabel, 0, 10);
 		            }
 		            //file = fileChooser.showOpenDialog(null).getAbsolutePath();
 			}
         });
+        
+        
         btnLoad.getStyleClass().add("buttonLoad");
 		
 		pane.setAlignment(Pos.CENTER);
@@ -205,6 +210,7 @@ public class AddConcertTab extends Tab{
 			nameStage.show();  
 			}
 		});
+		
 //		pane.add(button, 1, 9);
 		HBox submitContainer = new HBox();
 		submitContainer.getChildren().add(button);

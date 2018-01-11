@@ -13,6 +13,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -204,6 +206,13 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		dateAttendedInput = new DatePicker();
 		inputs.add(dateAttendedInput, 0, 9);
+		
+		// imageview of the image the user added
+//		ImageView imageDisplay = new ImageView();
+//		imageDisplay.setImage(new Image("selectedImg.png"));
+//		inputs.add(imageDisplay, 1, 14);
+//		imageDisplay.setFitHeight(50);
+//		imageDisplay.setPreserveRatio(true);
 		
 		// removing the datePicker from the gridPane
 		inputs.getChildren().remove(dateAttendedInput);

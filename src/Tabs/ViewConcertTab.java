@@ -103,7 +103,6 @@ public class ViewConcertTab extends Tab{
 	            		System.out.println("No value");
 	            	}
 	            	
-	            	
 	        	  	Scene scene = new SingleConcertViewScene();
 	    			nameStage.setTitle("concert");
 	    			nameStage.setScene(scene);

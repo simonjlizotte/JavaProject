@@ -33,7 +33,7 @@ public class DeleteMessagePane extends BorderPane{
 		Button yes = new Button("Yes");
 		Button no = new Button("No");
 		no.getStyleClass().add("buttonLoad");
-		yes.getStyleClass().add("buttonLoad");
+		yes.getStyleClass().add("buttonLoadWarn");
 		buttons.getChildren().addAll(yes, no);
 		buttons.setAlignment(Pos.CENTER);
 		buttons.setSpacing(20);

@@ -14,7 +14,23 @@
 }
 
 .messageWarn{
--fx-font-size: 11pt;
+	-fx-font-size: 11pt;
+}
+
+.buttonLoadWarn{
+    -fx-text-fill: #212121;
+    -fx-padding: 5 25 5 25;
+    -fx-background-color: #e53935;
+}
+.photoAddedLabel{
+	 -fx-text-fill: #FF9800;
+}
+
+.buttonLoadWarn:hover{
+   -fx-border-radius: 2;
+    -fx-background-radius: 2; 
+    -fx-text-fill: #ffffff;
+	-fx-background-color: #e53935;
 }
 .menu-bar{
 	-fx-background-color:#dadad9;
