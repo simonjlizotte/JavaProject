@@ -6,7 +6,7 @@ import tables.ConcertTable;
 public class DeleteMessageScene extends Scene{
 
 	public DeleteMessageScene(String bandName, String date, int concertId, ConcertTable concertTable) {
-		super(new DeleteMessagePane(bandName, date, concertId, concertTable), 600, 400);
+		super(new DeleteMessagePane(bandName, date, concertId, concertTable), 500, 200);
 	}
 
 }

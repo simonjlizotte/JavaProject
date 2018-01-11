@@ -10,6 +10,9 @@ import javafx.util.Duration;
  * This Pane will be showing when the user hits the submit button while adding a Concert
  * @author josegeorges
  *
+ *@author carmenkerim
+ *
+ *Css will be applied in the main.css
  */
 public class ConfirmationMessagePane extends BorderPane{
 
