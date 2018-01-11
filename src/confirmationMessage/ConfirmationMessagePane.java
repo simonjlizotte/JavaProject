@@ -12,7 +12,7 @@ import javafx.util.Duration;
  *
  *@author carmenkerim
  *
- *Css will be applied in the main.css
+ *css will be applied in the main.css file. 
  */
 public class ConfirmationMessagePane extends BorderPane{
 
@@ -25,6 +25,5 @@ public class ConfirmationMessagePane extends BorderPane{
 		PauseTransition delay = new PauseTransition(Duration.seconds(3));
 		delay.setOnFinished( event -> AddConcertTab.nameStage.close() );
 		delay.play();
-
 	}
 }

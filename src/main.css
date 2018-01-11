@@ -13,7 +13,9 @@
  	-fx-text-fill: #e53935;
 }
 
-
+.messageWarn{
+-fx-font-size: 11pt;
+}
 .menu-bar{
 	-fx-background-color:#dadad9;
 }
