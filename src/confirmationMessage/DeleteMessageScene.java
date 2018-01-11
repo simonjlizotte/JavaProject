@@ -1,11 +1,12 @@
 package confirmationMessage;
 
 import javafx.scene.Scene;
+import tables.ConcertTable;
 
 public class DeleteMessageScene extends Scene{
 
-	public DeleteMessageScene() {
-		super(new DeleteMessagePane(), 600, 400);
+	public DeleteMessageScene(String bandName, String date, int concertId, ConcertTable concertTable) {
+		super(new DeleteMessagePane(bandName, date, concertId, concertTable), 600, 400);
 	}
 
 }
