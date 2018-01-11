@@ -187,6 +187,7 @@ public class AddConcertTab extends Tab{
 			bandNameInput.clear();
 			cityInput.clear();
 			
+			
 			Scene scene = new ConfirmationMessageScene(confirmation);
 			nameStage.setScene(scene);
 			scene.getStylesheets().add("main.css");
