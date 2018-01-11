@@ -106,15 +106,15 @@ public class SingleConcertViewPane extends BorderPane{
 		buttonBox.setAlignment(Pos.CENTER);
 //		buttonBox.setPadding(new Insets(10,10,10,10));
 		
+		/**
+		 * Have to pass the concertId and concertTable so that we can delete the concert right in the confirmation button
+		 */
 		remove.setOnMouseClicked(e->{
 			Scene scene = new DeleteMessageScene(whatBandInput.getText().toString(), dateAttendedInput.getValue().toString(), concertId, concertTable );
 			nameStage.setScene(scene);
 			scene.getStylesheets().add("main.css");
 			nameStage.show();
-			
-//			concertTable.deleteConcert(concertId);
-//			ViewConcertTab.nameStage.close();
-//			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));		
+					
 		});
 		
 		// style class to add the removeButton
