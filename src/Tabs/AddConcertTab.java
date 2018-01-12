@@ -144,7 +144,7 @@ public class AddConcertTab extends Tab{
 		//Final Row - Upload File
 		Text uploadPic = new Text("Upload a picture: ");
 		Button btnLoad = new Button("Load");
-		
+	    btnLoad.getStyleClass().add("buttonLoad");
 		pane.add(uploadPic, 0, 10);
 		pane.add(btnLoad, 0,11);
         btnLoad.setOnAction(new EventHandler<ActionEvent>() {
@@ -169,8 +169,8 @@ public class AddConcertTab extends Tab{
         });
         
         
-        btnLoad.getStyleClass().add("buttonLoad");
-		
+        pane.getStyleClass().add("paneAdd");
+        pane.setMaxWidth(300);
 		pane.setAlignment(Pos.CENTER);
 		pane.setPadding(insets);
 		pane.setVgap(10);

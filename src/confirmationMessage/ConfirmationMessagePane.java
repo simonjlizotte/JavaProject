@@ -19,6 +19,7 @@ public class ConfirmationMessagePane extends BorderPane{
 	public ConfirmationMessagePane(String message) {
 		//message
 		Label confirmationMessage = new Label(message);
+		confirmationMessage.getStyleClass().add("confirmMesg");
 		this.setCenter(confirmationMessage);
 		
 		//it has a delay so that after 3 seconds it closes by itself
