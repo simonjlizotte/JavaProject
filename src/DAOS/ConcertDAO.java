@@ -8,15 +8,15 @@ import objects.Venue;
 
 public interface ConcertDAO {
 		//Create
-		public static void createConcert(String date, int rating, String pic, Band band,Venue venue) {
+		public static String createConcert(String date, int rating, String pic, Band band,Venue venue) {
+			return null;
 		}
 		//Read
 		public ArrayList<Concert> getAllConcerts();
 		public Concert getConcert(int concertID);
 		//Update
-		public void updateDate(Band band);
-		public void updateRating(Band band);
-		public void updatePicture(Band band);
+		public void updateDate(String date, int concertId);
+		public void updateRating(int newRating, int concertId);
 		//Delete
-		public void deleteBand(Band band);
+		public void deleteConcert(int concertId);
 }

@@ -1,5 +1,7 @@
 package objects;
 
+import tables.BandTable;
+
 /** Concert class
  * 
  * This class will serve to hold the properties of each concert.
@@ -19,7 +21,6 @@ public class Concert {
 	public Concert() {
 		
 	}
-	
 
 	public Concert(int id, int bandID, int venueID, String date, int rating, String pic) {
 		this.id = id;
@@ -77,5 +78,13 @@ public class Concert {
 
 	public void setPic(String pic) {
 		this.pic = pic;
+	}
+	
+	public String toString() {
+		Band band = new Band();
+		BandTable bandTable = new BandTable();
+		band = bandTable.getBand(this.getBandID());
+		
+		return  this.getDate() + ", " + band.getName();
 	}
 }
