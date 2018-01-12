@@ -37,9 +37,13 @@ import tables.GenreTable;
 /**
  * 
  * @author josegeorges
+ * @author carmenkerim
+ * @author simonlizotte
+ * @author adambazzi
  *
  * This tab is designed to follow a singleton pattern, meaning that there will only be access
  * to one instance of this tab.
+ * 
  */
 public class AddConcertTab extends Tab{
 	

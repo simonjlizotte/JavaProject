@@ -38,11 +38,17 @@ import tables.VenueTable;
  * This tab will display every concert that the user added in a listView
  */
 public class ViewConcertTab extends Tab{
+	
 	// concert band
 	Band concertBand;
+	
+	//stage
 	public static Stage nameStage = new Stage();
 	
+	//global variable passed to reference the id selected
 	public static int num2;
+	
+	//listview of bands
 	public static ListView<Concert> bandList;
 	
 	Venue venueObject;
@@ -69,9 +75,6 @@ public class ViewConcertTab extends Tab{
 		// vBox to host the listView
 		BorderPane borderPane = new BorderPane();
 				
-		//Concert table
-		//ConcertTable concertTable = new ConcertTable();
-		
 		//bands table
 		BandTable bandTable = new BandTable();
 		
@@ -124,6 +127,7 @@ public class ViewConcertTab extends Tab{
 	    BorderPane.setAlignment(viewTabTitle, Pos.CENTER);
 		this.setContent(borderPane);
 	}
+	
 	//this method will be call when needing the instance of the tab or when first creating it
 	public static ViewConcertTab getInstance() {
 		if(tab == null) {

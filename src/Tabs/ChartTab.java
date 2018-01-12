@@ -12,7 +12,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import objects.Band;
+import objects.Genre;
 import objects.Venue;
+import tables.BandTable;
+import tables.GenreTable;
 import tables.VenueTable;
 
 /**
@@ -62,6 +66,15 @@ public class ChartTab extends Tab{
 			
 		ArrayList<String> cityCounter = new ArrayList<String>();
 		
+		
+		BandTable bandTable = new BandTable();
+		
+		ArrayList<Band> band = bandTable.getAllBands();
+		int genreId = band.get(1).getGenreId();
+		Genre genre = new Genre();
+		GenreTable genreTable = new GenreTable();
+		
+		System.out.println(genreTable.getGenre(genreId));
 		
 		// Label to set the title
 		Label chartTabTitle = new Label("CHARTS OF YOUR FAV DATA!");
