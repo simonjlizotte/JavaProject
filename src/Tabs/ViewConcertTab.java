@@ -90,8 +90,8 @@ public class ViewConcertTab extends Tab{
 		ArrayList<Concert> concerts = concertTable.getAllConcerts();
 		
 		// add those items to the ListView
-		bandList.setItems(FXCollections.observableArrayList(concerts));	
-		
+		bandList.setItems(FXCollections.observableArrayList(concerts));
+	
 		bandList.getSelectionModel().selectedItemProperty()
 		.addListener(new ChangeListener<Concert>() {
 			@Override
@@ -102,7 +102,6 @@ public class ViewConcertTab extends Tab{
 	            	}else {
 	            		System.out.println("No value");
 	            	}
-	            	
 	            	
 	        	  	Scene scene = new SingleConcertViewScene();
 	    			nameStage.setTitle("concert");
