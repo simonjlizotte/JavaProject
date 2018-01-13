@@ -241,8 +241,24 @@ public class ConcertTable implements ConcertDAO{
 
 	@Override
 	public int getYearCount(int year) {
-		
-		return 0;
+		String query = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE year("
+				+ Const.CONCERTS_COLUMN_DATE + ") = " + year;
+	ArrayList<Concert> concerts = new ArrayList<>();
+	try {
+		Statement getCount = db.getConnection().createStatement();
+		ResultSet result = getCount.executeQuery(query);
+		while(result.next()) {
+			concerts.add(new Concert(result.getInt(Const.CONCERTS_COLUMN_ID),
+					result.getInt(Const.CONCERTS_COLUMN_BAND_ID),
+					result.getInt(Const.CONCERTS_COLUMN_VENUE_ID),
+					result.getString(Const.CONCERTS_COLUMN_DATE),
+					result.getInt(Const.CONCERTS_COLUMN_RATING),
+					result.getString(Const.CONCERTS_COLUMN_PIC)));
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return concerts.size();
 	}
 
 	/**

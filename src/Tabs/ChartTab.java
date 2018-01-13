@@ -17,6 +17,7 @@ import objects.Band;
 import objects.Genre;
 import objects.Venue;
 import tables.BandTable;
+import tables.ConcertTable;
 import tables.GenreTable;
 import tables.VenueTable;
 
@@ -99,20 +100,16 @@ public class ChartTab extends Tab{
         // title to the yearChart
         yearChart.setTitle("Year");
         yearChart.setLabelsVisible(true);
-        
-        // sample obserableList for the yearChart
-        ObservableList<PieChart.Data> yearData =
-            FXCollections.observableArrayList(
-                new PieChart.Data("2007", 2));
       
         // set the data to the yearChart
-        yearChart.setData(yearData);
+        yearChart.setData(populateYearChart());
 
 //--------- refresh button -------\\
         
         Button refreshButton = new Button("Refresh Charts");
         refreshButton.setOnMouseClicked(e->{
             genresChart.setData(populateGenreChart());
+            yearChart.setData(populateYearChart());
         });
         
         //Setting the spacing of the charts
@@ -157,6 +154,26 @@ public class ChartTab extends Tab{
         ObservableList<PieChart.Data> genresData =
             FXCollections.observableArrayList(dataList);
         return genresData;
+	}
+	
+	public ObservableList<PieChart.Data> populateYearChart(){
+		//we need the bandTable
+		ConcertTable concertTable =  new ConcertTable();
+		//we get all the genres and add them inside an ArrayList
+		ArrayList<Integer> years = concertTable.getAllYears();
+		//this will hold the data for the charts
+		ArrayList<PieChart.Data> dataList = new ArrayList<>();
+		//this loop will call the getGenreCount, getGenre and add both to a new pieChart, which will
+		//then be added to the dataList. This happens with each genre inside of the database.
+				for (int year : years) {
+					int yearAmount = concertTable.getYearCount(year);
+					PieChart.Data tempData = new PieChart.Data(Integer.toString(year), yearAmount);
+					dataList.add(tempData);
+				}
+		        //observableList for the genres
+		        ObservableList<PieChart.Data> yearsData =
+		            FXCollections.observableArrayList(dataList);
+		        return yearsData;
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
