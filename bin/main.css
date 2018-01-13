@@ -19,6 +19,14 @@
     -fx-font-size: 10pt;
 }
 
+/*SINGLECONCERTVIEW LABEL*/
+
+.labelFont{
+	-fx-font-weight: bold;
+	-fx-font-size: 11pt;
+	 -fx-text-fill: #212121;
+}
+
 
 /*CONFIRM MESSAGE FOR ATTACHING A PHOTO*/
 .confirmMesg{
@@ -63,6 +71,7 @@ IS CLICKED (LABEL TYPE)*/
     -fx-text-fill: #FF9800;
     -fx-padding: 5 25 5 25;
     -fx-background-color: #ffffff;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 .buttonLoad:hover{

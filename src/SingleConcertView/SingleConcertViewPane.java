@@ -105,28 +105,27 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		// creating the remove and edit buttons
 		Button edit = new Button("Update Concert");
+		edit.getStyleClass().add("buttonLoad");
 		edit.setVisible(true);
 		
 		// remove button
-		Button remove = new Button("Remove Concert");
+		Button removeButton = new Button("Remove Concert");
 		
 		// save button
 		Button saveEdits = new Button("Save Changes");
-		saveEdits.setVisible(false);
 		
 		// update values
 		Label updatesValues = new Label("Update The Values");
 		inputs.add(updatesValues, 0, 0);
-		updatesValues.setVisible(false);
 		
-		buttonBox.getChildren().addAll(edit, saveEdits, remove);
+		buttonBox.getChildren().addAll(edit);
 		buttonBox.setAlignment(Pos.CENTER);
 		
 		/**
 		 * Have to pass the concertId and concertTable so that we can delete 
 		 * the concert right in the confirmation button
 		 */
-		remove.setOnMouseClicked(e->{
+		removeButton.setOnMouseClicked(e->{
 			Scene scene = new DeleteMessageScene(whatBandInput.getText().toString(), dateAttendedInput.getValue().toString(), concertId, concertTable );
 			nameStage.setScene(scene);
 			scene.getStylesheets().add("main.css");
@@ -134,14 +133,13 @@ public class SingleConcertViewPane extends BorderPane{
 		});
 		
 		// style class to add the removeButton
-	     remove.getStyleClass().add("removeButton");
+	     removeButton.getStyleClass().add("removeButton");
 		
-		inputs.setVgap(8);
-		
-		remove.setVisible(false);
+		inputs.setVgap(9);
 		
 		//Creating the input fields labels
-		Label whatBand = new Label("What band:");
+		Label whatBand = new Label("Band:");
+		whatBand.getStyleClass().add("labelFont");
 		inputs.add(whatBand, 0, 0);
 		whatBandInput = new TextField();
 		whatBandInput.setPromptText("");
@@ -149,16 +147,18 @@ public class SingleConcertViewPane extends BorderPane{
 		whatBandInput.setEditable(false);
 		inputs.add(whatBandInput, 0, 1);
 		
-		Label whereAt = new Label("What Venue:");
+		Label whereAt = new Label("Venue:");
+		whereAt.getStyleClass().add("labelFont");
 		inputs.add(whereAt, 0, 2);
 		
 		TextField whereAtInput = new TextField();
-		whereAtInput.setPromptText("Venue Name");
+		whereAtInput.setPromptText("Name");
 		whereAtInput.setText(venueName);
 		whereAtInput.setEditable(false);
 		inputs.add(whereAtInput, 0, 3);
 		
-		Label whatCity = new Label("What City:");
+		Label whatCity = new Label("City:");
+		whatCity.getStyleClass().add("labelFont");
 		inputs.add(whatCity, 0, 4);
 		
 		TextField whatCityInput = new TextField();
@@ -168,6 +168,7 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(whatCityInput, 0, 5);
 		
 		Label genre = new Label("Genre:");
+		genre.getStyleClass().add("labelFont");
 		inputs.add(genre, 0, 6);
 		
 		ComboBox<Genre> genreInput = new ComboBox<>();
@@ -179,16 +180,18 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(genreDisplay,0, 7);
 		
 		Label dateAttended = new Label("Date Attended:");
+		dateAttended.getStyleClass().add("labelFont");
 		Label dateFormat = new Label("(yyyy/mm/dd)");
 		// setting the dataformat to hide
 		dateFormat.setVisible(false);
 		inputs.add(dateAttended, 0, 8);
-		inputs.add(dateFormat, 1, 9);
-	
+//		inputs.add(dateFormat, 1, 9);
+
 		dateAttendedInput = new DatePicker();
 		inputs.add(dateAttendedInput, 0, 9);
 		
 		Label overallRating = new Label("Overall Rating:");
+		overallRating.getStyleClass().add("labelFont");
 		inputs.add(overallRating, 0, 11);
 	
 		Label overallRatingInput = new Label(concertObject.getRating() + "");
@@ -210,6 +213,7 @@ public class SingleConcertViewPane extends BorderPane{
 		comboRating.setVisible(false);
 		
 		Label pictures = new Label("Pictures from the Event:");
+		pictures.getStyleClass().add("labelFont");
 		inputs.add(pictures, 0, 10);
 	
 		// imageview of the image the user added
@@ -242,6 +246,7 @@ public class SingleConcertViewPane extends BorderPane{
 						genreObjectAll));
 			
 			genreInput.setValue(GenreTable.getGenre(bandObject.getGenreId()));
+			
 			// Setting current date value so it doesnt add a null value
 			LocalDate inputDate = LocalDate.parse(dateAdded);
 			dateAttendedInput.setValue(inputDate);
@@ -250,19 +255,13 @@ public class SingleConcertViewPane extends BorderPane{
 			
 			// showing the date format to show
 			dateFormat.setVisible(true);
-			// setting the text view visibility
-			edit.setVisible(false);
-			saveEdits.setVisible(true);
-//			updatesValues.setVisible(true);
 			title.setText("Update Values");
 			buttonBox.getChildren().remove(edit);
-			remove.setVisible(true);
+			buttonBox.getChildren().addAll(saveEdits, removeButton);
 			comboRating.setVisible(true);
 			overallRatingInput.setVisible(false);
 		});
-		
-		edit.getStyleClass().add("buttonLoad");
-		
+			
 		saveEdits.setOnAction((event)->{
 					title.setText("ConcertView");
 					whatBandInput.setEditable(false);
@@ -284,7 +283,7 @@ public class SingleConcertViewPane extends BorderPane{
 					saveEdits.setVisible(false);
 					updatesValues.setVisible(false);
 					buttonBox.getChildren().add(0, edit);
-					remove.setVisible(false);
+					removeButton.setVisible(false);
 					
 					//venue update
 					venueTable.updateVenue(concertObject.getVenueID(), whereAtInput.getText().toString());
@@ -298,7 +297,6 @@ public class SingleConcertViewPane extends BorderPane{
 					concertTable.updateRating(comboRating.getValue(), concertObject.getId());
 					dateDisplay.setText(dateAttendedInput.getValue().toString());
 					ViewConcertTab.nameStage.close();
-					
 				});
 		
 		saveEdits.getStyleClass().add("buttonLoad");
