@@ -30,7 +30,19 @@ public class ConcertTable implements ConcertDAO{
 	static //initializing db connection
 	Database db = Database.getInstance();
 	
-	public static void createConcert(String date, int rating, FileInputStream pic, Band band, Venue venue) {
+	/**
+	 * 
+	 * This method adds concerts to the concertTable
+	 * 
+	 * @param date date of the concert
+	 * @param rating of the concert
+	 * @param pic of the concert
+	 * @param band to get the band from the table and access the id
+	 * @param venue to get the venue from the table and access the id
+	 * @return a confirmation message that will be passed to the ConfirmationMessageScene to display if the 
+	 * 	concert was successfully inserted or it was in the table already
+	 */
+	public static String createConcert(String date, int rating, FileInputStream pic, Band band, Venue venue) {
 		Venue concertVenue = tables.VenueTable.createVenue(venue);
 		Band concertBand = tables.BandTable.createBand(band);
 		int concertID = 0;
@@ -39,17 +51,13 @@ public class ConcertTable implements ConcertDAO{
 				+ Const.CONCERTS_COLUMN_VENUE_ID + ", " + Const.CONCERTS_COLUMN_DATE + ", " + Const.CONCERTS_COLUMN_RATING + "," + Const.CONCERTS_COLUMN_PIC + ")" +
 				"VALUES( 0, " + concertBand.getId() +  ", " + concertVenue.getId() + ", '" +  date + "', '" + rating  + "', null);"; 
 		
-		String selectQuery = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE " + Const.CONCERTS_COLUMN_DATE + " LIKE '" + date +"';";
-		String selectQuery2 = "SELECT id FROM " + Const.TABLE_CONCERT + " WHERE " + Const.CONCERTS_COLUMN_BAND_ID + " LIKE '" + concertBand.getId() +"';";
+		String selectQuery = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE " + Const.CONCERTS_COLUMN_DATE + " LIKE '" + date +"' AND " + Const.CONCERTS_COLUMN_BAND_ID + " = " + concertBand.getId();
 
 		try {
 			Statement getBand = db.getConnection().createStatement();
-			ResultSet result = getBand.executeQuery(selectQuery);
-			
-			System.out.println("result: " + result.toString());
+			ResultSet result = getBand.executeQuery(selectQuery);			
 				if (result.next()) {
-					System.out.println("already in table");					
-					
+					return band.getName() + " already in table";
 				} else {
 
 					db.getConnection().createStatement().execute(query);
@@ -63,14 +71,12 @@ public class ConcertTable implements ConcertDAO{
 					// This calls the function within this class which updates the just entered concerts picture   
 					concerts.updatePicture(pic, concertID);
 					concerts.getConcertImage(concertID);
-					System.out.println(band.getName() + " successfully added to the table");
+					return band.getName() + " successfully added to the table";
 				}
-			
-			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 
 	/**
@@ -127,28 +133,45 @@ public class ConcertTable implements ConcertDAO{
 	return concert;
 	}
 
+
 	@Override
-	public void updateDate(Band band) {
-		// TODO Auto-generated method stub
-		
+	public void updateDate(String date, int concertId) {
+		String query = "UPDATE " + Const.TABLE_CONCERT +
+				" SET " + Const.CONCERTS_COLUMN_DATE + " = '" + date + "' WHERE "
+				+ Const.BANDS_COLUMN_ID + " = '" + concertId + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println( " updated date from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void updateRating(Band band) {
-		// TODO Auto-generated method stub
-		
+	public void updateRating(int newRating, int concertId) {
+		String query = "UPDATE " + Const.TABLE_CONCERT +
+				" SET " + Const.CONCERTS_COLUMN_RATING + " = '" + newRating + "' WHERE "
+				+ Const.BANDS_COLUMN_ID + " = '" + concertId + "';";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println( " updated rating from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	@Override
-	public void updatePicture(Band band) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
-	public void deleteBand(Band band) {
-		// TODO Auto-generated method stub
-		
+	public void deleteConcert(int concertId) {
+		String query = "DELETE FROM " + Const.TABLE_CONCERT + " WHERE " +
+				Const.CONCERTS_COLUMN_ID + " = " + concertId;
+		try {
+			
+			db.getConnection().createStatement().execute(query);
+			System.out.println("concert deleted from the table");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * 
@@ -190,7 +213,7 @@ public class ConcertTable implements ConcertDAO{
 						stmt = db.getConnection().prepareStatement(sql8);
 						   ResultSet resultSet = stmt.executeQuery();
 						    while (resultSet.next()) {
-						      File image = new File("/Users/selectedImage.png");
+						      File image = new File("selectedImg.png");
 						      //@SuppressWarnings("resource")
 							FileOutputStream fos = new FileOutputStream(image);
 		
@@ -215,5 +238,47 @@ public class ConcertTable implements ConcertDAO{
 		return null;
 		
 	}
+
+	@Override
+	public int getYearCount(int year) {
+		String query = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE year("
+				+ Const.CONCERTS_COLUMN_DATE + ") = " + year;
+	ArrayList<Concert> concerts = new ArrayList<>();
+	try {
+		Statement getCount = db.getConnection().createStatement();
+		ResultSet result = getCount.executeQuery(query);
+		while(result.next()) {
+			concerts.add(new Concert(result.getInt(Const.CONCERTS_COLUMN_ID),
+					result.getInt(Const.CONCERTS_COLUMN_BAND_ID),
+					result.getInt(Const.CONCERTS_COLUMN_VENUE_ID),
+					result.getString(Const.CONCERTS_COLUMN_DATE),
+					result.getInt(Const.CONCERTS_COLUMN_RATING),
+					result.getString(Const.CONCERTS_COLUMN_PIC)));
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return concerts.size();
+	}
+
+	/**
+	 * This method gets the distinc years that appear on the concert table
+	 */
+	@Override
+	public ArrayList<Integer> getAllYears() {
+		String query = "SELECT DISTINCT year("+ Const.CONCERTS_COLUMN_DATE +") FROM " + Const.TABLE_CONCERT;
+	ArrayList<Integer> years = new ArrayList<>();
+	try {
+		Statement getYear = db.getConnection().createStatement();
+		ResultSet result = getYear.executeQuery(query);
+			while(result.next()) {
+				years.add(result.getInt("year("+Const.CONCERTS_COLUMN_DATE+")"));
+			}		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return years;
+	}
+	
 
 }

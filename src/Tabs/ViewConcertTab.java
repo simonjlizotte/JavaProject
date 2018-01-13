@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -37,10 +38,18 @@ import tables.VenueTable;
  * This tab will display every concert that the user added in a listView
  */
 public class ViewConcertTab extends Tab{
+	
 	// concert band
 	Band concertBand;
 	
+	//stage
+	public static Stage nameStage = new Stage();
+	
+	//global variable passed to reference the id selected
 	public static int num2;
+	
+	//listview of bands
+	public static ListView<Concert> bandList;
 	
 	Venue venueObject;
 	
@@ -66,18 +75,15 @@ public class ViewConcertTab extends Tab{
 		// vBox to host the listView
 		BorderPane borderPane = new BorderPane();
 				
-		//Concert table
-		//ConcertTable concertTable = new ConcertTable();
-		
 		//bands table
 		BandTable bandTable = new BandTable();
 		
 		// listView of band names
-		ListView<Concert> bandList = new ListView<Concert>();
+		 bandList = new ListView<Concert>();
 		
 		// label to set the title
 		Label viewTabTitle = new Label("View Concerts!");
-		viewTabTitle.getStyleClass().add("viewTabTitle");
+		viewTabTitle.getStyleClass().add("singleViewTitle");
 				
 		//grabbing the date and band names from the tables to display
 		ConcertTable concertTable = new ConcertTable();	
@@ -88,78 +94,50 @@ public class ViewConcertTab extends Tab{
 		
 		// add those items to the ListView
 		bandList.setItems(FXCollections.observableArrayList(concerts));
-	   
-		bandList.getSelectionModel().selectedItemProperty().addListener(
-	            (ObservableValue<? extends Concert> ov, Concert old_val, 
-	                Concert new_val) -> {   
-	                	num2 = new_val.getId();
-	                	Stage nameStage = new Stage();
+		
+		// onClick event which will if the selected item and diselect it. It will pass the id
+		//and call the scene
+		bandList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(final MouseEvent mouseEvent) {
+		      Concert selected = bandList.getSelectionModel().getSelectedItem();
+		      int selectedNum = bandList.getSelectionModel().getSelectedIndex();
+		        if (bandList.getSelectionModel().isSelected(selectedNum)){
+		            bandList.getSelectionModel().clearSelection(selectedNum);
+		            if(selected != null) {
+	                		num2 = selected.getId();
+		            }else {
+	            			System.out.println("No value");
+		            }
+	            	
 		        	  	Scene scene = new SingleConcertViewScene();
 		    			nameStage.setTitle("concert");
 		    			nameStage.setScene(scene);
 		    			scene.getStylesheets().add("main.css");
-		    			nameStage.show();
-		  
-	                	System.out.println(new_val.getId());
-	        });
-	    
-////		// this is a mouse event function which currently will o
-//		bandList.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//	          @Override
-//	          public void handle(MouseEvent arg0) {
-//	        	  	Stage nameStage = new Stage();
-//	        	  	Scene scene = new SingleConcertViewScene();
-//	    			nameStage.setTitle("concert");
-//	    			nameStage.setScene(scene);
-//	    			scene.getStylesheets().add("main.css");
-//	    			nameStage.show();
-//	        	  	System.out.println(bandList.getSelectionModel().getSelectedItem());
-//	          }
-//	      });
-		
-//		bandList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-//			@Override
-//			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-////				for(int j = 0; j < concerts.size(); j++) {
-////					num = concertTable.getAllConcerts().get(j).getId();
-//////					System.out.println("ListView Selection Changed (newValue: " + newValue + i + ")\n");
-////				}
-//				
-//			System.out.println("ListView Selection Changed (newValue: " + newValue +  ")\n");
-//			Stage nameStage = new Stage();
-//        	  	Scene scene = new SingleConcertViewScene();
-//    			nameStage.setTitle("concert");
-//    			nameStage.setScene(scene);
-//    			scene.getStylesheets().add("main.css");
-//    			nameStage.show();
-//			}
-//		});
-//		
-		// refresh button
-		Button refreshButton = new Button("Refresh");
-		refreshButton.getStyleClass().add("refresh");
-		
-		refreshButton.setOnAction(e->{
-			bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
+		    			nameStage.show();    
+		        }
+		    }
 		});
-//		
+	
 	    // setting the borderPane
 	    borderPane.setTop(viewTabTitle);	  	    
 	    borderPane.setCenter(bandList);
-	    borderPane.setBottom(refreshButton);
 	    borderPane.setPadding(new Insets(10,10,10,10));
-	    
 	    //Getting the position of the borderPane to center
 	    BorderPane.setAlignment(viewTabTitle, Pos.CENTER);
-	    BorderPane.setAlignment(refreshButton, Pos.CENTER);
 		this.setContent(borderPane);
 	}
+	
 	//this method will be call when needing the instance of the tab or when first creating it
 	public static ViewConcertTab getInstance() {
 		if(tab == null) {
 			tab = new ViewConcertTab();
 		}
 		return tab;
+	}
+	
+	public void closeNameStage() {
+		this.nameStage.close();
 	}
 	
 }

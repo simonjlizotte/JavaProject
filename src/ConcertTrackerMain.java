@@ -29,6 +29,8 @@ public class ConcertTrackerMain extends Application{
 		// Building MenuBar
 		MenuBar menu = new MenuBar();
 		
+		menu.getStyleClass().add("menu");
+		
 		// Build File Menu
 		Menu file = new Menu("File");
 		Menu help = new Menu("Help");
@@ -36,6 +38,7 @@ public class ConcertTrackerMain extends Application{
 		
 		// Build file Menu Items
 		MenuItem quit = new MenuItem("Quit");
+		
 		// Set Lambda
 		quit.setOnAction((event) -> {
 			System.exit(0);
