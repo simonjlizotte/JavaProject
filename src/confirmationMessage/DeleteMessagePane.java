@@ -27,6 +27,7 @@ public class DeleteMessagePane extends BorderPane{
 		Text message = new Text("Are you sure you want to delete the concert that " + bandName + " performed on " + date + " from your database?");
 		message.setWrappingWidth(300);
 		message.setTextAlignment(TextAlignment.CENTER);
+		message.getStyleClass().add("messageWarn");
 		BorderPane.setAlignment(message, Pos.CENTER);
 		this.setTop(message);
 		
@@ -34,8 +35,11 @@ public class DeleteMessagePane extends BorderPane{
 		HBox buttons = new HBox();
 		Button yes = new Button("Yes");
 		Button no = new Button("No");
+		no.getStyleClass().add("buttonLoad");
+		yes.getStyleClass().add("buttonLoadWarn");
 		buttons.getChildren().addAll(yes, no);
 		buttons.setAlignment(Pos.CENTER);
+		buttons.setSpacing(20);
 		this.setCenter(buttons);
 		
 		//event listeners for the buttons
