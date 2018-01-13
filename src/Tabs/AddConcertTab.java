@@ -21,7 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -42,6 +41,7 @@ import tables.GenreTable;
  * to one instance of this tab.
  */
 public class AddConcertTab extends Tab{
+	
 	
 	//file String
 	File file;
@@ -68,6 +68,14 @@ public class AddConcertTab extends Tab{
 		
 		db = Database.getInstance();
 			
+		GenreTable genreTable = new GenreTable();
+		genreTable.insertGenre("PUNK");
+		genreTable.insertGenre("METAL");
+		genreTable.insertGenre("POP");
+		genreTable.insertGenre("REGGAE");
+		genreTable.insertGenre("SKAP");
+		genreTable.insertGenre("ROCK");
+		genreTable.insertGenre("HIP-HOP");
 		// Title
 		Label title = new Label("Add a concert");
 		title.getStyleClass().add("singleViewTitle");
@@ -219,7 +227,7 @@ public class AddConcertTab extends Tab{
 		
 		container.setCenter(pane);
 		container.setTop(title);
-		container.setAlignment(title, Pos.CENTER);
+		BorderPane.setAlignment(title, Pos.CENTER);
 		container.setBottom(submitContainer);
 		this.setContent(container);
 	}
