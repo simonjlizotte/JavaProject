@@ -166,6 +166,28 @@ public class BandTable implements BandDAO{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * SELECT COUNT(*) FROM bandTable WHERE genre_id = 1;
+	 */
+	@Override
+	public int getGenreCount(int genreId) {
+		String query = "SELECT * FROM " + Const.TABLE_BAND + " WHERE "
+					+ Const.BANDS_COLUMN_GENRE_ID + " = " + genreId;
+		ArrayList<Band> bands = new ArrayList<>();
+		try {
+			Statement getCount = db.getConnection().createStatement();
+			ResultSet result = getCount.executeQuery(query);
+			while(result.next()) {
+				bands.add(new Band(result.getInt(Const.BANDS_COLUMN_ID),
+						result.getString(Const.BANDS_COLUMN_NAME), result.getInt(Const.BANDS_COLUMN_GENRE_ID)));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return bands.size();
+	}
 
 	
 

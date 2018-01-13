@@ -14,6 +14,8 @@ public interface ConcertDAO {
 		//Read
 		public ArrayList<Concert> getAllConcerts();
 		public Concert getConcert(int concertID);
+		public int getYearCount(int year);
+		public ArrayList<Integer> getAllYears();
 		//Update
 		public void updateDate(String date, int concertId);
 		public void updateRating(int newRating, int concertId);
