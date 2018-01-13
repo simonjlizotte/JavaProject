@@ -69,13 +69,6 @@ public class ChartTab extends Tab{
 		
 		BandTable bandTable = new BandTable();
 		
-		ArrayList<Band> band = bandTable.getAllBands();
-		int genreId = band.get(1).getGenreId();
-		Genre genre = new Genre();
-		GenreTable genreTable = new GenreTable();
-		
-		System.out.println(genreTable.getGenre(genreId));
-		
 		// Label to set the title
 		Label chartTabTitle = new Label("CHARTS OF YOUR FAV DATA!");
 		chartTabTitle.getStyleClass().add("chartTabTitle");

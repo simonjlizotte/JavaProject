@@ -167,6 +167,7 @@ public class AddConcertTab extends Tab{
 		            		filePath = file.getAbsolutePath();
 		            		uploadPic.setVisible(false);
 		            		pane.add(photoAddedLabel, 0, 10);
+		            		btnLoad.setVisible(false);
 		            }
 		            //file = fileChooser.showOpenDialog(null).getAbsolutePath();
 			}

@@ -71,21 +71,4 @@ public class GenreTable implements GenreDAO{
 		}
 		return genre;
 	}
-
-	public static int getGenreCount(Genre genre) {
-		String query = "SELECT * FROM " + Const.TABLE_GENRE + " WHERE "
-				+ Const.GENRE_COLUMN_NAME + " = '" + genre + "'";
-		ArrayList<Genre> genreItems = new ArrayList<Genre>();
-		try {
-			Statement getGenre = db.getConnection().createStatement();
-			ResultSet result = getGenre.executeQuery(query);
-			if(result.next()) {
-			genreItems.add(new Genre(result.getInt(Const.GENRE_COLUMN_ID),
-					result.getString(Const.GENRE_COLUMN_NAME))); 
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		return genreItems.size();
-	}
 }
