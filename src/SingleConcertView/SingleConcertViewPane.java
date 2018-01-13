@@ -306,6 +306,7 @@ public class SingleConcertViewPane extends BorderPane{
 					concertTable.updateDate(dateAttendedInput.getValue().toString().toUpperCase().trim(), concertObject.getId());
 					concertTable.updateRating(comboRating.getValue(), concertObject.getId());
 					dateDisplay.setText(dateAttendedInput.getValue().toString());
+					ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
 					ViewConcertTab.nameStage.close();
 				});
 		
