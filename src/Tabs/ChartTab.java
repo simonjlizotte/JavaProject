@@ -34,6 +34,7 @@ import tables.VenueTable;
  */
 public class ChartTab extends Tab{
 	
+
 	ViewConcertTab viewConcert;
 	//instance of venueTable
 	VenueTable venueTable = new VenueTable();
@@ -52,6 +53,9 @@ public class ChartTab extends Tab{
 	
 	//constructor
 	private ChartTab() {
+		// clean tables of unused data
+		ConcertTable concertTable = new ConcertTable();
+		concertTable.garbageCollection();
 		this.setText(TAB_TITLE);
 		 
 		HBox buttonHolder = new HBox();
