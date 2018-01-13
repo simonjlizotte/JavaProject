@@ -49,13 +49,8 @@ public class Band {
 	public int getGenreId() {
 		return genreId;
 	}
-
-
+	
 	public void setGenreId(int genreId) {
 		this.genreId = genreId;
-	}
-	
-	
-	
-	
+	}	
 }
