@@ -116,7 +116,6 @@ public class AddConcertTab extends Tab{
 		TextField cityInput = new TextField();
 		pane.add(cityInput, 0, 5);
 		
-		
 		//Fifth Row - Genre
 		Text genre = new Text("Genre:");
 		pane.add(genre, 0 , 6 );		
@@ -179,7 +178,6 @@ public class AddConcertTab extends Tab{
 			}
         });
         
-        
         pane.getStyleClass().add("paneAdd");
         pane.setMaxWidth(300);
 		pane.setAlignment(Pos.CENTER);
@@ -214,7 +212,17 @@ public class AddConcertTab extends Tab{
 			bandNameInput.clear();
 			cityInput.clear();
 			
+			// reseting the genre
+			comboGenre.getItems().clear();
+			comboGenre.setItems(
+					FXCollections.observableArrayList(
+							GenreTable.getAllGenres()));
 			
+			date.getEditor().clear();
+			//reseting the rating
+			comboRating.getItems().clear();
+			comboRating.setItems(
+					FXCollections.observableArrayList(ratingArray));
 			Scene scene = new ConfirmationMessageScene(confirmation);
 			nameStage.setScene(scene);
 			scene.getStylesheets().add("main.css");
