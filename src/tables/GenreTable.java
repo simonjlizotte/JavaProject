@@ -71,4 +71,25 @@ public class GenreTable implements GenreDAO{
 		}
 		return genre;
 	}
+
+	@Override
+	public void insertGenre(String genre) {
+		String insertQuery = "INSERT INTO " + Const.TABLE_GENRE + 
+				"(" + Const.GENRE_COLUMN_NAME + ") "
+						+ "values ('" +	genre + "')";
+		String selectQuery = "SELECT * FROM " + Const.TABLE_GENRE +  " WHERE " + Const.GENRE_COLUMN_NAME + " = '" + genre +"';";
+		try {
+			Statement getGenre = db.getConnection().createStatement();
+			ResultSet result = getGenre.executeQuery(selectQuery);
+				if (result.next()) {
+					System.out.println(genre + "already in table");					
+				} else {
+				getGenre.execute(insertQuery);
+				System.out.println(genre + " successfully added to the table");
+				}
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+
+	}
 }

@@ -1,6 +1,5 @@
 package objects;
 
-import tables.BandTable;
 
 /** Concert class
  * 

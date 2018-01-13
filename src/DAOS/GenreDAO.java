@@ -16,5 +16,8 @@ public interface GenreDAO {
 	}
 	public static Genre getGenre(int genreID) {
 		return null;
-	}	
+	}
+	
+	//insert
+	public void insertGenre(String genre);
 }

@@ -23,6 +23,7 @@ public class DeleteMessagePane extends BorderPane{
 	public DeleteMessagePane(String bandName, String date, int concertId, ConcertTable concertTable) {
 		//this line blocks input in the rest of the program until the user closes the stage
 //		SingleConcertViewPane.nameStage.initModality(Modality.APPLICATION_MODAL);
+
 		//question
 		Text message = new Text("Are you sure you want to delete the concert that " + bandName + " performed on " + date + " from your database?");
 		message.setWrappingWidth(300);
