@@ -1,5 +1,6 @@
 package objects;
 
+import tables.BandTable;
 
 /** Concert class
  * 
@@ -52,5 +53,9 @@ public class Band {
 	
 	public void setGenreId(int genreId) {
 		this.genreId = genreId;
+	}
+	
+	public String toString() {
+		return this.name;
 	}	
 }
