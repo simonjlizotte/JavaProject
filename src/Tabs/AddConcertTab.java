@@ -37,9 +37,13 @@ import tables.GenreTable;
 /**
  * 
  * @author josegeorges
+ * @author carmenkerim
+ * @author simonlizotte
+ * @author adambazzi
  *
  * This tab is designed to follow a singleton pattern, meaning that there will only be access
  * to one instance of this tab.
+ * 
  */
 public class AddConcertTab extends Tab{
 	
@@ -67,9 +71,9 @@ public class AddConcertTab extends Tab{
 		this.setText(TAB_TITLE);
 		
 		db = Database.getInstance();
-			
+				
 		// Title
-		Label title = new Label("Add a concert");
+		Label title = new Label("Add A Concert");
 		title.getStyleClass().add("singleViewTitle");
 		
 		//prompt that the photo was added
@@ -80,8 +84,6 @@ public class AddConcertTab extends Tab{
 		GridPane pane = new GridPane();
 		
 		BorderPane container = new BorderPane();
-		
-//		pane.getStyleClass().add("paneS");
 		
 		//Declaring insets
 		Insets insets = new Insets(10,10,10,10);
@@ -144,7 +146,7 @@ public class AddConcertTab extends Tab{
 		//Final Row - Upload File
 		Text uploadPic = new Text("Upload a picture: ");
 		Button btnLoad = new Button("Load");
-		
+	    btnLoad.getStyleClass().add("buttonLoad");
 		pane.add(uploadPic, 0, 10);
 		pane.add(btnLoad, 0,11);
         btnLoad.setOnAction(new EventHandler<ActionEvent>() {
@@ -163,14 +165,15 @@ public class AddConcertTab extends Tab{
 		            		filePath = file.getAbsolutePath();
 		            		uploadPic.setVisible(false);
 		            		pane.add(photoAddedLabel, 0, 10);
+		            		btnLoad.setVisible(false);
 		            }
 		            //file = fileChooser.showOpenDialog(null).getAbsolutePath();
 			}
         });
         
         
-        btnLoad.getStyleClass().add("buttonLoad");
-		
+        pane.getStyleClass().add("paneAdd");
+        pane.setMaxWidth(300);
 		pane.setAlignment(Pos.CENTER);
 		pane.setPadding(insets);
 		pane.setVgap(10);
