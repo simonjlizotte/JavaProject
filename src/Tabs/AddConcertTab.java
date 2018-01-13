@@ -71,9 +71,9 @@ public class AddConcertTab extends Tab{
 		this.setText(TAB_TITLE);
 		
 		db = Database.getInstance();
-			
+				
 		// Title
-		Label title = new Label("Add a concert");
+		Label title = new Label("Add A Concert");
 		title.getStyleClass().add("singleViewTitle");
 		
 		//prompt that the photo was added
@@ -84,8 +84,6 @@ public class AddConcertTab extends Tab{
 		GridPane pane = new GridPane();
 		
 		BorderPane container = new BorderPane();
-		
-//		pane.getStyleClass().add("paneS");
 		
 		//Declaring insets
 		Insets insets = new Insets(10,10,10,10);

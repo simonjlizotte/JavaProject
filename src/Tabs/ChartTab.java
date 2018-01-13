@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import objects.Band;
 import objects.Genre;
 import objects.Venue;
@@ -48,7 +49,7 @@ public class ChartTab extends Tab{
 	private static ChartTab tab;
 	
 	//Gridpane used to display the charts
-	public static GridPane pane;
+	public static HBox pane;
 	
 	// used to store the title and gridpane
 	public static BorderPane paneHolder;
@@ -57,34 +58,18 @@ public class ChartTab extends Tab{
 	private ChartTab() {
 		this.setText(TAB_TITLE);
 		 
+		HBox buttonHolder = new HBox();
 		
-		pane = new GridPane();
+		pane = new HBox();
 		paneHolder = new BorderPane();
-		
-
-		
 		BandTable bandTable = new BandTable();
 		
 		// Label to set the title
-		Label chartTabTitle = new Label("CHARTS OF YOUR FAV DATA!");
-		chartTabTitle.getStyleClass().add("chartTabTitle");
+		Label chartTabTitle = new Label("Concert Data");
+		chartTabTitle.getStyleClass().add("singleViewTitle");
 	   
 		//------- citites chart -------//
         PieChart citiesChart = new PieChart();
- 
-       
-        // set the data to the citiesChart
-//        citiesChart.setData("");
-        
-        // setting the title and labels
-        citiesChart.setTitle("Cities");
-        citiesChart.setLabelsVisible(true);
-        
-//        // sample obserableList for the cities
-//        ObservableList<PieChart.Data> citiesData =
-//            FXCollections.observableArrayList(
-//                new PieChart.Data("Windsor", 2));
-
         
 //------- genre chart -------//
         PieChart genresChart = new PieChart();
@@ -109,26 +94,30 @@ public class ChartTab extends Tab{
 //--------- refresh button -------\\
         
         Button refreshButton = new Button("Refresh Charts");
+        refreshButton.getStyleClass().add("submit");
+        buttonHolder.getChildren().add(refreshButton);
+        buttonHolder.setAlignment(Pos.CENTER);
+        buttonHolder.getStyleClass().add("buttonBox");
+        buttonHolder.setSpacing(20);
         refreshButton.setOnMouseClicked(e->{
             genresChart.setData(populateGenreChart());
             yearChart.setData(populateYearChart());
         });
         
-        //Setting the spacing of the charts
-        pane.setHgap(10);
         
         // padding around the charts
         pane.setPadding(new Insets(10,10,10,10));
         
         // added yearChart,genres, and titles chart to pane
-        pane.add(yearChart, 0, 0);
-        pane.add(genresChart, 0, 1);
-        pane.add(citiesChart, 1, 0);
-        pane.add(refreshButton, 1, 1);
+//        pane.add(yearChart, 0, 0);
+//        pane.add(genresChart, 1,0 );
+        	pane.getChildren().addAll(yearChart, genresChart);
         
-        paneHolder.setTop(chartTabTitle);
-        BorderPane.setAlignment(chartTabTitle, Pos.CENTER);
+        paneHolder.setTop(chartTabTitle);  
         paneHolder.setCenter(pane);
+        paneHolder.setBottom(buttonHolder);
+        paneHolder.setAlignment(buttonHolder, Pos.CENTER);
+        BorderPane.setAlignment(chartTabTitle, Pos.CENTER);
         //setting the pane to the tab view
         this.setContent(paneHolder);
 	}

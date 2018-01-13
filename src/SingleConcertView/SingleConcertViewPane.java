@@ -28,6 +28,7 @@ import tables.BandTable;
 import tables.ConcertTable;
 import tables.GenreTable;
 import tables.VenueTable;
+import viewPhoto.ViewPhotoScene;
 /**
  *  @author nickstajduhar
  * @author carmenkerim
@@ -60,8 +61,7 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		// instance of ViewConcertTab
 		ViewConcertTab.getInstance();
-		
-		
+	
 		// id of the concert being passed from the listview
 		int concertId = ViewConcertTab.num2;
 		
@@ -116,7 +116,6 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		// update values
 		Label updatesValues = new Label("Update The Values");
-		inputs.add(updatesValues, 0, 0);
 		
 		buttonBox.getChildren().addAll(edit);
 		buttonBox.setAlignment(Pos.CENTER);
@@ -135,7 +134,7 @@ public class SingleConcertViewPane extends BorderPane{
 		// style class to add the removeButton
 	     removeButton.getStyleClass().add("removeButton");
 		
-		inputs.setVgap(9);
+		inputs.setVgap(5);
 		
 		//Creating the input fields labels
 		Label whatBand = new Label("Band:");
@@ -172,7 +171,7 @@ public class SingleConcertViewPane extends BorderPane{
 		inputs.add(genre, 0, 6);
 		
 		ComboBox<Genre> genreInput = new ComboBox<>();
-		inputs.add(genreInput, 0, 11);
+		inputs.add(genreInput, 0, 12);
 		// removing the genre input box
 		inputs.getChildren().remove(genreInput);
 		// creating a genreDisplay and adding it to the GridPane
@@ -192,10 +191,10 @@ public class SingleConcertViewPane extends BorderPane{
 		
 		Label overallRating = new Label("Overall Rating:");
 		overallRating.getStyleClass().add("labelFont");
-		inputs.add(overallRating, 0, 11);
+		inputs.add(overallRating, 0, 12);
 	
 		Label overallRatingInput = new Label(concertObject.getRating() + "");
-		inputs.add(overallRatingInput, 0, 12);
+		inputs.add(overallRatingInput, 0, 13);
 		
 		ComboBox<Integer> comboRating = new ComboBox<>();
 		ArrayList<Integer> ratingArray = new ArrayList<Integer>();
@@ -209,12 +208,23 @@ public class SingleConcertViewPane extends BorderPane{
 				FXCollections.observableArrayList(ratingArray));
 		comboRating.setValue(concertObject.getRating());
 		
-		inputs.add(comboRating, 0, 13);
+		inputs.add(comboRating, 0, 14);
 		comboRating.setVisible(false);
 		
 		Label pictures = new Label("Pictures from the Event:");
 		pictures.getStyleClass().add("labelFont");
+		Label picturesLink = new Label("View Picture");
+		picturesLink.getStyleClass().add("picturesLink");
+		picturesLink.setOnMouseClicked(e->{
+			Scene scene = new ViewPhotoScene();
+			nameStage.setScene(scene);
+			scene.getStylesheets().add("main.css");
+			nameStage.show();
+		});
+		
+		
 		inputs.add(pictures, 0, 10);
+		inputs.add(picturesLink, 0, 11);
 	
 		// imageview of the image the user added
 		ImageView imageDisplay = new ImageView();

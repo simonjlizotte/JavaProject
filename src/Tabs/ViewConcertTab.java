@@ -83,7 +83,7 @@ public class ViewConcertTab extends Tab{
 		
 		// label to set the title
 		Label viewTabTitle = new Label("View Concerts!");
-		viewTabTitle.getStyleClass().add("viewTabTitle");
+		viewTabTitle.getStyleClass().add("singleViewTitle");
 				
 		//grabbing the date and band names from the tables to display
 		ConcertTable concertTable = new ConcertTable();	

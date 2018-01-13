@@ -20,11 +20,18 @@
 }
 
 /*SINGLECONCERTVIEW LABEL*/
+.imageView{
+    -fx-background-color: #607D8B;
+}
+
+.picturesLink:hover{
+	-fx-text-fill: #FF9800;
+}
 
 .labelFont{
 	-fx-font-weight: bold;
 	-fx-font-size: 11pt;
-	 -fx-text-fill: #212121;
+	-fx-text-fill: #212121;
 }
 
 
@@ -38,6 +45,8 @@
 .singleViewTitle{
     -fx-font-size: 23pt;
     -fx-padding: 5 25 5 25;
+    -fx-text-fill: #424242;
+    -fx-font-weight: bold;
 }
 
 /*TITLE FOR THE SINGLE CONCERT VIEW WHEN THE EDIT CHANGES
@@ -243,10 +252,10 @@ ON THE SINGLECONCERTVIEW*/
 
 /*STYLING THE CHARTS*/
 .chartTabTitle{
-    -fx-font-size: 20pt;
+    -fx-font-size: 18pt;
+   -fx-text-fill:#455A64;
 }
 
 .chart {
-    -fx-padding: 10px;
 }
 
