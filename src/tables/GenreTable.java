@@ -92,6 +92,4 @@ public class GenreTable implements GenreDAO{
 		}
 
 	}
-
-	
 }
