@@ -239,6 +239,30 @@ public class ConcertTable implements ConcertDAO{
 		
 	}
 
+	@Override
+	public int getYearCount(int year) {
+		
+		return 0;
+	}
+
+	/**
+	 * This method gets the distinc years that appear on the concert table
+	 */
+	@Override
+	public ArrayList<Integer> getAllYears() {
+		String query = "SELECT DISTINCT year("+ Const.CONCERTS_COLUMN_DATE +") FROM " + Const.TABLE_CONCERT;
+	ArrayList<Integer> years = new ArrayList<>();
+	try {
+		Statement getYear = db.getConnection().createStatement();
+		ResultSet result = getYear.executeQuery(query);
+			while(result.next()) {
+				years.add(result.getInt("year("+Const.CONCERTS_COLUMN_DATE+")"));
+			}		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return years;
+	}
 	
 
 }
