@@ -239,6 +239,46 @@ public class ConcertTable implements ConcertDAO{
 		
 	}
 
+	@Override
+	public int getYearCount(int year) {
+		String query = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE year("
+				+ Const.CONCERTS_COLUMN_DATE + ") = " + year;
+	ArrayList<Concert> concerts = new ArrayList<>();
+	try {
+		Statement getCount = db.getConnection().createStatement();
+		ResultSet result = getCount.executeQuery(query);
+		while(result.next()) {
+			concerts.add(new Concert(result.getInt(Const.CONCERTS_COLUMN_ID),
+					result.getInt(Const.CONCERTS_COLUMN_BAND_ID),
+					result.getInt(Const.CONCERTS_COLUMN_VENUE_ID),
+					result.getString(Const.CONCERTS_COLUMN_DATE),
+					result.getInt(Const.CONCERTS_COLUMN_RATING),
+					result.getString(Const.CONCERTS_COLUMN_PIC)));
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return concerts.size();
+	}
+
+	/**
+	 * This method gets the distinc years that appear on the concert table
+	 */
+	@Override
+	public ArrayList<Integer> getAllYears() {
+		String query = "SELECT DISTINCT year("+ Const.CONCERTS_COLUMN_DATE +") FROM " + Const.TABLE_CONCERT;
+	ArrayList<Integer> years = new ArrayList<>();
+	try {
+		Statement getYear = db.getConnection().createStatement();
+		ResultSet result = getYear.executeQuery(query);
+			while(result.next()) {
+				years.add(result.getInt("year("+Const.CONCERTS_COLUMN_DATE+")"));
+			}		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return years;
+	}
 	
 
 }

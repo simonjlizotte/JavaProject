@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +17,7 @@ import objects.Band;
 import objects.Genre;
 import objects.Venue;
 import tables.BandTable;
+import tables.ConcertTable;
 import tables.GenreTable;
 import tables.VenueTable;
 
@@ -55,17 +57,11 @@ public class ChartTab extends Tab{
 	private ChartTab() {
 		this.setText(TAB_TITLE);
 		 
-		viewConcert.getInstance();
 		
 		pane = new GridPane();
 		paneHolder = new BorderPane();
 		
-		VenueTable venueTable = new VenueTable();
-				
-		ArrayList<Venue> cityCount = venueTable.getAllVenues();
-			
-		ArrayList<String> cityCounter = new ArrayList<String>();
-		
+
 		
 		BandTable bandTable = new BandTable();
 		
@@ -90,35 +86,33 @@ public class ChartTab extends Tab{
 //                new PieChart.Data("Windsor", 2));
 
         
-        //------- genre chart -------//
+//------- genre chart -------//
         PieChart genresChart = new PieChart();
         
         // setting the title and labels
         genresChart.setTitle("Genres");
         genresChart.setLabelsVisible(true);
-        
-        //Sample obserableList for the genres
-        ObservableList<PieChart.Data> genresData =
-            FXCollections.observableArrayList(
-                new PieChart.Data("Hard", 2));
-        
+
         //Set the data to the genresChart
-        genresChart.setData(genresData);
+        genresChart.setData(populateGenreChart());
         
-        //------- year chart -------//
+//------- year chart -------//
         PieChart yearChart = new PieChart();
         
         // title to the yearChart
         yearChart.setTitle("Year");
         yearChart.setLabelsVisible(true);
-        
-        // sample obserableList for the yearChart
-        ObservableList<PieChart.Data> yearData =
-            FXCollections.observableArrayList(
-                new PieChart.Data("2007", 2));
       
         // set the data to the yearChart
-        yearChart.setData(yearData);
+        yearChart.setData(populateYearChart());
+
+//--------- refresh button -------\\
+        
+        Button refreshButton = new Button("Refresh Charts");
+        refreshButton.setOnMouseClicked(e->{
+            genresChart.setData(populateGenreChart());
+            yearChart.setData(populateYearChart());
+        });
         
         //Setting the spacing of the charts
         pane.setHgap(10);
@@ -130,12 +124,58 @@ public class ChartTab extends Tab{
         pane.add(yearChart, 0, 0);
         pane.add(genresChart, 0, 1);
         pane.add(citiesChart, 1, 0);
+        pane.add(refreshButton, 1, 1);
         
         paneHolder.setTop(chartTabTitle);
         BorderPane.setAlignment(chartTabTitle, Pos.CENTER);
         paneHolder.setCenter(pane);
         //setting the pane to the tab view
         this.setContent(paneHolder);
+	}
+	
+	/**JoseGeorges
+	 * This method populates the GenreChart;
+	 * @return an observableList of piechart.data
+	 */
+	public ObservableList<PieChart.Data> populateGenreChart() {
+        //we need the bandTable
+		BandTable bandTable =  new BandTable();
+		//we get all the genres and add them inside an ArrayList
+		ArrayList<Genre> genres = GenreTable.getAllGenres();
+		//this will hold the data for the charts
+		ArrayList<PieChart.Data> dataList = new ArrayList<>();
+		//this loop will call the getGenreCount, getGenre and add both to a new pieChart, which will
+		//then be added to the dataList. This happens with each genre inside of the database.
+		for (int i = 0; i < genres.size(); i++) {
+			int genreAmount = bandTable.getGenreCount(genres.get(i).getId());
+			String genreName = genres.get(i).getGenre();
+			PieChart.Data tempData = new PieChart.Data(genreName, genreAmount);
+			dataList.add(tempData);
+		}
+        //observableList for the genres
+        ObservableList<PieChart.Data> genresData =
+            FXCollections.observableArrayList(dataList);
+        return genresData;
+	}
+	
+	public ObservableList<PieChart.Data> populateYearChart(){
+		//we need the bandTable
+		ConcertTable concertTable =  new ConcertTable();
+		//we get all the genres and add them inside an ArrayList
+		ArrayList<Integer> years = concertTable.getAllYears();
+		//this will hold the data for the charts
+		ArrayList<PieChart.Data> dataList = new ArrayList<>();
+		//this loop will call the getGenreCount, getGenre and add both to a new pieChart, which will
+		//then be added to the dataList. This happens with each genre inside of the database.
+				for (int year : years) {
+					int yearAmount = concertTable.getYearCount(year);
+					PieChart.Data tempData = new PieChart.Data(Integer.toString(year), yearAmount);
+					dataList.add(tempData);
+				}
+		        //observableList for the genres
+		        ObservableList<PieChart.Data> yearsData =
+		            FXCollections.observableArrayList(dataList);
+		        return yearsData;
 	}
 	
 	//this method will be call when needing the instance of the tab or when first creating it
