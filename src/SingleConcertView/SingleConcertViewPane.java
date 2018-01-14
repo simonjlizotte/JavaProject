@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import objects.Band;
 import objects.Concert;
@@ -50,7 +51,6 @@ public class SingleConcertViewPane extends BorderPane{
 	
 	Concert itemSelected;
 	public SingleConcertViewPane() {
-		
 		// create a VBox to store the buttons
 		HBox buttonBox = new HBox();
 		buttonBox.getStyleClass().add("buttonBox");
@@ -129,7 +129,7 @@ public class SingleConcertViewPane extends BorderPane{
 			concertTable.garbageCollection();
 			nameStage.setScene(scene);
 			scene.getStylesheets().add("main.css");
-			nameStage.show();		
+			nameStage.show();	
 		});
 		
 		// style class to add the removeButton
@@ -303,8 +303,10 @@ public class SingleConcertViewPane extends BorderPane{
 					
 					//venue update
 					venueTable.updateVenue(concertObject.getVenueID(), whereAtInput.getText().toString());
+					
 					//city update
 					venueTable.updateCity(concertObject.getVenueID(), whatCityInput.getText().toString());
+					
 					//band update
 					bandTable.updateBand(concertObject.getBandID(), whatBandInput.getText().toString());
 					bandTable.updateGenre(genreInput.getSelectionModel().getSelectedItem().getId(), concertObject.getBandID());
