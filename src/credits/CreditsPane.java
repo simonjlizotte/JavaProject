@@ -1,5 +1,7 @@
 package credits;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 /**

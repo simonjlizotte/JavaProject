@@ -280,5 +280,73 @@ public class ConcertTable implements ConcertDAO{
 	return years;
 	}
 	
+	public void garbageCollection() {
+		// Create array lists for holding data
+		ArrayList<Concert> allConcerts = new ArrayList<Concert>();
+		ArrayList<Band> allBands = new ArrayList<Band>();
+		ArrayList<Venue> allVenues = new ArrayList<Venue>();
+		
+		//Create Tables 
+		BandTable bandTable = new BandTable();
+		VenueTable venueTable = new VenueTable();
+		
+		// Populate arrays 
+		allConcerts = this.getAllConcerts();
+		allBands = bandTable.getAllBands();
+		allVenues = venueTable.getAllVenues();
+		
+		// Clean band table
+		
+		for (int i = 0; i < allBands.size(); i++) {
+			int count = 0;
+			for (int j = 0; j < allConcerts.size(); j++) {
+				if (allBands.get(i).getId() == allConcerts.get(j).getBandID()) {
+					System.out.println("Band is being used");
+				} else {
+					count++;
+				}
+			}
+			if (count == allConcerts.size()) {
+				String query = "DELETE FROM " + Const.TABLE_BAND + " WHERE " +
+						Const.BANDS_COLUMN_ID + " = " + allBands.get(i).getId();
+				try {
+					
+					db.getConnection().createStatement().execute(query);
+					System.out.println("unused venue  cleaned from the table");
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		for (int i = 0; i < allVenues.size(); i++) {
+			int count = 0;
+			System.out.println(count);
+			for (int j = 0; j < allConcerts.size(); j++) {
+				if (allVenues.get(i).getId() == allConcerts.get(j).getVenueID()) {
+					System.out.println("Venue is being used");
+				} else {
+					count++;
+					
+				}
+			}
+			System.out.println(count);
+			System.out.println(allConcerts.size());
+			if (count == allConcerts.size()) {
+				String query = "DELETE FROM " + Const.TABLE_VENUE + " WHERE " +
+						Const.VENUE_COLUMN_ID + " = " + allVenues.get(i).getId();
+				try {
+					
+					db.getConnection().createStatement().execute(query);
+					System.out.println("unused venue  cleaned from the table");
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+
+	}
+	
 
 }

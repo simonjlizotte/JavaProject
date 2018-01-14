@@ -212,17 +212,23 @@ public class AddConcertTab extends Tab{
 			bandNameInput.clear();
 			cityInput.clear();
 			
-			// reseting the genre
-			comboGenre.getItems().clear();
-			comboGenre.setItems(
-					FXCollections.observableArrayList(
-							GenreTable.getAllGenres()));
+//			// reseting the genre
+//			comboGenre.getItems().clear();
+//			comboGenre.setItems(
+//					FXCollections.observableArrayList(
+//							GenreTable.getAllGenres()));
 			
+			date.setValue(null);
+			comboGenre.setValue(null);
+			btnLoad.setVisible(true);
+
 			date.getEditor().clear();
-			//reseting the rating
-			comboRating.getItems().clear();
-			comboRating.setItems(
-					FXCollections.observableArrayList(ratingArray));
+			
+//			//reseting the rating
+//			comboRating.getItems().clear();
+//			comboRating.setItems(
+//					FXCollections.observableArrayList(ratingArray));
+			
 			Scene scene = new ConfirmationMessageScene(confirmation);
 			nameStage.setScene(scene);
 			scene.getStylesheets().add("main.css");
