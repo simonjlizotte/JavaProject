@@ -125,7 +125,7 @@ public class ConcertTrackerMain extends Application{
 	    }
 	
 	// Implemented methods of Application
-	private void showMainStage(ReadOnlyObjectProperty<ObservableList<String>> friends) {
+	private void showMainStage(ReadOnlyObjectProperty<ObservableList<String>> concert) {
 		
 		 mainStage = new Stage(StageStyle.DECORATED);
 	        mainStage.setTitle("Concert Tracker");
