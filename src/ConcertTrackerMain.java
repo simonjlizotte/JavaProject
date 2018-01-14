@@ -2,29 +2,128 @@
 import credits.CreditsScene;
 import credits.SourcesScene;
 import help.HelpScene;
+
+import java.io.File;
+
 import Tabs.AddConcertTab;
 import Tabs.ChartTab;
 import Tabs.ViewConcertTab;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.Worker;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class ConcertTrackerMain extends Application{
+	
+	//Defining Application Icon and Splash Screen Image
+	public static String APPLICATION_ICON = "stage.png";
+	 public static String SPLASH_IMAGE =
+			 "splash.png"; 
+	 
+	 
+	 //Creating the splashLayout pane
+	    private Pane splashLayout;
+	    //Creating a main stage
+	    private Stage mainStage;
+	    //Setting the splash screen width and height
+	    private static final int SPLASH_WIDTH = 960;
+	    private static final int SPLASH_HEIGHT = 440;
 
 	public static void main(String[] args)  {
 		// Launch application with argument args for mac operations	
 		Application.launch(args);
 	}
 	
-	// Implemented methods of Application
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+    public void init() {
+		ImageView splash = new ImageView(new Image(
+                new File(SPLASH_IMAGE).toURI().toString()
+        ));
+        
+        splashLayout = new VBox();
+        splashLayout.getChildren().addAll(splash);
+        splashLayout.setStyle(
+                "-fx-padding: 5; " +
+                "-fx-background-color: cornsilk; " +
+                "-fx-border-width:5; " +
+                "-fx-border-color: " +
+                    "linear-gradient(" +
+                        "to bottom, " +
+                        "chocolate, " +
+                        "derive(chocolate, 50%)" +
+                    ");"
+        );
+        splashLayout.setEffect(new DropShadow());
+    }
+	
+	  @Override
+	    public void start(final Stage initStage) throws Exception {
+//	        final Task<ObservableList<String>> concertTaskList = new Task<ObservableList<String>>() {
+//	            @Override
+//	            protected ObservableList<String> call() throws InterruptedException {
+//	                ObservableList<String> foundConcerts =
+//	                        FXCollections.<String>observableArrayList();
+//	                ObservableList<String> concertList =
+//	                        FXCollections.observableArrayList(
+//	                                "Green Holiday", "Infinity Works", "Weekend Chronicle", "Burning Whizz", "Sumo Tonixs",
+//	                                "Mission Kettle", "Freeing Cheetah", "Fez Whiz"
+//	                        );
+//
+//	                updateMessage("Finding Concerts . . .");
+//	                for (int i = 0; i < concertList.size(); i++) {
+//	                    Thread.sleep(400);
+//	                    updateProgress(i + 1, concertList.size());
+//	                    String nextFriend = concertList.get(i);
+//	                    foundConcerts.add(nextFriend);
+//	                    updateMessage("Finding Concerts . . . Found " + nextFriend);
+//	                }
+//	                Thread.sleep(400);
+//	                updateMessage("All concerts found.");
+//
+//	                return foundConcerts;
+//	            }
+//	        };
+
+//	        showSplash(
+//	                initStage,
+//	                concertTaskList,
+//	                () -> showMainStage(concertTaskList.valueProperty())
+//	        );
+//	        new Thread(concertTaskList).start();
+	    }
+	
+	// Implemented methods of Application
+	private void showMainStage(ReadOnlyObjectProperty<ObservableList<String>> concerts) {
+		
+		 mainStage = new Stage(StageStyle.DECORATED);
+	        mainStage.setTitle("Concert Tracker");
+	        mainStage.getIcons().add(new Image(
+	        		new File(APPLICATION_ICON).toURI().toString()
+	        ));
 		
 		// Building MenuBar
 		MenuBar menu = new MenuBar();
@@ -101,12 +200,42 @@ public class ConcertTrackerMain extends Application{
 		Scene scene = new Scene(pane, 1024, 768);
 		scene.getStylesheets().add("main.css");
 		
-		// Add scene to stage 
-		primaryStage.setScene(scene);
-		// Set Title 
-		primaryStage.setTitle("Concert Tracker");
-		// Show Stage
-		primaryStage.show();		
+		 mainStage.setScene(scene);
+	     mainStage.show();
+		
+			
 	}
+	
+	 private void showSplash(
+	            final Stage initStage,
+	            Task<?> task,
+	            InitCompletionHandler initCompletionHandler
+	    ) {
+	        task.stateProperty().addListener((observableValue, oldState, newState) -> {
+	            if (newState == Worker.State.SUCCEEDED) {
+	                initStage.toFront();
+	                FadeTransition fadeSplash = new FadeTransition(Duration.seconds(1.2), splashLayout);
+	                fadeSplash.setFromValue(1.0);
+	                fadeSplash.setToValue(0.0);
+	                fadeSplash.setOnFinished(actionEvent -> initStage.hide());
+	                fadeSplash.play();
+
+	                initCompletionHandler.complete();
+	            } // todo add code to gracefully handle other task states.
+	        });
+
+	        Scene splashScene = new Scene(splashLayout, Color.TRANSPARENT);
+	        final Rectangle2D bounds = Screen.getPrimary().getBounds();
+	        initStage.setScene(splashScene);
+	        initStage.setX(bounds.getMinX() + bounds.getWidth() / 2 - SPLASH_WIDTH / 2);
+	        initStage.setY(bounds.getMinY() + bounds.getHeight() / 2 - SPLASH_HEIGHT / 2);
+	        initStage.initStyle(StageStyle.TRANSPARENT);
+	        initStage.setAlwaysOnTop(true);
+	        initStage.show();
+	    }
+
+	    public interface InitCompletionHandler {
+	        void complete();
+	    }
 
 }
