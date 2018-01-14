@@ -216,6 +216,8 @@ public class AddConcertTab extends Tab{
 			date.setValue(null);
 			comboGenre.setValue(null);
 			btnLoad.setVisible(true);
+			file = null;
+			filePath = null;
 			
 			Scene scene = new ConfirmationMessageScene(confirmation);
 			nameStage.setScene(scene);

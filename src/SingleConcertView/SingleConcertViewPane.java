@@ -1,12 +1,16 @@
 package SingleConcertView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Tabs.ViewConcertTab;
 import confirmationMessage.DeleteMessageScene;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,6 +23,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import objects.Band;
 import objects.Concert;
@@ -47,6 +53,11 @@ public class SingleConcertViewPane extends BorderPane{
 	
 	//DatePicker
 	DatePicker dateAttendedInput;
+	
+	// Image upload files
+	File file;
+	String filePath;
+	
 	
 	Concert itemSelected;
 	public SingleConcertViewPane() {
@@ -223,9 +234,45 @@ public class SingleConcertViewPane extends BorderPane{
 			nameStage.show();
 		});
 		
+		// Set files to old picture in case of no update
+		File existingImageFile = new File("selectedImg.png");
+		filePath = existingImageFile.getAbsolutePath();
 		
-		inputs.add(pictures, 0, 10);
-		inputs.add(picturesLink, 0, 11);
+		//Final Row - Upload File
+				Text uploadPic = new Text("Upload a picture: ");
+				Button btnLoad = new Button("Load");
+			    btnLoad.getStyleClass().add("buttonLoad");
+				//prompt that the photo was added
+				Label photoAddedLabel = new Label("Photo Attached");
+				photoAddedLabel.getStyleClass().add("photoAddedLabel");
+				inputs.add(pictures, 0, 10);
+				inputs.add(picturesLink, 0, 11);
+				inputs.add(uploadPic, 0, 14);
+				inputs.add(btnLoad, 1, 14);
+		        btnLoad.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent event) {
+						 FileChooser fileChooser = new FileChooser();
+			             
+				            //Setting filters so that the user can only add jpg and png
+						 FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+				            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+				            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+				              
+				            //Show open file dialog
+				            if ( (file = fileChooser.showOpenDialog(null)) != null) {
+				            		filePath = file.getAbsolutePath();
+				            		uploadPic.setVisible(false);
+				            		inputs.add(photoAddedLabel, 1, 12);
+				            		btnLoad.setVisible(false);
+				            }
+				            //file = fileChooser.showOpenDialog(null).getAbsolutePath();
+					}
+		        });
+		
+		
+		
 	
 		// imageview of the image the user added
 		ImageView imageDisplay = new ImageView();
@@ -311,6 +358,15 @@ public class SingleConcertViewPane extends BorderPane{
 					genreDisplay.setText(genreInput.getSelectionModel().getSelectedItem().getGenre());
 					concertTable.updateDate(dateAttendedInput.getValue().toString().toUpperCase().trim(), concertObject.getId());
 					concertTable.updateRating(comboRating.getValue(), concertObject.getId());
+					// Update picture
+					FileInputStream fis = null;
+					try {
+						fis = new FileInputStream(filePath);
+					} catch (FileNotFoundException e2) {
+						e2.printStackTrace();
+					concertTable.updatePicture(fis, concertObject.getId());
+					}
+					
 					dateDisplay.setText(dateAttendedInput.getValue().toString());
 					// clean tables of unused data
 					ConcertTable concertTableTest = new ConcertTable();
