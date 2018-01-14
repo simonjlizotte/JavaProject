@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import confirmationMessage.ConfirmationMessageScene;
 import database.Database;
+import javafx.util.Duration;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -72,14 +74,23 @@ public class AddConcertTab extends Tab{
 		//Declaring insets
 		Insets insets = new Insets(10,10,10,10);
 		
-		//Declaring the Rating
-
+		//Declaring the Ratin
+		 
 		//First Row - Band		
 		Text bandName = new Text("Band:");
 		pane.add(bandName, 0, 0);
 		TextField bandNameInput = new TextField();
 		pane.add(bandNameInput, 1, 0);
 		
+		bandNameInput.setOnMouseClicked(e->{
+			 FadeTransition ft = new FadeTransition();
+			 ft.setDuration(Duration.millis(2300.0));
+		     ft.setFromValue(1.0);
+		     ft.setToValue(0.3);
+		     ft.setCycleCount(4);
+		     ft.setAutoReverse(true);
+		     ft.play();
+		});
 		//Second Row - Venue
 		Text venue = new Text("Venue: ");
 		pane.add(venue, 0, 1);

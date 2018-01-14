@@ -2,9 +2,13 @@
 import credits.CreditsScene;
 import credits.SourcesScene;
 import help.HelpScene;
+
+import javafx.util.Duration;
+
 import Tabs.AddConcertTab;
 import Tabs.ChartTab;
 import Tabs.ViewConcertTab;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -62,6 +66,7 @@ public class ConcertTrackerMain extends Application{
 			creditStage.setScene(new SourcesScene());
 			creditStage.show();
 		});
+		
 		MenuItem creditNames = new MenuItem("Credits");
 		// Set lambda
 		creditNames.setOnAction((event) -> {
@@ -70,6 +75,7 @@ public class ConcertTrackerMain extends Application{
 			nameStage.setScene(new CreditsScene());
 			nameStage.show();
 		});
+		
 		
 		// Add File Menu Items to menu 
 		file.getItems().addAll(quit);
@@ -85,6 +91,7 @@ public class ConcertTrackerMain extends Application{
 		AddConcertTab addConcertTab = AddConcertTab.getInstance();
 		ViewConcertTab viewConcertTab = ViewConcertTab.getInstance();
 		ChartTab chartTab = ChartTab.getInstance();
+		
 		
 		//Adding the tabs to the tabPaneviewConcertTab
 		tabPane.getTabs().addAll(addConcertTab, viewConcertTab, chartTab);
