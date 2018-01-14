@@ -213,7 +213,9 @@ public class AddConcertTab extends Tab{
 			venueInput.clear();
 			bandNameInput.clear();
 			cityInput.clear();
-			
+			date.setValue(null);
+			comboGenre.setValue(null);
+			btnLoad.setVisible(true);
 			
 			Scene scene = new ConfirmationMessageScene(confirmation);
 			nameStage.setScene(scene);
