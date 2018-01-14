@@ -126,6 +126,7 @@ public class SingleConcertViewPane extends BorderPane{
 		 */
 		removeButton.setOnMouseClicked(e->{
 			Scene scene = new DeleteMessageScene(whatBandInput.getText().toString(), dateAttendedInput.getValue().toString(), concertId, concertTable );
+			concertTable.garbageCollection();
 			nameStage.setScene(scene);
 			scene.getStylesheets().add("main.css");
 			nameStage.show();		
@@ -248,7 +249,7 @@ public class SingleConcertViewPane extends BorderPane{
 			whereAtInput.setEditable(true);
 			whatCityInput.setEditable(true);
 			title.getStyleClass().add("singleViewTitleEdit");
-			
+
 			//adding the input boxes back to the grid pane
 			inputs.getChildren().remove(genreDisplay);
 			inputs.add(genreInput, 0, 7);
@@ -268,6 +269,11 @@ public class SingleConcertViewPane extends BorderPane{
 			title.setText("Update Values");
 			buttonBox.getChildren().remove(edit);
 			buttonBox.getChildren().addAll(saveEdits, removeButton);
+			ConcertTable concertTableTest = new ConcertTable();
+			ArrayList<Concert> test = concertTableTest.getAllConcerts();
+			if (test.size() != 0) {
+			concertTable.garbageCollection();
+			}
 			comboRating.setVisible(true);
 			overallRatingInput.setVisible(false);
 		});
@@ -306,8 +312,15 @@ public class SingleConcertViewPane extends BorderPane{
 					concertTable.updateDate(dateAttendedInput.getValue().toString().toUpperCase().trim(), concertObject.getId());
 					concertTable.updateRating(comboRating.getValue(), concertObject.getId());
 					dateDisplay.setText(dateAttendedInput.getValue().toString());
+					// clean tables of unused data
+					ConcertTable concertTableTest = new ConcertTable();
+					ArrayList<Concert> test = concertTableTest.getAllConcerts();
+					if (test.size() != 0) {
+					concertTable.garbageCollection();
+					}
 					ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
 					ViewConcertTab.nameStage.close();
+					
 				});
 		
 		saveEdits.getStyleClass().add("buttonLoad");
