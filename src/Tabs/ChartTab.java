@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import objects.Concert;
 import objects.Genre;
 import tables.BandTable;
 import tables.ConcertTable;
@@ -55,7 +56,10 @@ public class ChartTab extends Tab{
 	private ChartTab() {
 		// clean tables of unused data
 		ConcertTable concertTable = new ConcertTable();
+		ArrayList<Concert> test = concertTable.getAllConcerts();
+		if (test.size() != 0) {
 		concertTable.garbageCollection();
+		}
 		this.setText(TAB_TITLE);
 		 
 		HBox buttonHolder = new HBox();
