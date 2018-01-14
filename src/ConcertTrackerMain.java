@@ -47,6 +47,10 @@ public class ConcertTrackerMain extends Application{
 	 
 	 //Creating the splashLayout pane
 	    private Pane splashLayout;
+	    //Creating a progress bar for the splash screen
+	    private ProgressBar loadProgress;
+	    //Creating progress text
+	    private Label progressText;
 	    //Creating a main stage
 	    private Stage mainStage;
 	    //Setting the splash screen width and height
@@ -60,64 +64,68 @@ public class ConcertTrackerMain extends Application{
 	
 	@Override
     public void init() {
+		//Adding the image view and image for the splash screen
 		ImageView splash = new ImageView(new Image(
                 new File(SPLASH_IMAGE).toURI().toString()
         ));
-        
+		//Creating a progress bar
+        loadProgress = new ProgressBar();
+        //Setting the progress bar width
+        loadProgress.setPrefWidth(SPLASH_WIDTH - 20);
+        //Setting the progress text
+        progressText = new Label("Will find your concerts . . .");
+        //Making the splashLayout pane a VBox
         splashLayout = new VBox();
-        splashLayout.getChildren().addAll(splash);
+        splashLayout.getChildren().addAll(splash, loadProgress, progressText);
+        progressText.setAlignment(Pos.CENTER);
         splashLayout.setStyle(
                 "-fx-padding: 5; " +
-                "-fx-background-color: cornsilk; " +
-                "-fx-border-width:5; " +
-                "-fx-border-color: " +
-                    "linear-gradient(" +
-                        "to bottom, " +
-                        "chocolate, " +
-                        "derive(chocolate, 50%)" +
-                    ");"
+                "-fx-background-color: rgb(255,195,111); " +
+                "-fx-border-width:5; " 
         );
+        //Adding a drop shadow effect
         splashLayout.setEffect(new DropShadow());
     }
 	
 	  @Override
 	    public void start(final Stage initStage) throws Exception {
-//	        final Task<ObservableList<String>> concertTaskList = new Task<ObservableList<String>>() {
-//	            @Override
-//	            protected ObservableList<String> call() throws InterruptedException {
-//	                ObservableList<String> foundConcerts =
-//	                        FXCollections.<String>observableArrayList();
-//	                ObservableList<String> concertList =
-//	                        FXCollections.observableArrayList(
-//	                                "Green Holiday", "Infinity Works", "Weekend Chronicle", "Burning Whizz", "Sumo Tonixs",
-//	                                "Mission Kettle", "Freeing Cheetah", "Fez Whiz"
-//	                        );
-//
-//	                updateMessage("Finding Concerts . . .");
-//	                for (int i = 0; i < concertList.size(); i++) {
-//	                    Thread.sleep(400);
-//	                    updateProgress(i + 1, concertList.size());
-//	                    String nextFriend = concertList.get(i);
-//	                    foundConcerts.add(nextFriend);
-//	                    updateMessage("Finding Concerts . . . Found " + nextFriend);
-//	                }
-//	                Thread.sleep(400);
-//	                updateMessage("All concerts found.");
-//
-//	                return foundConcerts;
-//	            }
-//	        };
+		  //Creating a task that takes a observable list string
+	        final Task<ObservableList<String>> concertTaskList = new Task<ObservableList<String>>() {
+	            @Override
+	            protected ObservableList<String> call() throws InterruptedException {
+	            	//Creating a foundConcerts Observable list
+	                ObservableList<String> foundConcerts = FXCollections.<String>observableArrayList();
+	                //Creating a Observable list of concerts
+	                ObservableList<String> concertList = FXCollections.observableArrayList(
+	                        		 "Green Holiday", "Infinity Works", "Weekend Chronicle", "Burning Whizz", "Sumo Tonixs",
+	                              "Mission Kettle", "Freeing Cheetah", "Fez Whiz"
+	                        );
+	                	//Updating the message
+	                updateMessage("Finding Concerts . . .");
+	                for (int i = 0; i < concertList.size(); i++) {
+	                    Thread.sleep(400);
+	                    updateProgress(i + 1, concertList.size());
+	                    String nextConcert = concertList.get(i);
+	                    foundConcerts.add(nextConcert);
+	                    updateMessage("Finding Concerts . . . Found " + nextConcert);
+	                }
+	                Thread.sleep(400);
+	                updateMessage("All concerts found.");
 
-//	        showSplash(
-//	                initStage,
-//	                concertTaskList,
-//	                () -> showMainStage(concertTaskList.valueProperty())
-//	        );
-//	        new Thread(concertTaskList).start();
+	                return foundConcerts;
+	            }
+	        };
+
+	        showSplash(
+	                initStage,
+	                concertTaskList,
+	                () -> showMainStage(concertTaskList.valueProperty())
+	        );
+	        new Thread(concertTaskList).start();
 	    }
 	
 	// Implemented methods of Application
-	private void showMainStage(ReadOnlyObjectProperty<ObservableList<String>> concerts) {
+	private void showMainStage(ReadOnlyObjectProperty<ObservableList<String>> friends) {
 		
 		 mainStage = new Stage(StageStyle.DECORATED);
 	        mainStage.setTitle("Concert Tracker");
@@ -211,8 +219,12 @@ public class ConcertTrackerMain extends Application{
 	            Task<?> task,
 	            InitCompletionHandler initCompletionHandler
 	    ) {
+	        progressText.textProperty().bind(task.messageProperty());
+	        loadProgress.progressProperty().bind(task.progressProperty());
 	        task.stateProperty().addListener((observableValue, oldState, newState) -> {
 	            if (newState == Worker.State.SUCCEEDED) {
+	                loadProgress.progressProperty().unbind();
+	                loadProgress.setProgress(1);
 	                initStage.toFront();
 	                FadeTransition fadeSplash = new FadeTransition(Duration.seconds(1.2), splashLayout);
 	                fadeSplash.setFromValue(1.0);
@@ -221,7 +233,7 @@ public class ConcertTrackerMain extends Application{
 	                fadeSplash.play();
 
 	                initCompletionHandler.complete();
-	            } // todo add code to gracefully handle other task states.
+	            } 
 	        });
 
 	        Scene splashScene = new Scene(splashLayout, Color.TRANSPARENT);
