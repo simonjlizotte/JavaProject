@@ -22,20 +22,26 @@ public class DeleteMessagePane extends BorderPane{
 	
 	public DeleteMessagePane(String bandName, String date, int concertId, ConcertTable concertTable) {
 		//this line blocks input in the rest of the program until the user closes the stage
-		SingleConcertViewPane.nameStage.initModality(Modality.APPLICATION_MODAL);
+//		SingleConcertViewPane.nameStage.initModality(Modality.APPLICATION_MODAL);
+
 		//question
 		Text message = new Text("Are you sure you want to delete the concert that " + bandName + " performed on " + date + " from your database?");
 		message.setWrappingWidth(300);
 		message.setTextAlignment(TextAlignment.CENTER);
+		message.getStyleClass().add("messageWarn");
 		BorderPane.setAlignment(message, Pos.CENTER);
 		this.setTop(message);
+		
 		
 		//buttons
 		HBox buttons = new HBox();
 		Button yes = new Button("Yes");
 		Button no = new Button("No");
+		no.getStyleClass().add("buttonLoad");
+		yes.getStyleClass().add("buttonLoadWarn");
 		buttons.getChildren().addAll(yes, no);
 		buttons.setAlignment(Pos.CENTER);
+		buttons.setSpacing(20);
 		this.setCenter(buttons);
 		
 		//event listeners for the buttons
