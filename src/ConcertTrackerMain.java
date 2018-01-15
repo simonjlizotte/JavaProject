@@ -156,8 +156,10 @@ public class ConcertTrackerMain extends Application{
 		MenuItem helpFile = new MenuItem ("Help");
 		helpFile.setOnAction((event) -> {
 			Stage helpStage = new Stage();
+			Scene helpScene = new HelpScene();
 			helpStage.setTitle("HELP");
-			helpStage.setScene(new HelpScene());
+			helpStage.setScene(helpScene);
+			helpScene.getStylesheets().add("main.css");
 			helpStage.show();
 		});
 		
