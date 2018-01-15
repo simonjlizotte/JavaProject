@@ -59,6 +59,26 @@ public class AddConcertTab extends Tab{
 		
 		db = Database.getInstance();
 			
+<<<<<<< HEAD
+=======
+		GenreTable genreTable = new GenreTable();
+		genreTable.insertGenre("PUNK");
+		genreTable.insertGenre("METAL");
+		genreTable.insertGenre("POP");
+		genreTable.insertGenre("REGGAE");
+		genreTable.insertGenre("SKA");
+		genreTable.insertGenre("ROCK");
+		genreTable.insertGenre("HIP-HOP");
+		
+		// Title
+		Label title = new Label("Add A Concert");
+		title.getStyleClass().add("singleViewTitle");
+		
+		//prompt that the photo was added
+		Label photoAddedLabel = new Label("Photo Attached");
+		photoAddedLabel.getStyleClass().add("photoAddedLabel");
+		
+>>>>>>> e40850ba73c689e34225db9d190f54dcf2b792a6
 		//VBox to host the listView
 		GridPane pane = new GridPane();
 		pane.getStyleClass().add("paneS");
@@ -144,6 +164,12 @@ public class AddConcertTab extends Tab{
 		            //Show open file dialog
 		            if ( (file = fileChooser.showOpenDialog(null)) != null) {
 		            		filePath = file.getAbsolutePath();
+<<<<<<< HEAD
+=======
+		               	pane.getChildren().remove(uploadPic);
+		            		pane.add(photoAddedLabel, 0, 10);
+		            		btnLoad.setVisible(false);
+>>>>>>> e40850ba73c689e34225db9d190f54dcf2b792a6
 		            }
 		            //file = fileChooser.showOpenDialog(null).getAbsolutePath();
 			}
@@ -181,6 +207,35 @@ public class AddConcertTab extends Tab{
 			venueInput.clear();
 			bandNameInput.clear();
 			cityInput.clear();
+<<<<<<< HEAD
+=======
+			
+			// removing the added photo label
+     		pane.getChildren().remove(photoAddedLabel);
+     		pane.add(uploadPic, 0, 10);
+			
+//			// reseting the genre
+//			comboGenre.getItems().clear();
+//			comboGenre.setItems(
+//					FXCollections.observableArrayList(
+//							GenreTable.getAllGenres()));
+			
+			date.setValue(null);
+			comboGenre.setValue(null);
+			btnLoad.setVisible(true);
+
+			date.getEditor().clear();
+			
+//			//reseting the rating
+//			comboRating.getItems().clear();
+//			comboRating.setItems(
+//					FXCollections.observableArrayList(ratingArray));
+			
+			Scene scene = new ConfirmationMessageScene(confirmation);
+			nameStage.setScene(scene);
+			scene.getStylesheets().add("main.css");
+			nameStage.show();  
+>>>>>>> e40850ba73c689e34225db9d190f54dcf2b792a6
 			}
 		});
 		pane.add(button, 1, 9);

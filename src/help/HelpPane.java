@@ -15,6 +15,7 @@ public class HelpPane extends BorderPane {
 		
 		// Create title
 		Label title = new Label("Help");
+		title.getStyleClass().add("titleWhite");
 		
 		// Set title to top
 		
@@ -38,6 +39,7 @@ public class HelpPane extends BorderPane {
 		// Add TextArea to Pane
 		
 		this.setCenter(helpContent);
+		this.getStyleClass().add("popUpBackground");
 		BorderPane.setAlignment(helpContent, Pos.CENTER);
 		
 	}

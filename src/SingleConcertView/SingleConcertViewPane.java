@@ -31,7 +31,7 @@ import tables.GenreTable;
 import tables.VenueTable;
 import viewPhoto.ViewPhotoScene;
 /**
- *  @author nickstajduhar
+ * @author nickstajduhar
  * @author carmenkerim
  * 
  * Singleconcertview to display concerts from the database
@@ -65,17 +65,24 @@ public class SingleConcertViewPane extends BorderPane{
 		// id of the concert being passed from the listview
 		int concertId = ViewConcertTab.num2;
 		
+		/**
+		 * Creating the tables needed
+		 */
 		// concertTable created
 		ConcertTable concertTable = new ConcertTable();
+		
 		// bandTable created
 		BandTable bandTable = new BandTable();
+		
 		// genreTable
 		GenreTable genreTable = new GenreTable();
+		
 		// venueTable
 		VenueTable venueTable = new VenueTable();
 		
 		//updates image to selected concert
 		concertTable.getConcertImage(concertId);
+		
 		
 		// Getting the concert id of the object passed
 		Concert concertObject = concertTable.getConcert(concertId);
@@ -197,6 +204,7 @@ public class SingleConcertViewPane extends BorderPane{
 		Label overallRatingInput = new Label(concertObject.getRating() + "");
 		inputs.add(overallRatingInput, 0, 13);
 		
+		// Combo box of rating 
 		ComboBox<Integer> comboRating = new ComboBox<>();
 		ArrayList<Integer> ratingArray = new ArrayList<Integer>();
 		ratingArray.add(1);
@@ -216,6 +224,8 @@ public class SingleConcertViewPane extends BorderPane{
 		pictures.getStyleClass().add("labelFont");
 		Label picturesLink = new Label("View Picture");
 		picturesLink.getStyleClass().add("picturesLink");
+		
+		// shows the photo uploaded
 		picturesLink.setOnMouseClicked(e->{
 			Scene scene = new ViewPhotoScene();
 			nameStage.setScene(scene);
@@ -243,6 +253,9 @@ public class SingleConcertViewPane extends BorderPane{
 		Label dateDisplay = new Label(dateAdded);
 		inputs.add(dateDisplay, 0, 9);		
 	
+		/**
+		 * This edit button will make the labels and input boxes to editable
+		 */
 		edit.setOnAction((event)->{
 			// setting the edit boxes to true
 			whatBandInput.setEditable(true);
@@ -278,6 +291,10 @@ public class SingleConcertViewPane extends BorderPane{
 			overallRatingInput.setVisible(false);
 		});
 			
+		/**
+		 * This save button will update all the values needed
+		 */
+
 		saveEdits.setOnAction((event)->{
 					title.setText("ConcertView");
 					whatBandInput.setEditable(false);
@@ -338,7 +355,5 @@ public class SingleConcertViewPane extends BorderPane{
 		this.setTop(title);
 		this.setCenter(inputs);
 		this.setBottom(buttonBox);
-				
-	
 	}
 }
