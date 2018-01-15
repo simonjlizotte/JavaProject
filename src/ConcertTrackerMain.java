@@ -68,6 +68,7 @@ public class ConcertTrackerMain extends Application{
 		ImageView splash = new ImageView(new Image(
                 new File(SPLASH_IMAGE).toURI().toString()
         ));
+		
 		//Creating a progress bar
         loadProgress = new ProgressBar();
         //Setting the progress bar width
@@ -165,16 +166,22 @@ public class ConcertTrackerMain extends Application{
 		// Set Lambda
 		creditSources.setOnAction((event) -> {
 			Stage creditStage = new Stage();
+			Scene sourceScene = new SourcesScene();
 			creditStage.setTitle("SOURCES");
-			creditStage.setScene(new SourcesScene());
+			creditStage.setScene(sourceScene);
+			sourceScene.getStylesheets().add("main.css");
 			creditStage.show();
 		});
+		
 		MenuItem creditNames = new MenuItem("Credits");
+		
 		// Set lambda
 		creditNames.setOnAction((event) -> {
 			Stage nameStage = new Stage();
+			Scene creditsScene = new CreditsScene();
 			nameStage.setTitle("CREDITS");
-			nameStage.setScene(new CreditsScene());
+			nameStage.setScene(creditsScene);
+			creditsScene.getStylesheets().add("main.css");
 			nameStage.show();
 		});
 		

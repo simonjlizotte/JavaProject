@@ -19,6 +19,21 @@
     -fx-font-size: 10pt;
 }
 
+.popUpBackground{
+	-fx-background-color: #455A64;
+}
+
+.titleWhite{
+    -fx-font-size: 23pt;
+    -fx-padding: 5 25 5 25;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+.whiteLabel{
+	-fx-text-fill: #ffffff;
+}
+
+
 /*SINGLECONCERTVIEW LABEL*/
 .imageView{
     -fx-background-color: #607D8B;

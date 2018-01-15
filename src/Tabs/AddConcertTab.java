@@ -80,6 +80,7 @@ public class AddConcertTab extends Tab{
 		genreTable.insertGenre("SKAP");
 		genreTable.insertGenre("ROCK");
 		genreTable.insertGenre("HIP-HOP");
+		
 		// Title
 		Label title = new Label("Add A Concert");
 		title.getStyleClass().add("singleViewTitle");
