@@ -31,7 +31,7 @@ import tables.GenreTable;
 import tables.VenueTable;
 import viewPhoto.ViewPhotoScene;
 /**
- *  @author nickstajduhar
+ * @author nickstajduhar
  * @author carmenkerim
  * 
  * Singleconcertview to display concerts from the database

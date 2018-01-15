@@ -47,6 +47,7 @@ public class DeleteMessagePane extends BorderPane{
 		//event listeners for the buttons
 		yes.setOnMouseClicked(e->{
 			concertTable.deleteConcert(concertId);
+			concertTable.garbageCollection();
 			ViewConcertTab.nameStage.close();
 			ViewConcertTab.bandList.setItems(FXCollections.observableArrayList(concertTable.getAllConcerts()));
 			SingleConcertViewPane.nameStage.close();

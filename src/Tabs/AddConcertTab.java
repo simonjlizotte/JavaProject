@@ -77,9 +77,10 @@ public class AddConcertTab extends Tab{
 		genreTable.insertGenre("METAL");
 		genreTable.insertGenre("POP");
 		genreTable.insertGenre("REGGAE");
-		genreTable.insertGenre("SKAP");
+		genreTable.insertGenre("SKA");
 		genreTable.insertGenre("ROCK");
 		genreTable.insertGenre("HIP-HOP");
+		
 		// Title
 		Label title = new Label("Add A Concert");
 		title.getStyleClass().add("singleViewTitle");
@@ -170,7 +171,7 @@ public class AddConcertTab extends Tab{
 		            //Show open file dialog
 		            if ( (file = fileChooser.showOpenDialog(null)) != null) {
 		            		filePath = file.getAbsolutePath();
-		            		uploadPic.setVisible(false);
+		               	pane.getChildren().remove(uploadPic);
 		            		pane.add(photoAddedLabel, 0, 10);
 		            		btnLoad.setVisible(false);
 		            }
@@ -211,6 +212,10 @@ public class AddConcertTab extends Tab{
 			venueInput.clear();
 			bandNameInput.clear();
 			cityInput.clear();
+			
+			// removing the added photo label
+     		pane.getChildren().remove(photoAddedLabel);
+     		pane.add(uploadPic, 0, 10);
 			
 //			// reseting the genre
 //			comboGenre.getItems().clear();
