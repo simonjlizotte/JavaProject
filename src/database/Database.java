@@ -9,6 +9,7 @@ import java.sql.Statement;
 
 import database.Const;
 import database.Database;
+import tables.GenreTable;
 
 /**
  *
@@ -122,7 +123,8 @@ public class Database {
 			createTable(Const.TABLE_VENUE, CREATE_TABLE_VENUE, connection);
 			createTable(Const.TABLE_CONCERT, CREATE_TABLE_CONCERT, connection);
 
-			
+
+
 		}else {
 			System.out.println("Connection already created");
 		}
