@@ -38,11 +38,17 @@ import tables.VenueTable;
  * This tab will display every concert that the user added in a listView
  */
 public class ViewConcertTab extends Tab{
+	
 	// concert band
 	Band concertBand;
+	
+	//stage
 	public static Stage nameStage = new Stage();
 	
+	//global variable passed to reference the id selected
 	public static int num2;
+	
+	//listview of bands
 	public static ListView<Concert> bandList;
 	
 	Venue venueObject;
@@ -69,9 +75,6 @@ public class ViewConcertTab extends Tab{
 		// vBox to host the listView
 		BorderPane borderPane = new BorderPane();
 				
-		//Concert table
-		//ConcertTable concertTable = new ConcertTable();
-		
 		//bands table
 		BandTable bandTable = new BandTable();
 		
@@ -80,7 +83,7 @@ public class ViewConcertTab extends Tab{
 		
 		// label to set the title
 		Label viewTabTitle = new Label("View Concerts!");
-		viewTabTitle.getStyleClass().add("viewTabTitle");
+		viewTabTitle.getStyleClass().add("singleViewTitle");
 				
 		//grabbing the date and band names from the tables to display
 		ConcertTable concertTable = new ConcertTable();	
@@ -91,49 +94,31 @@ public class ViewConcertTab extends Tab{
 		
 		// add those items to the ListView
 		bandList.setItems(FXCollections.observableArrayList(concerts));
-//	   
-//		bandList.getSelectionModel().selectedItemProperty().addListener(
-//	            (ObservableValue<? extends Concert> ov, Concert old_val, 
-//	                Concert new_val) -> {   
-//	                	if(new_val != null) {
-//	                    	num2 = new_val.getId();
-//	                	}else {
-//	                		System.out.println("No value");
-//	                	}
-//	                	
-//	                	Stage nameStage = new Stage();
-//		        	  	Scene scene = new SingleConcertViewScene();
-//		    			nameStage.setTitle("concert");
-//		    			nameStage.setScene(scene);
-//		    			scene.getStylesheets().add("main.css");
-//		    			nameStage.show();
-//	        });
-
-//		// refresh button
-//		Button refreshButton = new Button("Refresh");
-//		refreshButton.getStyleClass().add("refresh");	
 		
-		bandList.getSelectionModel().selectedItemProperty()
-		.addListener(new ChangeListener<Concert>() {
-			@Override
-			public void changed(ObservableValue<? extends Concert> observable, 
-					Concert oldValue, Concert newValue) {
-	          	if(newValue != null) {
-	                	num2 = newValue.getId();
-	            	}else {
-	            		System.out.println("No value");
-	            	}
+		// onClick event which will if the selected item and diselect it. It will pass the id
+		//and call the scene
+		bandList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(final MouseEvent mouseEvent) {
+		      Concert selected = bandList.getSelectionModel().getSelectedItem();
+		      int selectedNum = bandList.getSelectionModel().getSelectedIndex();
+		        if (bandList.getSelectionModel().isSelected(selectedNum)){
+		            bandList.getSelectionModel().clearSelection(selectedNum);
+		            if(selected != null) {
+	                		num2 = selected.getId();
+		            }else {
+	            			System.out.println("No value");
+		            }
 	            	
-	            	
-	        	  	Scene scene = new SingleConcertViewScene();
-	    			nameStage.setTitle("concert");
-	    			nameStage.setScene(scene);
-	    			scene.getStylesheets().add("main.css");
-	    			nameStage.show();  
-	    			
-			}
+		        	  	Scene scene = new SingleConcertViewScene();
+		    			nameStage.setTitle("concert");
+		    			nameStage.setScene(scene);
+		    			scene.getStylesheets().add("main.css");
+		    			nameStage.show();    
+		        }
+		    }
 		});
-				
+	
 	    // setting the borderPane
 	    borderPane.setTop(viewTabTitle);	  	    
 	    borderPane.setCenter(bandList);
@@ -142,6 +127,7 @@ public class ViewConcertTab extends Tab{
 	    BorderPane.setAlignment(viewTabTitle, Pos.CENTER);
 		this.setContent(borderPane);
 	}
+	
 	//this method will be call when needing the instance of the tab or when first creating it
 	public static ViewConcertTab getInstance() {
 		if(tab == null) {

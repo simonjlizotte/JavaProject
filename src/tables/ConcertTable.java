@@ -30,7 +30,19 @@ public class ConcertTable implements ConcertDAO{
 	static //initializing db connection
 	Database db = Database.getInstance();
 	
-	public static void createConcert(String date, int rating, FileInputStream pic, Band band, Venue venue) {
+	/**
+	 * 
+	 * This method adds concerts to the concertTable
+	 * 
+	 * @param date date of the concert
+	 * @param rating of the concert
+	 * @param pic of the concert
+	 * @param band to get the band from the table and access the id
+	 * @param venue to get the venue from the table and access the id
+	 * @return a confirmation message that will be passed to the ConfirmationMessageScene to display if the 
+	 * 	concert was successfully inserted or it was in the table already
+	 */
+	public static String createConcert(String date, int rating, FileInputStream pic, Band band, Venue venue) {
 		Venue concertVenue = tables.VenueTable.createVenue(venue);
 		Band concertBand = tables.BandTable.createBand(band);
 		int concertID = 0;
@@ -43,12 +55,9 @@ public class ConcertTable implements ConcertDAO{
 
 		try {
 			Statement getBand = db.getConnection().createStatement();
-			ResultSet result = getBand.executeQuery(selectQuery);
-			
-			System.out.println("result: " + result.toString());
+			ResultSet result = getBand.executeQuery(selectQuery);			
 				if (result.next()) {
-					System.out.println("already in table");					
-					
+					return band.getName() + " already in table";
 				} else {
 
 					db.getConnection().createStatement().execute(query);
@@ -62,14 +71,12 @@ public class ConcertTable implements ConcertDAO{
 					// This calls the function within this class which updates the just entered concerts picture   
 					concerts.updatePicture(pic, concertID);
 					concerts.getConcertImage(concertID);
-					System.out.println(band.getName() + " successfully added to the table");
+					return band.getName() + " successfully added to the table";
 				}
-			
-			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 
 	/**
@@ -232,6 +239,114 @@ public class ConcertTable implements ConcertDAO{
 		
 	}
 
+	@Override
+	public int getYearCount(int year) {
+		String query = "SELECT * FROM " + Const.TABLE_CONCERT + " WHERE year("
+				+ Const.CONCERTS_COLUMN_DATE + ") = " + year;
+	ArrayList<Concert> concerts = new ArrayList<>();
+	try {
+		Statement getCount = db.getConnection().createStatement();
+		ResultSet result = getCount.executeQuery(query);
+		while(result.next()) {
+			concerts.add(new Concert(result.getInt(Const.CONCERTS_COLUMN_ID),
+					result.getInt(Const.CONCERTS_COLUMN_BAND_ID),
+					result.getInt(Const.CONCERTS_COLUMN_VENUE_ID),
+					result.getString(Const.CONCERTS_COLUMN_DATE),
+					result.getInt(Const.CONCERTS_COLUMN_RATING),
+					result.getString(Const.CONCERTS_COLUMN_PIC)));
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return concerts.size();
+	}
+
+	/**
+	 * This method gets the distinc years that appear on the concert table
+	 */
+	@Override
+	public ArrayList<Integer> getAllYears() {
+		String query = "SELECT DISTINCT year("+ Const.CONCERTS_COLUMN_DATE +") FROM " + Const.TABLE_CONCERT;
+	ArrayList<Integer> years = new ArrayList<>();
+	try {
+		Statement getYear = db.getConnection().createStatement();
+		ResultSet result = getYear.executeQuery(query);
+			while(result.next()) {
+				years.add(result.getInt("year("+Const.CONCERTS_COLUMN_DATE+")"));
+			}		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return years;
+	}
+	
+	public void garbageCollection() {
+		// Create array lists for holding data
+		ArrayList<Concert> allConcerts = new ArrayList<Concert>();
+		ArrayList<Band> allBands = new ArrayList<Band>();
+		ArrayList<Venue> allVenues = new ArrayList<Venue>();
+		
+		//Create Tables 
+		BandTable bandTable = new BandTable();
+		VenueTable venueTable = new VenueTable();
+		
+		// Populate arrays 
+		allConcerts = this.getAllConcerts();
+		allBands = bandTable.getAllBands();
+		allVenues = venueTable.getAllVenues();
+		
+		// Clean band table
+		
+		for (int i = 0; i < allBands.size(); i++) {
+			int count = 0;
+			for (int j = 0; j < allConcerts.size(); j++) {
+				if (allBands.get(i).getId() == allConcerts.get(j).getBandID()) {
+					System.out.println("Band is being used");
+				} else {
+					count++;
+				}
+			}
+			if (count == allConcerts.size()) {
+				String query = "DELETE FROM " + Const.TABLE_BAND + " WHERE " +
+						Const.BANDS_COLUMN_ID + " = " + allBands.get(i).getId();
+				try {
+					
+					db.getConnection().createStatement().execute(query);
+					System.out.println("unused venue  cleaned from the table");
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		for (int i = 0; i < allVenues.size(); i++) {
+			int count = 0;
+			System.out.println(count);
+			for (int j = 0; j < allConcerts.size(); j++) {
+				if (allVenues.get(i).getId() == allConcerts.get(j).getVenueID()) {
+					System.out.println("Venue is being used");
+				} else {
+					count++;
+					
+				}
+			}
+			System.out.println(count);
+			System.out.println(allConcerts.size());
+			if (count == allConcerts.size()) {
+				String query = "DELETE FROM " + Const.TABLE_VENUE + " WHERE " +
+						Const.VENUE_COLUMN_ID + " = " + allVenues.get(i).getId();
+				try {
+					
+					db.getConnection().createStatement().execute(query);
+					System.out.println("unused venue  cleaned from the table");
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+
+	}
 	
 
 }

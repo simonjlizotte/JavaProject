@@ -64,7 +64,7 @@ public class VenueTable implements VenueDAO{
 	 * 
 	 * Query: SELECT * FROM venueTable;
 	 */
-	public static ArrayList<Venue> getAllVenues() {
+	public ArrayList<Venue> getAllVenues() {
 		String query = "SELECT * FROM " + Const.TABLE_VENUE;
 		ArrayList<Venue> venues = new ArrayList<Venue>();
 		

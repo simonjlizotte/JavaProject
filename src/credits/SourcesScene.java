@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 public class SourcesScene extends Scene {
 
 	public SourcesScene() {
-		super(new SourcesPane(), 600,600);
+		super(new SourcesPane(), 800,600);
 	}
 
 }
