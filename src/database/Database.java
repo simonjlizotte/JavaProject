@@ -84,7 +84,7 @@ public class Database {
 			+ Const.CONCERTS_COLUMN_VENUE_ID + " int, "
 			+ Const.CONCERTS_COLUMN_DATE + " DATE, "
 			+ Const.CONCERTS_COLUMN_RATING + " TINYINT, " 
-			+ Const.CONCERTS_COLUMN_PIC + " BLOB, "
+			+ Const.CONCERTS_COLUMN_PIC + " LONGBLOB, "
 			+ "PRIMARY KEY(" + Const.CONCERTS_COLUMN_ID + "),"
 			+ "FOREIGN KEY(" + Const.CONCERTS_COLUMN_BAND_ID + ") REFERENCES " + Const.TABLE_BAND + "(" + Const.BANDS_COLUMN_ID + "),"
 			+ "FOREIGN KEY(" + Const.CONCERTS_COLUMN_VENUE_ID + ") REFERENCES " + Const.TABLE_VENUE + "(" + Const.VENUE_COLUMN_ID + "));";
