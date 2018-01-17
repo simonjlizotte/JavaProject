@@ -44,6 +44,9 @@ Should use our common camel casing as used in class for the last 2 years.
 ![alt text](DataBase_Structure.png "Designed Database Structure")
 
 
+**When launching the program please use a local server (I.E XAMPP) or comment out the lines of code that call on the connection, 'localhost' and fill in Scweb and add your credentials. Lastly, please dont forget to create a database called JavaProject(Follow the naming scheme accordly)**
+
+
 ![alt tag](https://user-images.githubusercontent.com/23283400/34924511-cd3af300-f971-11e7-87fa-f20bffcf186c.png)
 
 ![alt tag](https://user-images.githubusercontent.com/23283400/34924512-cea708aa-f971-11e7-871d-613ffecfba8b.png)
