@@ -3,12 +3,15 @@ import credits.CreditsScene;
 import credits.SourcesScene;
 import help.HelpScene;
 
+import javafx.util.Duration;
 import java.io.File;
 
 import Tabs.AddConcertTab;
 import Tabs.ChartTab;
 import Tabs.ViewConcertTab;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Transition;
 import javafx.application.Application;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
@@ -150,6 +153,13 @@ public class ConcertTrackerMain extends Application{
 		quit.setOnAction((event) -> {
 			System.exit(0);
 		});
+		//Fade in animation for the menu bar
+		FadeTransition ft = new FadeTransition();
+		ft.setNode(menu);
+		ft.setFromValue(0);
+		ft.setToValue(1);
+		ft.setDuration(Duration.millis(2000));
+		ft.play();
 		
 		// Build help Menu Items 
 		MenuItem helpFile = new MenuItem ("Help");
@@ -158,8 +168,10 @@ public class ConcertTrackerMain extends Application{
 			Scene helpScene = new HelpScene();
 			helpStage.setTitle("HELP");
 			helpStage.setScene(helpScene);
-			helpScene.getStylesheets().add("main.css");
+			helpScene.getStylesheets().add("main.css");		 
 			helpStage.show();
+			
+		 
 		});
 		
 		// Build credits Menu Items 
@@ -186,6 +198,7 @@ public class ConcertTrackerMain extends Application{
 			nameStage.show();
 		});
 		
+		
 		// Add File Menu Items to menu 
 		file.getItems().addAll(quit);
 		help.getItems().addAll(helpFile);
@@ -200,6 +213,7 @@ public class ConcertTrackerMain extends Application{
 		AddConcertTab addConcertTab = AddConcertTab.getInstance();
 		ViewConcertTab viewConcertTab = ViewConcertTab.getInstance();
 		ChartTab chartTab = ChartTab.getInstance();
+		
 		
 		//Adding the tabs to the tabPaneviewConcertTab
 		tabPane.getTabs().addAll(addConcertTab, viewConcertTab, chartTab);

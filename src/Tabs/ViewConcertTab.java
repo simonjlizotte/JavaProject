@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import SingleConcertView.SingleConcertViewPane;
 import SingleConcertView.SingleConcertViewScene;
 import database.Database;
+import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import objects.Band;
 import objects.Concert;
 import objects.Venue;
@@ -134,6 +136,7 @@ public class ViewConcertTab extends Tab{
 			tab = new ViewConcertTab();
 		}
 		return tab;
+		
 	}
 	
 	public void closeNameStage() {
