@@ -294,7 +294,6 @@ public class SingleConcertViewPane extends BorderPane{
 		/**
 		 * This save button will update all the values needed
 		 */
-
 		saveEdits.setOnAction((event)->{
 					title.setText("ConcertView");
 					whatBandInput.setEditable(false);

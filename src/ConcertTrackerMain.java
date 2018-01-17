@@ -44,7 +44,6 @@ public class ConcertTrackerMain extends Application{
 	 public static String SPLASH_IMAGE =
 			 "splash.png"; 
 	 
-	 
 	 //Creating the splashLayout pane
 	    private Pane splashLayout;
 	    //Creating a progress bar for the splash screen

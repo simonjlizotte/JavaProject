@@ -42,11 +42,8 @@ import tables.GenreTable;
  *
  * This tab is designed to follow a singleton pattern, meaning that there will only be access
  * to one instance of this tab.
- * 
  */
 public class AddConcertTab extends Tab{
-	
-	
 	//file String
 	File file;
 	String filePath;
@@ -157,14 +154,15 @@ public class AddConcertTab extends Tab{
 	    btnLoad.getStyleClass().add("buttonLoad");
 		pane.add(uploadPic, 0, 10);
 		pane.add(btnLoad, 0,11);
-        btnLoad.setOnAction(new EventHandler<ActionEvent>() {
+        
+		btnLoad.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				 FileChooser fileChooser = new FileChooser();
 	             
 		            //Setting filters so that the user can only add jpg and png
-				 FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+				 	FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
 		            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
 		            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 		              
