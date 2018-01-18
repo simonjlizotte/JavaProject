@@ -2,6 +2,8 @@ package Tabs;
 
 import java.util.ArrayList;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -12,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import objects.Concert;
 import objects.Genre;
 import tables.BandTable;
@@ -104,6 +107,12 @@ public class ChartTab extends Tab{
         buttonHolder.getStyleClass().add("buttonBox");
         buttonHolder.setSpacing(20);
         refreshButton.setOnMouseClicked(e->{
+        	TranslateTransition tt = new TranslateTransition(Duration.millis(200), refreshButton);
+		     tt.setByY(15f);
+		     tt.setCycleCount(2);
+		     tt.setAutoReverse(true);
+		 
+		     tt.play();
             genresChart.setData(populateGenreChart());
             yearChart.setData(populateYearChart());
         });

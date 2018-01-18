@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import Tabs.ViewConcertTab;
 import confirmationMessage.DeleteMessageScene;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import objects.Band;
 import objects.Concert;
 import objects.Genre;
@@ -132,6 +134,12 @@ public class SingleConcertViewPane extends BorderPane{
 		 * the concert right in the confirmation button
 		 */
 		removeButton.setOnMouseClicked(e->{
+			TranslateTransition tt = new TranslateTransition(Duration.millis(200), removeButton);
+		     tt.setByY(15f);
+		     tt.setCycleCount(2);
+		     tt.setAutoReverse(true);
+		 
+		     tt.play();
 			Scene scene = new DeleteMessageScene(whatBandInput.getText().toString(), dateAttendedInput.getValue().toString(), concertId, concertTable );
 			concertTable.garbageCollection();
 			nameStage.setScene(scene);
@@ -257,6 +265,12 @@ public class SingleConcertViewPane extends BorderPane{
 		 * This edit button will make the labels and input boxes to editable
 		 */
 		edit.setOnAction((event)->{
+			TranslateTransition tt = new TranslateTransition(Duration.millis(200), edit);
+		     tt.setByY(15f);
+		     tt.setCycleCount(2);
+		     tt.setAutoReverse(true);
+		 
+		     tt.play();
 			// setting the edit boxes to true
 			whatBandInput.setEditable(true);
 			whereAtInput.setEditable(true);
@@ -294,8 +308,13 @@ public class SingleConcertViewPane extends BorderPane{
 		/**
 		 * This save button will update all the values needed
 		 */
-
 		saveEdits.setOnAction((event)->{
+			TranslateTransition tt = new TranslateTransition(Duration.millis(2000), saveEdits);
+		     tt.setByY(15f);
+		     tt.setCycleCount(2);
+		     tt.setAutoReverse(true);
+		 
+		     tt.play();
 					title.setText("ConcertView");
 					whatBandInput.setEditable(false);
 					whereAtInput.setEditable(false);

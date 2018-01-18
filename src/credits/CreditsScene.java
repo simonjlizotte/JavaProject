@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 public class CreditsScene extends Scene {
 
 	public CreditsScene() {
-			super (new CreditsPane(), 600, 600);
+			super (new CreditsPane(), 800, 600);
 	}
 
 }
