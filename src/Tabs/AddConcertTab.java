@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import confirmationMessage.ConfirmationMessageScene;
 import database.Database;
+import javafx.util.Duration;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,11 +45,8 @@ import tables.GenreTable;
  *
  * This tab is designed to follow a singleton pattern, meaning that there will only be access
  * to one instance of this tab.
- * 
  */
 public class AddConcertTab extends Tab{
-	
-	
 	//file String
 	File file;
 	String filePath;
@@ -97,14 +97,23 @@ public class AddConcertTab extends Tab{
 		//Declaring insets
 		Insets insets = new Insets(10,10,10,10);
 		
-		//Declaring the Rating
-
+		//Declaring the Ratin
+		 
 		//First Row - Band		
 		Text bandName = new Text("Band:");
 		pane.add(bandName, 0, 0);
 		TextField bandNameInput = new TextField();
 		pane.add(bandNameInput, 0 , 1);
 		
+		bandNameInput.setOnMouseClicked(e->{
+			 FadeTransition ft = new FadeTransition();
+			 ft.setDuration(Duration.millis(2300.0));
+		     ft.setFromValue(1.0);
+		     ft.setToValue(0.3);
+		     ft.setCycleCount(4);
+		     ft.setAutoReverse(true);
+		     ft.play();
+		});
 		//Second Row - Venue
 		Text venue = new Text("Venue: ");
 		pane.add(venue, 0, 2);
@@ -157,14 +166,16 @@ public class AddConcertTab extends Tab{
 	    btnLoad.getStyleClass().add("buttonLoad");
 		pane.add(uploadPic, 0, 10);
 		pane.add(btnLoad, 0,11);
-        btnLoad.setOnAction(new EventHandler<ActionEvent>() {
+        
+		btnLoad.setOnAction(new EventHandler<ActionEvent>() {
 
+        	
 			@Override
 			public void handle(ActionEvent event) {
 				 FileChooser fileChooser = new FileChooser();
 	             
 		            //Setting filters so that the user can only add jpg and png
-				 FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+				 	FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
 		            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
 		            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 		              
@@ -191,6 +202,13 @@ public class AddConcertTab extends Tab{
 		Button button = new Button("Submit");
 		button.getStyleClass().add("submit");
 		button.setOnMouseClicked(e->{
+			//Animation
+			TranslateTransition tt = new TranslateTransition(Duration.millis(200), button);
+		     tt.setByY(15f);
+		     tt.setCycleCount(2);
+		     tt.setAutoReverse(true);
+		 
+		     tt.play();
 			//checking that there are no fields missing
 			if(venueInput.getText().isEmpty() || cityInput.getText().isEmpty() || bandNameInput.getText().isEmpty()
 					|| comboGenre.getSelectionModel().isEmpty() || comboRating.getSelectionModel().isEmpty() || date.getValue() == null || file == null){

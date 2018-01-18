@@ -2,6 +2,7 @@ package confirmationMessage;
 
 import SingleConcertView.SingleConcertViewPane;
 import Tabs.ViewConcertTab;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
+import javafx.util.Duration;
 import tables.ConcertTable;
 
 /**
@@ -46,6 +48,12 @@ public class DeleteMessagePane extends BorderPane{
 		
 		//event listeners for the buttons
 		yes.setOnMouseClicked(e->{
+			TranslateTransition tt = new TranslateTransition(Duration.millis(200), yes);
+		     tt.setByY(15f);
+		     tt.setCycleCount(2);
+		     tt.setAutoReverse(true);
+		     tt.play();
+		     
 			concertTable.deleteConcert(concertId);
 			concertTable.garbageCollection();
 			ViewConcertTab.nameStage.close();
@@ -54,6 +62,12 @@ public class DeleteMessagePane extends BorderPane{
 		});
 		
 		no.setOnMouseClicked(e->{
+			 TranslateTransition tt = new TranslateTransition(Duration.millis(200), no);
+		     tt.setByY(15f);
+		     tt.setCycleCount(2);
+		     tt.setAutoReverse(true);
+		 
+		     tt.play();
 			SingleConcertViewPane.nameStage.close();
 		});
 	}
